@@ -1,0 +1,34 @@
+# directories
+alias md="mkdir -p"
+alias rd="rmdir"
+
+# GNU ls
+alias ls="/usr/local/bin/gls --color=tty"
+alias l="ls -AF"
+alias ll="ls -alF"
+
+# other GNU aliases
+alias echo="/usr/local/bin/gecho"
+alias false="/usr/local/bin/gfalse"
+alias kill="/usr/local/bin/gkill"
+alias printf="/usr/local/bin/gprintf"
+alias pwd="/usr/local/bin/gpwd"
+alias test="/usr/local/bin/gtest"
+alias true="/usr/local/bin/gtrue"
+alias which="/usr/local/bin/which 2>/dev/null"
+
+# better names
+alias git="hub"
+alias scheme="rlwrap scheme"
+alias tower="gittower ."
+alias vi="vim"
+
+# helpers
+alias aliases="vim ~/.aliases"
+alias myip="curl ifconfig.me" # get external ip
+alias pubkey="cat ~/.ssh/id_rsa.pub"
+alias vimrc="vim ~/.vimrc"
+alias vimrcb="vim ~/.vimrc.bundles"
+alias zshenv="vim ~/.zshenv"
+alias zshrc="vim ~/.zshrc"
+alias zshrcl="vim ~/.zshrc.local"
