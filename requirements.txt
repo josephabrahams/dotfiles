@@ -1,0 +1,8 @@
+Fabric
+Jinja2
+Unipath
+awscli
+boto
+bpython
+virtualenv
+virtualenvwrapper

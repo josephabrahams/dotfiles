@@ -29,6 +29,10 @@ Install OS X native apps:
 
     brew bundle $HOME/.dotfiles/Caskfile
 
+Install the Python dependencies:
+
+    pip install -r $HOME/.dotfiles/requirements.txt
+
 Install the dotfiles:
 
     RCRC=$HOME/.dotfiles/rcrc rcup
