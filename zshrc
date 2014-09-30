@@ -35,6 +35,9 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
 # ls colors - joseph.is/1vozPB8
 export LS_COLORS='di=1;36:ln=35:so=32:ex=31:bd=34:cd=34'
 
+# grc beautifies all the things
+[ $+commands[grc] ] && [ $+commands[brew] ] && source /usr/local/etc/grc.bashrc
+
 # more autocompletion scripts
 eval "$(grunt --completion=zsh)"
 eval "$(gulp --completion=zsh)"
