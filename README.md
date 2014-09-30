@@ -68,7 +68,6 @@ Put your customizations in dotfiles appended with `.local`:
 
 ## Credits
 * [Mathias Bynens](https://github.com/mathiasbynens/dotfiles)
-* [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 * [Thoughtbot](https://github.com/thoughtbot/dotfiles)
 * [Square](https://github.com/square/maximum-awesome)
 * and many more.
