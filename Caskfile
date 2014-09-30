@@ -1,0 +1,40 @@
+# Install native apps
+# Usage: `brew bundle Caskfile`
+
+install caskroom/cask/brew-cask
+tap caskroom/versions
+
+cask install a-better-finder-rename
+cask install adobe-creative-cloud
+cask install airfoil
+cask install android-file-transfer
+cask install angry-ip-scanner
+cask install alfred
+cask install divvy
+cask install dash
+cask install dropbox
+cask install find-any-file
+cask install firefox
+cask install flux
+cask install google-chrome
+cask install google-hangouts
+cask install gpgtools
+cask install imagealpha
+cask install imageoptim
+cask install iterm2
+cask install karabiner
+cask install marked
+cask install macvim
+cask install nottingham
+cask install pandora-one
+cask install sequel-pro
+cask install slack
+cask install spotify
+cask install the-unarchiver
+cask install tower
+cask install transmission
+cask install transmit
+cask install vagrant
+cask install virtualbox
+cask install vmware-fusion
+cask install vlc

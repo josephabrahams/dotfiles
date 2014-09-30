@@ -5,9 +5,9 @@ Joseph does dotfiles
 Requirements
 ------------
 
-Set zsh as your login shell:
+Install [Homebrew](http://brew.sh/):
 
-    chsh -s $(which zsh)
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 Install [oh-my-zsh](http://ohmyz.sh/):
 
@@ -21,9 +21,13 @@ Clone onto your laptop:
 
     git clone git@github.com:josephabrahams/dotfiles.git $HOME/.dotfiles
 
-Install [rcm](https://github.com/thoughtbot/rcm):
+Install command-line tools:
 
     brew bundle $HOME/.dotfiles/Brewfile
+
+Install OS X native apps:
+
+    brew bundle $HOME/.dotfiles/Caskfile
 
 Install the dotfiles:
 
@@ -33,12 +37,21 @@ This command will create symlinks for config files in your home directory.
 Setting the `RCRC` environment variable tells `rcup` to use standard
 configuration options:
 
-* Exclude the `README.md`, `LICENSE`, and `Brewfile` files, which are part of
+* Exclude the `README.md`, `LICENSE`, `Brewfile`, and `Caskfile` files, which are part of
   the `dotfiles` repository but do not need to be symlinked in.
 
 You can safely run `rcup` multiple times to update:
 
     rcup
+
+Add the following lines to `/etc/shells`:
+
+    /usr/local/bin/bash
+    /usr/local/bin/zsh
+
+Set zsh as your login shell:
+
+    chsh -s /usr/local/bin/zsh
 
 
 Make your own customizations
@@ -50,6 +63,8 @@ Put your customizations in dotfiles appended with `.local`:
 
 
 ## Credits
-- [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-- [Thoughtbot](https://github.com/thoughtbot/dotfiles)
-- and many more.
+* [Mathias Bynens](https://github.com/mathiasbynens/dotfiles)
+* [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+* [Thoughtbot](https://github.com/thoughtbot/dotfiles)
+* [Square](https://github.com/square/maximum-awesome)
+* and many more.
