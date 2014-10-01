@@ -13,13 +13,18 @@ Install [oh-my-zsh](http://ohmyz.sh/):
 
     curl -L http://install.ohmyz.sh | ZSH=$HOME/.zsh sh
 
+Install [Base16](http://chriskempson.github.io/base16/):
+
+    git clone https://github.com/chriskempson/base16-iterm2.git $HOME/.config/base16-iterm2
+    git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
+
 
 Install
 -------
 
 Clone onto your laptop:
 
-    git clone git@github.com:josephabrahams/dotfiles.git $HOME/.dotfiles
+    git clone https://github.com/josephabrahams/dotfiles.git $HOME/.dotfiles
 
 Install command-line tools:
 
@@ -56,6 +61,16 @@ Add the following lines to `/etc/shells`:
 Set zsh as your login shell:
 
     chsh -s /usr/local/bin/zsh
+
+Configure iTerm2:
+
+* Install the Base16 Default theme in Profiles > Colors > Load Presets > Import
+    * ~/.config/base16-iterm2/base16-default.dark.256.itermcolors
+* Under Profiles > Terminal
+    * Set Scrollback Lines to 0 if you are using tmux.
+    * Set Report Terminal Type to xterm-256color.
+* Under Profiles > Text
+    * Disable Draw bold text in bright colors.
 
 
 Make your own customizations
