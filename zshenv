@@ -3,7 +3,7 @@ path=(
     .git/safe/../../bin
     ~/.bin
     ~/.composer/vendor/bin
-    ~/.rbenv/shims
+    # ~/.rbenv/shims
     /usr/local/bin
     /usr/local/heroku/bin
     /usr/local/MacGPG2/bin
@@ -15,12 +15,7 @@ path=(
     /bin
     /sbin
 )
-manpath=(
-    /usr/local/opt/coreutils/libexec/gnuman
-    /usr/local/man
-    /usr/X11/man
-    $MANPATH
-)
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # use vim as the visual editor
 export VISUAL=vim
