@@ -5,15 +5,17 @@ install caskroom/cask/brew-cask
 tap caskroom/versions
 
 cask install a-better-finder-rename
+cask install adobe-air
 cask install adobe-creative-cloud
 cask install airfoil
 cask install android-file-transfer
 cask install angry-ip-scanner
 cask install alfred
+cask install charles
 cask install divvy
 cask install dash
 cask install dropbox
-cask install find-any-file
+# cask install find-any-file        # broken link
 cask install firefox
 cask install flux
 cask install google-chrome

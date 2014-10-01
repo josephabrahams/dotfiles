@@ -26,7 +26,7 @@ install hub
 install imagemagick --with-webp
 install less
 install lynx
-install mit-scheme
+# install mit-scheme                # install joseph.is/XQuartz first
 install moreutils
 install node                        # TODO switch to nvm
 install openssh --with-brewed-openssl

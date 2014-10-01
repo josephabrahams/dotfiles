@@ -23,11 +23,11 @@ Clone onto your laptop:
 
 Install command-line tools:
 
-    brew bundle $HOME/.dotfiles/Brewfile
+    brew bundle $HOME/.dotfiles/Brewfile 2>/dev/null
 
 Install OS X native apps:
 
-    brew bundle $HOME/.dotfiles/Caskfile
+    brew bundle $HOME/.dotfiles/Caskfile 2>/dev/null
 
 Install the Python dependencies:
 
