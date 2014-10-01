@@ -40,18 +40,7 @@ Install the Python dependencies:
 
 Install the dotfiles:
 
-    RCRC=$HOME/.dotfiles/rcrc rcup
-
-This command will create symlinks for config files in your home directory.
-Setting the `RCRC` environment variable tells `rcup` to use standard
-configuration options:
-
-* Exclude the `README.md`, `LICENSE`, `Brewfile`, and `Caskfile` files, which are part of
-  the `dotfiles` repository but do not need to be symlinked in.
-
-You can safely run `rcup` multiple times to update:
-
-    rcup
+    RCRC=$HOME/.dotfiles/rcrc rcup -fv
 
 Add the following lines to `/etc/shells`:
 
