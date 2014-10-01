@@ -53,14 +53,8 @@ Set zsh as your login shell:
 
 Configure iTerm2:
 
-* Install the Base16 Default theme in Profiles > Colors > Load Presets > Import
-    * ~/.config/base16-iterm2/base16-default.dark.256.itermcolors
-* Under Profiles > Terminal
-    * Set Scrollback Lines to 0 if you are using tmux.
-    * Set Report Terminal Type to xterm-256color.
-* Under Profiles > Text
-    * Disable Draw bold text in bright colors.
-
+    /usr/libexec/PlistBuddy -c "Add: 'Custom Color Presets':'base16-default.dark.256' dict" ~/Library/Preferences/com.googlecode.iterm2.plist
+    /usr/libexec/PlistBuddy -c "Merge '$HOME/.config/base16-iterm2/base16-default.dark.256.itermcolors' :'Custom Color Presets':'base16-default.dark.256'" ~/Library/Preferences/com.googlecode.iterm2.plist
 
 Make your own customizations
 ----------------------------
