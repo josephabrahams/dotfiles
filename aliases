@@ -17,24 +17,31 @@ alias test="/usr/local/bin/gtest"
 alias true="/usr/local/bin/gtrue"
 alias which="/usr/local/bin/which 2>/dev/null"
 
-# verbosity
-alias cp="cp -iv"
-alias ln="ln -iv"
-alias mv="mv -iv"
-
 # helpers
-alias git="hub"
+alias cp="cp -ir"
+alias d="cd ~/Desktop/"
 alias myip="curl ifconfig.me" # get external ip
 alias pubkey="cat ~/.ssh/id_rsa.pub"
+alias ln="ln -iv"
+alias mv="mv -i"
+alias p="cd ~/Projects"
 alias rcup="rcup -v"
 alias scheme="rlwrap scheme"
 alias tower="gittower ."
 alias vi="vim"
 
+# git
+alias git="hub"
+alias ga="git add"
+alias gb="git branch"
+alias gc="git commit"
+alias gh="git browse"
+alias gs="git status"
+
 # rc files
-alias aliases="vim ~/.aliases"
+alias aliases="vim ~/.aliases; source ~/.aliases"
 alias vimrc="vim ~/.vimrc"
 alias vimrcb="vim ~/.vimrc.bundles"
-alias zshenv="vim ~/.zshenv"
-alias zshrc="vim ~/.zshrc"
-alias zshrcl="vim ~/.zshrc.local"
+alias zshenv="vim ~/.zshenv; source ~/.zshenv"
+alias zshrc="vim ~/.zshrc; source ~/.zshrc"
+alias zshrcl="vim ~/.zshrc.local; source ~/.zshenv"

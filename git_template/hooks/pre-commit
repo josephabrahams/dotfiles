@@ -1,0 +1,8 @@
+#!/bin/sh
+# checks that git-config user.name and user.email are set
+
+if [ -z "$(git config user.name)" -o -z "$(git config user.email)" ]; then
+    echo "\033[1mCommit failed:\033[0m" \
+         "git user.name and user.email not set."
+    exit 1
+fi

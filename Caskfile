@@ -25,6 +25,7 @@ cask install imagealpha
 cask install imageoptim
 cask install iterm2
 cask install karabiner
+# cask install ksdiff               # if Kaleidoscope installed from App Store
 cask install marked
 cask install macvim
 cask install nottingham
@@ -35,7 +36,7 @@ cask install spotify
 cask install the-unarchiver
 cask install tower
 cask install transmission
-cask install transmit
+# cask install transmit             # use App Store license
 cask install vagrant
 cask install virtualbox
 cask install vmware-fusion

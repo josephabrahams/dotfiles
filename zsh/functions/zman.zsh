@@ -1,4 +1,4 @@
-#ZSH documentation
+# zsh documentation
 zman() {
   PAGER="less -g -s '+/^       "$1"'" man zshall
 }

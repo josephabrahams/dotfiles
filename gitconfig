@@ -1,0 +1,19 @@
+[alias]
+    list = !git --no-pager log --reverse --decorate --pretty=oneline --abbrev-commit
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit
+[color]
+    ui = auto
+[core]
+    excludesfile = ~/.gitignore
+[commit]
+    template = ~/.gitmessage
+[credential]
+    helper = osxkeychain
+[init]
+    templatedir = ~/.git_template
+[merge]
+    ff = only
+[push]
+    default = simple
+[include]
+    path = ~/.gitconfig.local
