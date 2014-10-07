@@ -1,0 +1,21 @@
+#!/bin/sh
+# unzip an archive without creating that pesky __MACOSX folder
+
+filename="$1"
+
+if [ -z "$filename" ]; then
+    echo "Enter file to unzip: \c"
+    read filename
+    if [ -z "$filename" ]; then
+        echo "Aborting"
+        exit 1
+    fi
+fi
+
+if [ -f $filename ]; then
+    unzip $filename
+    rm -rf __MACOSX
+else
+    echo "File not found!"
+    exit 1
+fi

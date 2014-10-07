@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Symlink all git hooks in your projects directories to your dotfiles
+
+dothooks_dir="$HOME/.dotfiles/git_template/hooks"
+projects_dir="$HOME/Projects"
+
+function hook_it() {
+    for hooks_dir in ${projects_dir}/*/.git/hooks; do
+        sleep 0.05
+        echo "hooking $hooks_dir"
+        rm ${hooks_dir}/*
+        for hook in ${dothooks_dir}/*; do
+            ln -s $hook ${hooks_dir}/$(basename $hook)
+        done
+    done
+}
+
+if [ "$1" == "--force" -o "$1" == "-f" ]; then
+    hook_it
+else
+    echo -n "This will overwrite all git hooks in your projects directories. "
+    read -p "Are you sure? (y/n) " -n 1
+    echo ""
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        hook_it
+    fi
+fi
+unset hook_it

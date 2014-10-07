@@ -1,7 +1,8 @@
 # oh-my-zsh settings
 export ZSH=$HOME/.zsh
-ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
+DISABLE_UPDATE_PROMPT="true"
+ZSH_THEME="robbyrussell"
 plugins=(
     bower
     bundler

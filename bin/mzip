@@ -1,0 +1,22 @@
+#!/bin/sh
+# zip a file/folder without those pesky .DS_Store files
+
+filename="$1"
+
+if [ -z "$filename" ]; then
+    echo "Enter file/folder to zip: \c"
+    read filename
+    if [ -z "$filename" ]; then
+        echo "Aborting"
+        exit 1
+    fi
+fi
+
+if [ -f "$filename" ]; then
+    zip $(echo $filename).zip $filename
+elif [ -d "$filename" ]; then
+    zip -r $(echo $filename).zip $filename -x '*.DS_Store'
+else
+    echo "File/folder not found!"
+    exit 1
+fi

@@ -1,0 +1,27 @@
+#!/bin/sh
+# Untar an archive without having to remember the arguments for each file type
+
+# read from stdin if no argument provided
+if [ $# -eq 0 ]; then
+    read filename
+else
+    filename="$1"
+fi
+
+if [ -f "$filename" ]; then
+    if [ $(echo "$filename" | egrep '\.tar$') ]; then
+        tar -xvf $filename
+    elif [ $(echo "$filename" | egrep '\.tar\.gz$') ]; then
+        tar -zxvf $filename
+    elif [ $(echo "$filename" | egrep '\.tar\.bz2$') ]; then
+        tar -jxvf $filename
+    elif [ $(echo "$filename" | egrep '\.tar\.xz$') ]; then
+        tar -Jxvf $filename
+    else
+        echo "File type not supported!"
+        exit 1
+    fi
+else
+    echo "File not found!"
+    exit 1
+fi

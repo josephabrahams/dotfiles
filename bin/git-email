@@ -1,0 +1,22 @@
+#!/bin/sh
+# set user.email for the current git repo
+
+if [ "$1" == "--help" -o "$1" == "-h" ]; then
+    echo "Usage:"
+    echo "git-email           display user.email for current repo"
+    echo "git-email <email>   set user.email for current repo"
+    echo "git-email --unset   unset user.email for current repo"
+    exit
+fi
+
+if [ "$1" == "--unset" ]; then
+    git config --unset user.email
+    git config user.email
+    exit
+fi
+
+if [ -n "$1" ]; then
+  git config user.email $1
+fi
+
+git config user.email

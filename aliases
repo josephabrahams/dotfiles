@@ -20,6 +20,7 @@ alias which="/usr/local/bin/which 2>/dev/null"
 # helpers
 alias cp="cp -ir"
 alias d="cd ~/Desktop/"
+alias dots="cd ~/.dotfiles/"
 alias myip="curl ifconfig.me" # get external ip
 alias pubkey="cat ~/.ssh/id_rsa.pub"
 alias ln="ln -iv"
@@ -33,10 +34,14 @@ alias vi="vim"
 # git
 alias git="hub"
 alias ga="git add"
+alias gaa="git add -A"
 alias gb="git branch"
 alias gc="git commit"
+alias gl="git log"
+alias gcm="git commit -m"
 alias gh="git browse"
 alias gs="git status"
+alias gt="git tree"
 
 # rc files
 alias aliases="vim ~/.aliases; source ~/.aliases"

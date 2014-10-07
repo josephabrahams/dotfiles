@@ -1,0 +1,19 @@
+#!/bin/sh
+# quick php webserver
+
+php=$(which php)
+if [ $? != 0 ]; then
+    echo "Unable to find PHP"
+    exit 1
+fi
+
+if [ "$#" -eq 0 ]; then
+    port=8080
+else
+    port="$1"
+fi
+
+echo "http://localhost:$port" | pbcopy # && echo "\n\033[1mhttp://localhost:$PORT copied to the clipboard!\033[m"
+
+$php -S localhost:$port
+echo "\n"

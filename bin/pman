@@ -1,0 +1,15 @@
+#!/bin/sh
+# open a man page in Preview
+
+manpage="$1"
+
+if [ -z "$manpage" ]; then
+    echo "Enter man page to read: \c"
+    read manpage
+fi
+if [ -z "$manpage" ]; then
+    echo "Aborting"
+    exit 1
+fi
+
+man -t $manpage | open -f -a /Applications/Preview.app

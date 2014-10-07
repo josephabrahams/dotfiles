@@ -1,0 +1,39 @@
+#!/bin/sh
+# Spoof your Mac's Wi-Fi MAC address
+
+current_address="$(ifconfig en0 ether | grep ether | awk '{print $2}')"
+default_address="$(networksetup -getmacaddress Wi-Fi | awk '{print $3}')"
+
+if [ -n "$1" ]; then
+    if [ "$1" == "--list-current" ]; then
+        echo "$current_address"
+        exit 0
+    elif [ "$1" == "--list-default" ]; then
+        echo "$default_address"
+        exit 0
+    elif [ "$1" == "--reset" ]; then
+        new_address="$default_address"
+    elif [ "$1" == "--random" ]; then
+        new_address="$(openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//')"
+    elif [ $(echo "$1" | egrep -i '^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$') ]; then
+        new_address="$1"
+    fi
+
+    if [ $new_address ]; then
+        echo "Setting Wi-Fi MAC address to $new_address"
+        sudo ifconfig en0 ether $new_address
+        if [ "$?" == "0" ]; then
+            echo "Done"
+            exit 0
+        else
+            echo "Error"
+            exit 1
+        fi
+    fi
+fi
+
+echo "Usage:    spoof [options] <xx:xx:xx:xx:xx:xx>"
+echo "Options:  --list-current  Echo current address"
+echo "          --list-default  Echo default address"
+echo "          --random        Set a random address"
+echo "          --reset         Reset the default address"

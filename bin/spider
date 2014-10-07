@@ -1,0 +1,34 @@
+#!/bin/sh
+# create a quick sitemap of any website
+#
+# requires GNU expect and sed packages
+# `brew install extend`
+# `brew install gnu-sed --default-names`
+
+url="$1"
+output_file="$2"
+
+if [ -z "$url" ]; then
+    echo "Enter URL to crawl: \c"
+    read url
+    if [ -z "$url" ]; then
+        echo "Aborting"
+        exit 1
+    fi
+fi
+
+if [ -z "$output_file" ]; then
+    output_file="spider.txt"
+fi
+
+wget --spider --recursive --force-html --wait=0.667 --random-wait --no-directories $url 2>&1 \
+    | grep --line-buffered '^--' \
+    | unbuffer -p awk '{print $3}' \
+    | grep --line-buffered --invert-match '(try\:' \
+    | grep --line-buffered --invert-match --ignore-case --extended-regexp '\.(?:mid|midi|kar|aac|f4a|f4b|m4a|mp3|oga|ogg|ra|wav|bmp|gif|jpeg|jpg|png|tif|tiff|wbmp|webp|ico|cur|jng|js|json|doc|xls|ppt|docx|xlsx|pptx|3gpp|3gp|mp4|m4v|f4v|f4p|mpeg|mpg|ogv|mov|webm|flv|mng|asx|asf|wmv|avi|atom|rdf|rss|feed|xml|woff|eot|ttc|ttf|otf|svg|svgz|jar|war|ear|hqx|pdf|ps|eps|ai|rtf|wmlc|xhtml|kml|kmz|7z|crx|oex|xpi|cco|jardiff|jnlp|run|pl|pm|prc|pdb|rar|rpm|sea|swf|sit|tcl|tk|der|pem|crt|torrent|zip|bin|exe|dll|deb|dmg|iso|img|msi|msp|msm|safariextz|css|mml|txt|jad|wml|vtt|htc|vcf)' \
+    | sed --unbuffered --regexp-extended 's/(\?|\#)(.*)$//' \
+    | tee $output_file
+
+cat $output_file | col | sort --ignore-case | uniq > ${output_file}.tmp
+mv ${output_file}.tmp $output_file
+echo "Done."
