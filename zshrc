@@ -47,6 +47,9 @@ if which aws_zsh_completer.sh &>/dev/null; then
 fi
 [ -s ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
+# keybindings
+bindkey \^U backward-kill-line
+
 # aliases
 [ -s ~/.aliases ] && source ~/.aliases
 
