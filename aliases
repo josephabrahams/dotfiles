@@ -28,6 +28,7 @@ alias myip="dig +short myip.opendns.com @resolver1.opendns.com" # get external i
 alias pubkey="cat ~/.ssh/id_rsa.pub"
 alias ln="ln -iv"
 alias mv="mv -i"
+alias o="open ."
 alias p="cd ~/Projects"
 alias proj="cd ~/Projects"
 alias rcup="rcup -v"
