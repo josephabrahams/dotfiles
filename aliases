@@ -34,6 +34,7 @@ alias proj="cd ~/Projects"
 alias rcup="rcup -v"
 alias scheme="rlwrap scheme"
 alias sudo="sudo "
+alias tree="tre"
 alias tower="gittower ."
 alias vi="vim"
 
