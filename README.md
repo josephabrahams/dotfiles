@@ -29,6 +29,10 @@ Install [Composer](https://getcomposer.org):
     curl -sS https://getcomposer.org/installer | php
     mv composer.phar /usr/local/bin/composer
 
+Install [Vundle](https://github.com/gmarik/Vundle.vim)
+
+    git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+
 Install [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards):
 
     git clone -b master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git $HOME/.config/WordPress-Coding-Standards

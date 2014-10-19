@@ -1,0 +1,3 @@
+#!/bin/sh
+# Use MacVim for `vim`
+exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
