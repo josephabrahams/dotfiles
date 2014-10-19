@@ -1,0 +1,16 @@
+#!/bin/sh
+
+bold='\033[1m'
+unbold='\033[0m'
+
+# Update dotfiles
+echo "\n${bold}Updating dotfiles...${unbold}"
+cd $HOME/.dotfiles; git pull --rebase
+
+# Oh My Zsh
+if [ -z "$ZSH" ]; then
+    echo "\n${bold}Install Oh My Zsh...${unbold}"
+    curl -L http://install.ohmyz.sh | ZSH=$HOME/.zsh sh
+fi
+
+echo ""
