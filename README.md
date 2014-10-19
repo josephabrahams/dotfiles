@@ -9,18 +9,27 @@ Install [Homebrew](http://brew.sh/):
 
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-Install [oh-my-zsh](http://ohmyz.sh/):
+Install [Oh My Zsh](http://ohmyz.sh/):
 
     curl -L http://install.ohmyz.sh | ZSH=$HOME/.zsh sh
 
-Install [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/):
+Install [Zsh Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/):
 
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH/custom/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.zsh/custom/plugins/zsh-syntax-highlighting
 
 Install [Base16](http://chriskempson.github.io/base16/):
 
     git clone https://github.com/chriskempson/base16-iterm2.git $HOME/.config/base16-iterm2
     git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
+
+Install [Composer](https://getcomposer.org):
+
+    curl -sS https://getcomposer.org/installer | php
+    mv composer.phar /usr/local/bin/composer
+
+Install [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards):
+
+    git clone -b master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git $HOME/.config/WordPress-Coding-Standards
 
 
 Install
@@ -38,13 +47,18 @@ Install OS X native apps:
 
     brew bundle $HOME/.dotfiles/Caskfile 2>/dev/null
 
+Install the dotfiles:
+
+    RCRC=$HOME/.dotfiles/rcrc rcup -fv
+
 Install Python dependencies:
 
     pip install -r $HOME/.dotfiles/requirements.txt
 
-Install the dotfiles:
+Install PHP dependencies:
 
-    RCRC=$HOME/.dotfiles/rcrc rcup -fv
+    composer global install
+    phpcs --config-set installed_paths $HOME/.config/WordPress-Coding-Standards
 
 Add the following lines to `/etc/shells`:
 
