@@ -13,7 +13,7 @@ cask install angry-ip-scanner
 cask install alfred
 cask install charles
 cask install divvy
-cask install dash
+# cask install dash                 # use App Store license
 cask install dropbox
 # cask install find-any-file        # broken link
 cask install firefox

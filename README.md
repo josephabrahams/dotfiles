@@ -8,6 +8,8 @@ Requirements
 Install [Homebrew](http://brew.sh/):
 
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew install caskroom/cask/brew-cask
+    brew tap homebrew/boneyard
 
 Install [Oh My Zsh](http://ohmyz.sh/):
 
@@ -41,15 +43,20 @@ Clone onto your laptop:
 
 Install command-line tools:
 
-    brew bundle $HOME/.dotfiles/Brewfile 2>/dev/null
+    brew bundle $HOME/.dotfiles/Brewfile
 
 Install OS X native apps:
 
-    brew bundle $HOME/.dotfiles/Caskfile 2>/dev/null
+    HOMEBREW_CASK_OPTS="--appdir=/Applications" brew bundle $HOME/.dotfiles/Caskfile
 
 Install the dotfiles:
 
     RCRC=$HOME/.dotfiles/rcrc rcup -fv
+
+Install JavaScript dependencies:
+
+    npm install -g grunt-cli
+    npm install -g gulp
 
 Install Python dependencies:
 
@@ -58,12 +65,11 @@ Install Python dependencies:
 Install PHP dependencies:
 
     composer global install
-    phpcs --config-set installed_paths $HOME/.config/WordPress-Coding-Standards
+    ~/.composer/vendor/bin/phpcs --config-set installed_paths $HOME/.config/WordPress-Coding-Standards
 
-Add the following lines to `/etc/shells`:
+Add brewed bash and zsh to `/etc/shells`:
 
-    /usr/local/bin/bash
-    /usr/local/bin/zsh
+    sudo sh -c "echo '/usr/local/bin/bash\n/usr/local/bin/zsh' >> /etc/shells"
 
 Set zsh as your login shell:
 
@@ -71,8 +77,11 @@ Set zsh as your login shell:
 
 Configure iTerm2:
 
-    /usr/libexec/PlistBuddy -c "Add: 'Custom Color Presets':'base16-default.dark.256' dict" ~/Library/Preferences/com.googlecode.iterm2.plist
-    /usr/libexec/PlistBuddy -c "Merge '$HOME/.config/base16-iterm2/base16-default.dark.256.itermcolors' :'Custom Color Presets':'base16-default.dark.256'" ~/Library/Preferences/com.googlecode.iterm2.plist
+    open /Applications/iTerm.app
+
+1. Naviate to `Preferences...` > `Profiles` > `Colors` > `Load Presets...` > `Import...`
+2. Use Command+Shift+. to display hidden files in the Open dialogue
+3. Select `~/.config/base16-iterm2/base16-default.dark.256.itermcolors`
 
 
 Make your own customizations

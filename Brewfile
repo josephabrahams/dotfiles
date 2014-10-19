@@ -8,20 +8,20 @@ tap thoughtbot/formulae
 install ack
 install autoenv
 install bash                        # add `/usr/local/bin/bash` to /etc/shells
+install cabal-install
 install coreutils                   # add `/usr/local/gnubin` to $PATH
 install ctags
 install diffutils
 install dnsmasq
 install findutils --default-names
 install gawk
-install grc
 install git
 install gnu-sed --default-names
 install gnu-tar --default-names
 install gnu-which --default-names
+install grc
 install grep --default-names
 install gzip
-install haskell-platform
 install hub
 install imagemagick --with-webp
 install less
