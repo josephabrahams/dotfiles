@@ -1,6 +1,7 @@
 # tries to start mux with session called current dir name
 # if doesn't exist, runs `mux list`
-m() {
+
+function m() {
     local dirname=$(basename $(pwd) | sed 's/\./\-/g')
 
     if [[ -z "$1" ]]; then

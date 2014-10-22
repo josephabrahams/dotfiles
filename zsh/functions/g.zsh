@@ -1,11 +1,13 @@
 # No arguments: `git status`
 # With arguments: acts like `git`
-g() {
-  if [[ $# > 0 ]]; then
-    git $@
-  else
-    git status
-  fi
+# http://joseph.is/1oujSLs
+
+function g() {
+    if [[ $# > 0 ]]; then
+        git $@
+    else
+        git status
+    fi
 }
 
 # Complete g like git

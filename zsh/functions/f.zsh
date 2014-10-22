@@ -1,6 +1,7 @@
-# searches the current directory subtree for
-# files with names containing a string (ignores case)
-f() {
+# case insensitive search of the current directory subtree
+# for files with names containing a string
+
+function f() {
     if [ -z "$1" ]; then
         echo "find: missing operand"
         return 1

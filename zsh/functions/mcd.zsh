@@ -1,5 +1,6 @@
 # make a directory and then change into it
-mcd() {
+
+function mcd() {
     if [ -z "$1" ]; then
         echo "mcd: missing operand"
         return 1

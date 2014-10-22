@@ -1,4 +1,5 @@
 [alias]
+    fix = commit --amend
     list = !git --no-pager log --reverse --decorate --pretty=oneline --abbrev-commit
     tree = log --graph --decorate --pretty=oneline --abbrev-commit
 [color]

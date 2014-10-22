@@ -1,6 +1,7 @@
-# searches the current directory subtree for
-# files containing a string (ignores case)
-a() {
+# case insensitive search of the current directory subtree
+# for files containing a string using Ag
+
+function a() {
     if [ -z "$1" ]; then
         echo "ag: missing operand"
         return 1
