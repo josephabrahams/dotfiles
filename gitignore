@@ -1,3 +1,6 @@
+# Bundler
+.bundle
+
 # OSX
 .DS_Store
 .AppleDouble
@@ -17,9 +20,6 @@ Icon
 # Linux
 *~
 
-# Bundler
-.bundle
-
 # Vim
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
@@ -27,11 +27,3 @@ Icon
 Session.vim
 .netrwhist
 *~
-
-# Virtualenv
-# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
-.Python
-[Bb]in
-[Ii]nclude
-[Ll]ib
-[Ss]cripts
