@@ -43,6 +43,7 @@ install the_silver_searcher
 install tmux
 install tree
 install unzip
+install vim --override-system-vi
 install watch
 install wdiff --with-gettext
 install webkit2png

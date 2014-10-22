@@ -36,8 +36,6 @@ alias scheme="rlwrap scheme"
 alias sudo="sudo " # use sudo with aliases
 alias tree="t"
 alias tower="gittower ."
-alias vi="v"
-alias vim="v"
 
 # git
 alias git="hub"

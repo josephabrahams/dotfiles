@@ -40,6 +40,14 @@ set wildignore=log/**,node_modules/**,target/**,tmp/**,rbc,*.pyc,*.sql
 set wildmenu                                                " show a navigable menu for tab completion
 set wildmode=longest,list,full
 
+" add smart line wraps to vim
+" remove once mvim catches up to 7.4.338
+if has('gui_running')
+    set nowrap
+else
+    set breakindent
+endif
+
 if has('persistent_undo')
     set undofile                                            " enable persistant undo
     set undodir=~/.vim/undo//,~/tmp//,~//
