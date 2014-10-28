@@ -119,8 +119,11 @@ vnoremap p "_dP
 set nocursorline
 
 " Color Settings
-if $TERM == "xterm-256color" || $TERM == "screen-256color"
+if $TERM == "xterm-256color" || $TERM == "screen-256color" || has('gui_running')
     set t_Co=256
+endif
+
+if &t_Co == 256
     let base16colorspace=256
     colorscheme base16-default
     if has('gui_running')
