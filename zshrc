@@ -31,8 +31,10 @@ done
 unset function_file
 
 # Base16 shell theme
-BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
-[ -s $BASE16_SHELL ] && source $BASE16_SHELL
+if [[ "$TERM" == "xterm-256color" ]]; then
+    BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+    [ -s $BASE16_SHELL ] && source $BASE16_SHELL
+fi
 
 # ls colors - joseph.is/1vozPB8
 export LS_COLORS='di=1;36:ln=35:so=32:ex=31:bd=34:cd=34'

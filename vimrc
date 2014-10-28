@@ -119,28 +119,30 @@ vnoremap p "_dP
 set nocursorline
 
 " Color Settings
-set t_Co=256
-let base16colorspace=256
-colorscheme base16-default
 if has('gui_running')
-    set guioptions=egmrt
-    set guifont=Menlo:h14
-    set linespace=1
-    set background=light
-    hi LineNr guibg=#f5f5f5   " match background of light theme
-    " hi LineNr guibg=#151515 " match background of dark theme
-else
-    set background=dark
-    " hi LineNr ctermbg=05 " match background of light theme
-    hi LineNr ctermbg=00   " match background of dark theme
+    set t_Co=256
 endif
+
+if &t_Co == 256
+    let base16colorspace=256
+    colorscheme base16-default
+    if has('gui_running')
+        set guioptions=egmrt
+        set guifont=Menlo:h14
+        set linespace=1
+        set background=light
+        hi LineNr guibg=#f5f5f5     " match background of light theme
+    else
+        set background=dark
+        hi LineNr ctermbg=00        " match background of dark theme
+    endif
+endif
+
 
 " keyboard shortcuts
 let mapleader=','
 inoremap jj <ESC>
 inoremap jk <ESC>
-" inoremap kj <ESC>
-" inoremap kk <ESC>
 
 function! ColorColumnToggle()
     if &colorcolumn
