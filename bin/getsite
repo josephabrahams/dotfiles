@@ -1,0 +1,46 @@
+#!/bin/sh
+# create a static copy of any website
+#
+# requires wget
+# `brew install wget`
+
+url="$1"
+
+if [ -z "$url" ]; then
+    echo "Enter URL to crawl and copy: \c"
+    read url
+    if [ -z "$url" ]; then
+        echo "Aborting"
+        exit 1
+    fi
+fi
+
+wget \
+    --recursive \
+    --level=inf \
+    --page-requisites \
+    --tries=3 \
+    --force-html \
+    --ignore-case \
+    --adjust-extension \
+    --keep-session-cookies \
+    --wait=0.667 \
+    --random-wait \
+    --no-check-certificate \
+    $url 2>&1 |
+grep "Saving to:"
+
+echo ""
+dirname=$(echo $url | sed -E 's/^.*\:\/\///' | sed -E 's/\/*$//')
+for file in $(find $dirname | grep '?'); do
+    rename=$(echo $file | sed -E 's/\?.*$//')
+    mv -f $file $rename
+    echo "Renamed $file to $rename"
+done
+for file in $(find $dirname | grep '#'); do
+    rename=$(echo $file | sed -E 's/\#.*$//')
+    mv -f $file $rename
+    echo "Renamed $file to $rename"
+done
+
+echo "\nDone."

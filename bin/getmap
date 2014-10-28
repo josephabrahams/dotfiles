@@ -1,8 +1,10 @@
 #!/bin/sh
 # create a quick sitemap of any website
 #
-# requires GNU expect and sed packages
-# `brew install extend`
+# requires GNU Wget, unbuffer, and sed packages
+# `brew tap homebrew/dupes`
+# `brew install wget`
+# `brew install expect`
 # `brew install gnu-sed --default-names`
 
 url="$1"
@@ -18,7 +20,7 @@ if [ -z "$url" ]; then
 fi
 
 if [ -z "$output_file" ]; then
-    output_file="spider.txt"
+    output_file="sitemap.txt"
 fi
 
 wget --spider --recursive --force-html --wait=0.667 --random-wait --no-directories $url 2>&1 \
