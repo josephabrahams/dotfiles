@@ -119,11 +119,8 @@ vnoremap p "_dP
 set nocursorline
 
 " Color Settings
-if has('gui_running')
+if $TERM == "xterm-256color" || $TERM == "screen-256color"
     set t_Co=256
-endif
-
-if &t_Co == 256
     let base16colorspace=256
     colorscheme base16-default
     if has('gui_running')
@@ -158,14 +155,14 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>l :call ColorColumnToggle()<CR>
-nnoremap <leader>t :CtrlP<CR>
 nnoremap <leader>o :!open %:p:h<CR><CR> " Open current directory in finder
+nnoremap <leader>t :CtrlP<CR>
 nnoremap <leader>T :CtrlPClearCacheѳѳ<CR>:CtrlP<CR>
 nnoremap <leader>] :TagbarToggle<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 vnoremap <leader><space> :s/\s\+$//e<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
-nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <leader>u :NERDTreeClose<CR>:UndotreeToggle<CR>
 nnoremap <leader>c <Plug>Kwbd
 nnoremap <leader>v ^v$hy           " Copy a whole line, but not linebreaks
 nnoremap <leader><leader> <c-^>    " Switch between the last two files
@@ -220,3 +217,8 @@ cnoremap <C-F> <Right>
 cnoremap <Esc>b <S-Left>
 cnoremap <Esc>f <S-Right>
 cnoremap <C-K> <C-\>estrpart(getcmdline(), 0, getcmdpos()-1)<CR>
+
+" stop accidentally running CtrlP
+nnoremap <C-P> :<C-P>
+nnoremap <C-N> :<C-N>
+

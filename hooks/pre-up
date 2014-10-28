@@ -1,11 +1,12 @@
 #!/bin/sh
+# runs right before rcm
 
 bold='\033[1m'
 unbold='\033[0m'
 
 # Update dotfiles
 echo "\n${bold}Updating dotfiles...${unbold}"
-cd $HOME/.dotfiles; git pull --rebase
+cd $HOME/.dotfiles; git pull
 
 # Oh My Zsh
 if [ -z "$ZSH" ]; then

@@ -30,6 +30,10 @@ Install Python dependencies:
 
     pip install -r $HOME/.dotfiles/requirements.txt
 
+Install/update most other dependencies:
+
+    $HOME/.dotfiles/bootstrap.sh
+
 Install the dotfiles & dependencies:
 
     RCRC=$HOME/.dotfiles/rcrc rcup -fv
@@ -38,7 +42,7 @@ Add brewed bash and zsh to `/etc/shells`:
 
     sudo sh -c "echo '/usr/local/bin/bash\n/usr/local/bin/zsh' >> /etc/shells"
 
-Set zsh as your login shell:
+Set brewed zsh as your login shell:
 
     chsh -s /usr/local/bin/zsh
 
