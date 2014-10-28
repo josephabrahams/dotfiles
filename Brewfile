@@ -13,6 +13,7 @@ install coreutils                   # add `/usr/local/gnubin` to $PATH
 install ctags
 install diffutils
 install dnsmasq
+install expect
 install findutils --default-names
 install gawk
 install git
