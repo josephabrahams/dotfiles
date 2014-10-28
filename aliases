@@ -3,9 +3,10 @@ alias md="mkdir -p"
 alias rd="rmdir"
 
 # GNU ls
-alias ls="/usr/local/bin/gls --color=tty"
+alias ls="/usr/local/bin/gls --color=auto"
 alias l="ls -AF"
 alias ll="ls -alF"
+alias lsd="ls -AlF --color=always | grep '^d' --color=never"
 
 # other GNU aliases
 alias echo="/usr/local/bin/gecho"
