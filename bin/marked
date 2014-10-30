@@ -1,0 +1,15 @@
+#!/bin/sh
+# open file in marked
+mdfile="$1"
+
+if [ -z "$mdfile" ]; then
+    echo "Enter Markdown file to open: \c"
+    read mdfile
+fi
+if [ -z "$mdfile" ]; then
+    echo "Aborting"
+    exit 1
+fi
+
+touch $mdfile
+open $mdfile -a /Applications/Marked.app/Contents/MacOS/Marked

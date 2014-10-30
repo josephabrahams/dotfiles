@@ -156,17 +156,18 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>l :call ColorColumnToggle()<CR>
-nnoremap <leader>o :!open %:p:h<CR><CR> " Open current directory in finder
+nnoremap <leader>o :!open %:p:h<CR><CR>     " Open current directory in finder
+nnoremap <leader>M :!open %:p -a /Applications/Marked.app/Contents/MacOS/Marked<CR><CR> " Open current file in Marked
 nnoremap <leader>t :CtrlP<CR>
-nnoremap <leader>T :CtrlPClearCacheѳѳ<CR>:CtrlP<CR>
+nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 nnoremap <leader>] :TagbarToggle<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 vnoremap <leader><space> :s/\s\+$//e<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>u :NERDTreeClose<CR>:UndotreeToggle<CR>
 nnoremap <leader>c <Plug>Kwbd
-nnoremap <leader>v ^v$hy           " Copy a whole line, but not linebreaks
-nnoremap <leader><leader> <c-^>    " Switch between the last two files
+nnoremap <leader>v ^v$hy                    " Copy a whole line, but not linebreaks
+nnoremap <leader><leader> <c-^>             " Switch between the last two files
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " quickly change windows
