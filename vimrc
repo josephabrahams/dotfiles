@@ -71,7 +71,12 @@ let g:NERDSpaceDelims=1
 let g:NERDTreeShowHidden=1
 let NERDTreeIgnore=['^\.DS_Store$', '^\.git$']
 let g:gitgutter_enabled=0
-" let g:syntastic_php_phpcs_args='--report=csv --standard=WordPress'
+
+function! EnableWordPress()
+    let g:syntastic_php_phpcs_args='--report=csv --standard=WordPress'
+    set noexpandtab
+endfunction
+command! WordPress :call EnableWordPress()
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
