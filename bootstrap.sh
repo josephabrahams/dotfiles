@@ -4,7 +4,7 @@
 bold='\033[1m'
 unbold='\033[0m'
 
-# Homebrew - http://brew.sh/
+# Homebrew - http://joseph.is/1DCbIBY
 echo "\n${bold}Updating Homebrew formulas...${unbold}"
 brew update
 echo "\n${bold}Upgrading installed brews...${unbold}"
@@ -38,17 +38,25 @@ else
     git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
 fi
 
-# JavaScript - https://www.npmjs.org/doc/
-if [ ! $(which grunt) ]; then
-    echo "\n${bold}Installing Grunt...${unbold}";
-    npm install -g grunt-cli
-fi
-if [ ! $(which gulp) ]; then
-    echo "\n${bold}Installing Gulp...${unbold}";
-    npm install -g gulp
+# JavaScript - http://joseph.is/1p6nO5g
+if [ $(which npm) ]; then
+    echo "\n${bold}Updating NPM...${unbold}";
+    npm -g update
+    if [ ! $(which jshint) ]; then
+        echo "\n${bold}Installing JSHint...${unbold}";
+        npm -g install jshint
+    fi
+    if [ ! $(which grunt) ]; then
+        echo "\n${bold}Installing Grunt...${unbold}";
+        npm -g install grunt-cli
+    fi
+    if [ ! $(which gulp) ]; then
+        echo "\n${bold}Installing Gulp...${unbold}";
+        npm -g install gulp
+    fi
 fi
 
-# PHP - https://getcomposer.org
+# PHP - http://joseph.is/1tTzucL
 if [ ! $(which composer) ]; then
     echo "\n${bold}Installing Composer...${unbold}";
     curl -sS https://getcomposer.org/installer | php
@@ -76,3 +84,4 @@ else
 fi
 
 echo "\nDone."
+

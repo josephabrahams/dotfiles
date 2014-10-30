@@ -53,15 +53,8 @@ if has('persistent_undo')
     set undodir=~/.vim/undo//,~/tmp//,~//
 endif
 
-" spacing for JavaScript
-autocmd BufRead,BufNewFile *.js set shiftwidth=2
-autocmd BufRead,BufNewFile *.js set tabstop=2
-autocmd BufRead,BufNewFile *.json set shiftwidth=2
-autocmd BufRead,BufNewFile *.json set tabstop=2
-
-" spacing for yaml
-autocmd BufRead,BufNewFile *.yml set shiftwidth=2
-autocmd BufRead,BufNewFile *.yml set tabstop=2
+" spacing for js, json, and yaml
+autocmd BufRead,BufNewFile *.js,*.json,*.yml set shiftwidth=2 tabstop=2 softtabstop=2
 
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a
