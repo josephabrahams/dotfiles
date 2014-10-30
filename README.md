@@ -65,9 +65,9 @@ Put your customizations in dotfiles appended with `.local`:
 
 
 ## Inspired by
-* [Mathias Bynens](https://github.com/mathiasbynens/dotfiles)
-* [Mike Solomon](http://msol.io/blog/tech/2014/03/10/work-more-efficiently-on-your-mac-for-developers/)
-* [Square](https://github.com/square/maximum-awesome)
-* [Thoughtbot](https://github.com/thoughtbot/dotfiles)
+* [Mathias Bynens](http://joseph.is/104CHsR)
+* [Mike Losh](http://joseph.is/1zNYLIu)
+* [Square](http://joseph.is/1FZKGbF)
+* [Thoughtbot](http://joseph.is/1FZKRUl)
 * and many more...
 
