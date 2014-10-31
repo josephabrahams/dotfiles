@@ -1,1 +1,1 @@
-EXCLUDES="Brewfile Caskfile LICENSE README.md bootstrap.sh requirements.txt"
+EXCLUDES="LICENSE README.md init"

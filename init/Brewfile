@@ -34,6 +34,7 @@ install openssh --with-brewed-openssl
 install pv
 install python --with-brewed-openssl
 install rbenv
+install rbenv-gem-rehash
 install rcm
 install reattach-to-user-namespace
 install rename

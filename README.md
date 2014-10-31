@@ -20,21 +20,25 @@ Clone the dotfiles repo:
 
 Install command-line tools:
 
-    brew bundle $HOME/.dotfiles/Brewfile
+    brew bundle $HOME/.dotfiles/init/Brewfile
 
 Install OS X native apps:
 
-    HOMEBREW_CASK_OPTS="--appdir=/Applications" brew bundle $HOME/.dotfiles/Caskfile
+    HOMEBREW_CASK_OPTS="--appdir=/Applications" brew bundle $HOME/.dotfiles/init/Caskfile
+
+Set sensible hacker defaults for OS X:
+
+    $HOME/.dotfiles/init/osx.sh
 
 Install Python dependencies:
 
-    pip install -r $HOME/.dotfiles/requirements.txt
+    pip install -r $HOME/.dotfiles/init/requirements.txt
 
 Install/update most other dependencies:
 
-    $HOME/.dotfiles/bootstrap.sh
+    $HOME/.dotfiles/init/bootstrap.sh
 
-Install the dotfiles & dependencies:
+Install the dotfiles, oh-my-zsh, and vim plugins:
 
     RCRC=$HOME/.dotfiles/rcrc rcup -fv
 
