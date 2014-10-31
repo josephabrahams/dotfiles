@@ -4,6 +4,11 @@
 bold='\033[1m'
 unbold='\033[0m'
 
+# Make common directories
+ln -sf $HOME/.bin $HOME/bin &>/dev/null
+mkdir -p $HOME/Projects 2>/dev/null
+mkdir -p $HOME/tmp 2>/dev/null
+
 # Homebrew - http://joseph.is/1DCbIBY
 echo "\n${bold}Updating Homebrew formulas...${unbold}"
 brew update
@@ -11,6 +16,12 @@ echo "\n${bold}Upgrading installed brews...${unbold}"
 brew upgrade
 echo "\n${bold}Remove unneeded brews...${unbold}"
 brew cleanup
+
+# Oh My Zsh
+if [ -z "$ZSH" ]; then
+    echo "\n${bold}Install Oh My Zsh...${unbold}"
+    curl -L http://install.ohmyz.sh | ZSH=$HOME/.zsh sh
+fi
 
 # Zsh Syntax Highlighting - http://joseph.is/1yPtYtq
 if [ -d $HOME/.zsh/custom/plugins/zsh-syntax-highlighting ]; then
@@ -82,6 +93,17 @@ else
     $HOME/.composer/vendor/bin/phpcs --config-set installed_paths $HOME/.config/WordPress-Coding-Standards
     $HOME/.composer/vendor/bin/phpcs -i
 fi
+
+# Vim - http://joseph.is/1sZma4R
+if [ -d $HOME/.vim/bundle/Vundle.vim ]; then
+    echo "\n${bold}Updating Vundle...${unbold}";
+    cd $HOME/.vim/bundle/Vundle.vim; git pull
+else
+    echo "\n${bold}Installing Vundle...${unbold}";
+    git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+fi
+echo "\n${bold}Installing/updating Vundle Plugins...${unbold}";
+vim -u $HOME/.vimrc.bundles +PluginInstall +PluginClean! +qa
 
 echo "\nDone."
 

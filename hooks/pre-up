@@ -5,13 +5,7 @@ bold='\033[1m'
 unbold='\033[0m'
 
 # Update dotfiles
-echo "\n${bold}Updating dotfiles...${unbold}"
+echo "\n${bold}Fetching dotfiles from GitHub...${unbold}"
 cd $HOME/.dotfiles; git pull
 
-# Oh My Zsh
-if [ -z "$ZSH" ]; then
-    echo "\n${bold}Install Oh My Zsh...${unbold}"
-    curl -L http://install.ohmyz.sh | ZSH=$HOME/.zsh sh
-fi
-
-echo ""
+echo "\n${bold}Syncing dotfiles to ${HOME}/...${unbold}"

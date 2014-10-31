@@ -4,5 +4,6 @@ Unipath
 awscli
 boto
 bpython
+flake8
 virtualenv
 virtualenvwrapper

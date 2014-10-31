@@ -3,28 +3,17 @@
 
 bold='\033[1m'
 unbold='\033[0m'
-dotfiles_dir="$HOME/.dotfiles"
-
-# Required directories
-ln -sf $HOME/.bin $HOME/bin &>/dev/null
-mkdir -p $HOME/.vim/undo 2>/dev/null
-mkdir -p $HOME/Projects 2>/dev/null
-mkdir -p $HOME/tmp 2>/dev/null
 
 # Vim - http://joseph.is/1sZma4R
 if [ -d $HOME/.vim/bundle/Vundle.vim ]; then
     # checks if vimrc or vimrc.bundles changed in the last commit
-    if [ -n "$(cd $dotfiles_dir; git diff HEAD^^ vimrc vimrc.bundles)" ]; then
+    if [ -n "$(cd $HOME/.dotfiles; git diff HEAD^^ vimrc vimrc.bundles)" ]; then
         echo "\n${bold}Updating Vundle...${unbold}";
         cd $HOME/.vim/bundle/Vundle.vim; git pull
         echo "\n${bold}Installing Vundle Plugins...${unbold}";
-        vim -u $HOME/.vimrc.bundles +PluginInstall +PluginClean! +qa
+        vim -u $HOME/.vimrc.bundles +PluginInstall +PluginClean! +qall
     fi
-else
-    echo "\n${bold}Installing Vundle...${unbold}";
-    git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-    echo "\n${bold}Installing Vundle Plugins...${unbold}";
-    vim -u $HOME/.vimrc.bundles +PluginInstall +PluginClean! +qa
 fi
 
 echo "\nDone."
+
