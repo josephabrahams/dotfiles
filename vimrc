@@ -396,7 +396,7 @@ endfunction
 noremap <leader>l :Align
 nnoremap <leader>l :call ColorColumnToggle()<CR>
 nnoremap <leader>o :!open %:p:h<CR><CR>     " Open current directory in finder
-nnoremap <leader>M :!open %:p -a /Applications/Marked.app/Contents/MacOS/Marked<CR><CR> " Open current file in Marked
+nnoremap <leader>M :!marked %:p<CR><CR>     " Open current file in Marked
 nnoremap <leader>] :TagbarToggle<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 vnoremap <leader><space> :s/\s\+$//e<CR>

@@ -12,4 +12,4 @@ if [ -z "$mdfile" ]; then
 fi
 
 touch $mdfile
-open $mdfile -a /Applications/Marked.app/Contents/MacOS/Marked
+open $mdfile -a /Applications/Marked\ 2.app/Contents/MacOS/Marked\ 2
