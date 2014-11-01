@@ -560,11 +560,11 @@ defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault
 
 
 ###############################################################################
-# Sublime Text                                                                #
+# Karabiner
 ###############################################################################
 
-# Install Sublime Text settings
-#cp -r ./Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
+# Symlink Karabiner Custom Settings File
+ln -sf $HOME/.dotfiles/init/private.xml $HOME/Library/Application\ Support/Karabiner/private.xml
 
 
 ###############################################################################

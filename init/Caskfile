@@ -10,7 +10,6 @@ cask install airfoil
 cask install alfred
 cask install caffeine
 cask install charles
-cask install divvy
 cask install dropbox
 cask install find-any-file
 cask install firefox
@@ -29,6 +28,7 @@ cask install nottingham
 cask install pandora-one
 cask install sequel-pro
 cask install slack
+cask install slate
 cask install spotify
 cask install the-unarchiver
 cask install tower
