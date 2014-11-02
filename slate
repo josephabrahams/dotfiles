@@ -25,18 +25,18 @@ bind k:${hyper}  focus up
 bind l:${hyper}  focus right
 
 # Location bindings
-bind q:${hyper}  throw next
-bind f:${hyper}  ${full}
+bind i:${hyper}  throw next
+bind o:${hyper}  ${full}
 bind ;:${hyper}  ${lefthalf}
 bind ':${hyper}  ${righthalf}
 bind y:${hyper}  ${topleft}
 bind u:${hyper}  ${topright}
-bind i:${hyper}  ${bottomleft}
-bind o:${hyper}  ${bottomright}
+bind n:${hyper}  ${bottomleft}
+bind m:${hyper}  ${bottomright}
 
 # App bindings
-bind c:${hyper}      focus ${browser}
-bind m:${hyper}      focus ${mail}
+bind f:${hyper}      focus ${browser}
+bind a:${hyper}      focus ${mail}
 bind s:${hyper}      focus ${spotify}
 bind t:${hyper}      focus ${terminal}
 bind space:${hyper}  focus ${terminal}

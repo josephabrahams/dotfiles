@@ -9,6 +9,7 @@ function! whitespace#strip_trailing()
 endfunction
 
 " strip trailing whitespace from all files on save
-" augroup whitespace
-"   autocmd BufWritePre * call whitespace#strip_trailing()
-" augroup END
+"augroup whitespace
+"  autocmd BufWritePre * call whitespace#strip_trailing()
+"augroup END
+

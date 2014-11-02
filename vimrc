@@ -12,9 +12,7 @@ set showmode                    " Show current mode down the bottom
 set visualbell                  " No sounds
 set autoread                    " Reload files when changed outside vim
 
-" Make vim act like all other editors, buffers can
-" exist in the background without being in a window
-" http://items.sjbach.com/319/configuring-vim-right
+" Make Vim act like an IDE - http://joseph.is/1ttteph
 set hidden
 
 " Enable syntax highlighting
@@ -23,161 +21,50 @@ syntax on
 " Change leader to a comma
 let mapleader=','
 
-
-" --------------------------------------------------------
-" Vundle
-" --------------------------------------------------------
-
+" Load Vundle plugins
 if filereadable( expand('~/.vimrc.bundles') )
     source ~/.vimrc.bundles
 endif
 
 
 " --------------------------------------------------------
-" Swap, Backup, && Undo
+" Ag
 " --------------------------------------------------------
 
-set noswapfile
-set backupcopy=yes              " Enable backup (see :help crontab)
-set backupdir=~/tmp//,~//       " Set backup directory
-
-if has('persistent_undo')
-    silent !mkdir ~/.vim/undo > /dev/null 2>&1
-    set undodir=~/.vim/undo//,~/tmp//,~//
-    set undofile
-endif
+nnoremap <leader>a :Ag ""<Left>
 
 
 " --------------------------------------------------------
-" Indentation
+" Appearance
 " --------------------------------------------------------
 
-set autoindent
-set smartindent
-set smarttab
-set shiftwidth=4                " normal mode indentation commands use 4 spaces
-set softtabstop=4               " insert mode tab and backspace use 4 spaces
-set tabstop=4                   " actual tabs occupy 4 characters
-set expandtab                   " expand tabs to spaces
-
-filetype plugin on
-filetype indent on
-
-set list
-set listchars=tab:▸\ ,trail:▫   " show trailing whitespace
-
-" TODO: remove once mvim catches up to 7.4.338
-if has('gui_running')
-    set nowrap
-else
-    set breakindent             " add smart line wraps to vim
-endif
-
-
-" --------------------------------------------------------
-" Folds
-" --------------------------------------------------------
-
-set foldmethod=indent           " fold based on indent
-set foldnestmax=3               " deepest fold is 3 levels
-set nofoldenable                " dont fold by default
-
-
-" --------------------------------------------------------
-" Completion
-" --------------------------------------------------------
-
-set wildmode=list:longest
-set wildmenu                    " enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~     " stuff to ignore when tab completing
-set wildignore+=*vim/undo*
-set wildignore+=*sass-cache*
-set wildignore+=*DS_Store*
-set wildignore+=vendor/**
-set wildignore+=*.gem
-set wildignore+=*.pyc
-set wildignore+=*.sql
-set wildignore+=log/**
-set wildignore+=node_modules/**
-set wildignore+=tmp/**
-set wildignore+=*.png,*.jpeg,*.jpg,*.gif
-
-
-" --------------------------------------------------------
-" Scrolling
-" --------------------------------------------------------
-
-set scrolloff=8             " Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=1
-
-
-" --------------------------------------------------------
-" Search
-" --------------------------------------------------------
-
-set incsearch               " Find the next match as we type the search
-set hlsearch                " Hilight searches by default
-set viminfo='100,f1         " Save up to 100 marks, enable capital marks
-set ignorecase              " Ignore case when searching...
-set smartcase               " ...unless we type a capital
-
-
-" --------------------------------------------------------
-" Appaeranace
-" --------------------------------------------------------
-
-set colorcolumn=""          " no line length bar on start
-set hlsearch                " highlight search results
-set laststatus=2            " always show statusbar
-set nocursorline            " don't highlight current line
-set ruler                   " show where you are
+set laststatus=2                " Always show statusbar
+set nocursorline                " Don't highlight current line
+set ruler                       " Show where you are
 
 " automatically rebalance windows on vim resize
-autocmd VimResized * :wincmd =
+autocmd VimResized * :wincmd=
 
 " Set 256 color space
 if matchstr($TERM,256) || has('gui_running')
     set t_Co=256
 endif
 
-" Enable Base16 color scheme if possible
+" Enable Base16 color scheme
 if &t_Co == 256
     let base16colorspace=256
     colorscheme base16-default
     if has('gui_running')
-        set guioptions-=rLT         " disable scrollbars and toolbar
+        set guioptions-=rLT     " Disable MacVim scrollbars and toolbar
         set guifont=Menlo:h14
         set linespace=1
         set background=light
-        hi LineNr guibg=#f5f5f5     " match background of light theme
+        hi LineNr guibg=#f5f5f5 " Match background of light theme
     else
         set background=dark
-        hi LineNr ctermbg=00        " match background of dark theme
+        hi LineNr ctermbg=00    " Match background of dark theme
     endif
 endif
-
-
-" ---------------------------------------------------------
-" Ag
-" ---------------------------------------------------------
-
-nnoremap <leader>a :Ag ""<Left>
-
-
-" ---------------------------------------------------------
-" CamelCase Motion
-" ---------------------------------------------------------
-
-map w <Plug>CamelCaseMotion_w
-map b <Plug>CamelCaseMotion_b
-map e <Plug>CamelCaseMotion_e
-omap iw <Plug>CamelCaseMotion_iw
-xmap iw <Plug>CamelCaseMotion_iw
-omap ib <Plug>CamelCaseMotion_ib
-xmap ib <Plug>CamelCaseMotion_ib
-omap ie <Plug>CamelCaseMotion_ie
-xmap ie <Plug>CamelCaseMotion_ie
 
 
 " --------------------------------------------------------
@@ -192,13 +79,28 @@ cnoremap <Esc>b <S-Left>
 cnoremap <Esc>f <S-Right>
 cnoremap <C-K> <C-\>estrpart(getcmdline(), 0, getcmdpos()-1)<CR>
 
-" stop accidentally running CtrlP
-" TODO: setup Yank Ring
-nnoremap <C-P> :<C-P>
-nnoremap <C-N> :<C-N>
-
 " echo PWD in command mode
 cnoremap <C-L> <C-R>=expand("%:p:h") . "/"<CR>
+
+
+" --------------------------------------------------------
+" Completion
+" --------------------------------------------------------
+
+set wildmode=list:longest
+set wildmenu                    " Enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=*.o,*.obj,*~     " Stuff to ignore when tab completing
+set wildignore+=*vim/undo*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/**
+set wildignore+=*.gem
+set wildignore+=*.pyc
+set wildignore+=*.sql
+set wildignore+=log/**
+set wildignore+=node_modules/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpeg,*.jpg,*.gif
 
 
 " ---------------------------------------------------------
@@ -240,6 +142,32 @@ nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 nnoremap <silent> <D-M> :CtrlPBufTag<CR>
 
 
+" --------------------------------------------------------
+" Cut/Paste
+" --------------------------------------------------------
+
+" Yank and paste with the system clipboard
+set clipboard=unnamed
+
+" Don't copy the contents of an overwritten selection.
+vnoremap p "_dP
+
+" Copy a whole line, but not linebreaks
+nnoremap <leader>y ^v$hy
+
+" Select all text
+noremap <C-G> ggVG
+
+
+" --------------------------------------------------------
+" Folds
+" --------------------------------------------------------
+
+set foldmethod=indent           " Fold based on indent
+set foldnestmax=3               " Deepest fold is 3 levels
+set nofoldenable                " Dont fold by default
+
+
 " ---------------------------------------------------------
 " Goto File
 " ---------------------------------------------------------
@@ -254,24 +182,104 @@ nnoremap <silent> <C-F> :vertical botright wincmd F<CR>
 
 
 " --------------------------------------------------------
-" GitGutter
+" Grep
 " --------------------------------------------------------
 
-let g:gitgutter_enabled=1
-
-
-" ---------------------------------------------------------
-" Grep
-" ---------------------------------------------------------
-
 if executable('ag')
-    " Use Agfor lightning fast Gsearch command
+    " Use Ag for lightning fast search
     set grepprg=ag\ --nogroup\ --nocolor
 else
     " Fall back to using git ls-files if Ag is not available
     set grepprg=git\ grep
 endif
 let g:grep_cmd_opts = '--line-number'
+
+
+" --------------------------------------------------------
+" Line Length
+" --------------------------------------------------------
+
+" don't show line length bar on start
+set colorcolumn=
+
+" toggle line length with <leader>l
+function! ColorColumnToggle()
+    if &colorcolumn
+        set colorcolumn=
+    else
+        set colorcolumn=80,120
+    endif
+endfunction
+nnoremap <leader>l :call ColorColumnToggle()<CR>
+
+
+" --------------------------------------------------------
+" GitGutter
+" --------------------------------------------------------
+
+" Enable GitGutter on start
+let g:gitgutter_enabled=1
+
+" Toggle with `,g`
+nnoremap <leader>g :GitGutterToggle<CR>
+
+
+" --------------------------------------------------------
+" Helpers
+" --------------------------------------------------------
+
+" In case you forgot to sudo
+cnoremap w!! %!sudo tee > /dev/null %
+
+" Delete buffer while keeping window layout
+nnoremap <leader>c :Kwbd<CR>
+
+" Open current directory in finder
+nnoremap <leader>o :!open %:p:h<CR><CR>
+
+" Switch between the last two files
+nnoremap <leader><leader> <c-^>
+
+" Quick macros
+noremap <S-Q> @q
+
+" Reload .vimrc
+noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+
+" --------------------------------------------------------
+" Indentation
+" --------------------------------------------------------
+
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=4                " Normal mode indentation commands use 4 spaces
+set softtabstop=4               " Insert mode tab and backspace use 4 spaces
+set tabstop=4                   " Actual tabs occupy 4 characters
+set expandtab                   " Expand tabs to spaces
+
+filetype plugin on
+filetype indent on
+
+set list
+set listchars=tab:▸\ ,trail:▫   " Show trailing whitespace
+
+" TODO: remove once mvim catches up to 7.4.338
+if has('gui_running')
+    set nowrap
+else
+    set breakindent             " Smart line wraps
+endif
+
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-d>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" Align selection on character, i.e. `=` or `:`)
+noremap <leader>= :Align
 
 
 " ---------------------------------------------------------
@@ -282,7 +290,7 @@ let g:grep_cmd_opts = '--line-number'
 autocmd BufRead,BufNewFile *.js set ft=javascript syntax=jquery
 " Uses 2 spaces for tabs in js and json files
 autocmd BufRead,BufNewFile *.js,*.json set shiftwidth=2 tabstop=2 softtabstop=2
-" Swig is Django
+" Swig uses Django syntax
 autocmd BufRead,BufNewFile *.swig set filetype=htmldjango
 
 
@@ -290,10 +298,38 @@ autocmd BufRead,BufNewFile *.swig set filetype=htmldjango
 " Markdown
 " --------------------------------------------------------
 
+" Use GitHub Markdown (jtratner/vim-flavored-markdown)
 augroup markdown
     au!
     au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown spell
 augroup END
+
+" Open current file with Marked 2
+nnoremap <leader>M :!marked %:p<CR><CR>
+
+
+" ---------------------------------------------------------
+" Motion / moving text
+" ---------------------------------------------------------
+
+" CamelCase Motion
+map w <Plug>CamelCaseMotion_w
+map b <Plug>CamelCaseMotion_b
+map e <Plug>CamelCaseMotion_e
+omap iw <Plug>CamelCaseMotion_iw
+xmap iw <Plug>CamelCaseMotion_iw
+omap ib <Plug>CamelCaseMotion_ib
+xmap ib <Plug>CamelCaseMotion_ib
+omap ie <Plug>CamelCaseMotion_ie
+xmap ie <Plug>CamelCaseMotion_ie
+
+" Move text blokcs up/down
+vnoremap <C-J> :m '>+1<CR>gv=gv
+vnoremap <C-K> :m '<-2<CR>gv=gv
+
+" Exit insert mode when trying to move up/down
+inoremap jj <ESC>
+inoremap kk <ESC>
 
 
 " --------------------------------------------------------
@@ -322,6 +358,44 @@ autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
 
 
 " --------------------------------------------------------
+" Scrolling
+" --------------------------------------------------------
+
+set scrolloff=8                 " Scroll 8 lines away from top/bottom
+set sidescrolloff=15            " Scroll 15 chards from side
+set sidescroll=1                " Keep the cursor on the screen
+
+
+" --------------------------------------------------------
+" Search
+" --------------------------------------------------------
+
+set incsearch                   " Find the next match as we type the search
+set hlsearch                    " Highlight search results
+set viminfo='100,f1             " Save up to 100 marks, enable capital marks
+set ignorecase                  " Ignore case when searching...
+set smartcase                   " ...unless we type a capital
+
+" clear search results
+nnoremap <silent> <leader>/ :let @/ = ""<CR>
+
+
+" --------------------------------------------------------
+" Swap, Backup, && Undo
+" --------------------------------------------------------
+
+set noswapfile
+set backupcopy=yes              " Enable backup (see :help crontab)
+set backupdir=~/tmp//,~//       " Set backup directory
+
+if has('persistent_undo')
+    silent !mkdir ~/.vim/undo > /dev/null 2>&1
+    set undodir=~/.vim/undo//,~/tmp//,~//
+    set undofile
+endif
+
+
+" --------------------------------------------------------
 " Syntastic
 " --------------------------------------------------------
 
@@ -330,12 +404,18 @@ let g:syntastic_python_checkers=["flake8"]
 
 
 " --------------------------------------------------------
+" Tagbar
+" --------------------------------------------------------
+
+" Open Tagbar
+nnoremap <leader>] :TagbarToggle<CR>
+
+
+" --------------------------------------------------------
 " TMUX
 " --------------------------------------------------------
 
-set clipboard=unnamed   " yank and paste with the system clipboard
-
-" support mouse resizing in TMUX
+" Support mouse resizing in TMUX
 set mouse=a
 if exists('$TMUX')
     set ttymouse=xterm2
@@ -362,82 +442,21 @@ nnoremap <leader>u :UndotreeToggle<CR>
 
 
 " --------------------------------------------------------
+" Whitespace
+" --------------------------------------------------------
+
+nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
+vnoremap <leader><space> :s/\s\+$//e<CR>
+
+
+" --------------------------------------------------------
 " WordPress
 " --------------------------------------------------------
 
 function! EnableWordPress()
     let g:syntastic_php_phpcs_args='--report=csv --standard=WordPress'
     set noexpandtab
-    set listchars=tab: \ ,trail:▫   " show trailing whitespace
+    set listchars=tab:\ \ ,trail:▫   " don't show tabs
 endfunction
 command! WordPress :call EnableWordPress()
-
-
-" --------------------------------------------------------
-" Helper Functions
-" --------------------------------------------------------
-
-" in case you forgot to sudo
-cnoremap w!! %!sudo tee > /dev/null %
-
-function! ColorColumnToggle()
-    if &colorcolumn
-        set colorcolumn=""
-    else
-        set colorcolumn=80,120
-    endif
-endfunction
-
-
-" --------------------------------------------------------
-" Keyboard Shortcuts
-" --------------------------------------------------------
-
-noremap <leader>l :Align
-nnoremap <leader>l :call ColorColumnToggle()<CR>
-nnoremap <leader>o :!open %:p:h<CR><CR>     " Open current directory in finder
-nnoremap <leader>M :!marked %:p<CR><CR>     " Open current file in Marked
-nnoremap <leader>] :TagbarToggle<CR>
-nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
-vnoremap <leader><space> :s/\s\+$//e<CR>
-nnoremap <leader>g :GitGutterToggle<CR>
-nnoremap <leader>c <Plug>Kwbd
-nnoremap <leader>v ^v$hy                    " Copy a whole line, but not linebreaks
-nnoremap <leader><leader> <c-^>             " Switch between the last two files
-noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-
-" exit insert mode when trying to move up/down
-inoremap jj <ESC>
-inoremap kk <ESC>
-
-" Don't copy the contents of an overwritten selection.
-vnoremap p "_dP
-
-" quickly change windows
-noremap <C-H> <C-W>h
-noremap <C-J> <C-W>j
-noremap <C-K> <C-W>k
-noremap <C-L> <C-W>l
-
-" select all text
-noremap <C-G> ggVG
-
-" quick macros
-noremap <S-Q> @q
-
-" " better tabs
-nnoremap <Tab> >>_
-nnoremap <S-Tab> <<_
-inoremap <S-Tab> <C-d>
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
-
-" move blokcs up/down
-vnoremap <C-J> :m '>+1<CR>gv=gv
-vnoremap <C-K> :m '<-2<CR>gv=gv
-nnoremap <C-J> <S-V>:m '>+1<CR>gv=
-nnoremap <C-K> <S-V>:m '<-2<CR>gv=
-
-" empty search results
-nnoremap <silent> <leader>/ :let @/ = ""<CR>
 
