@@ -7,7 +7,7 @@ path=(
     /usr/local/bin
     /usr/local/heroku/bin
     /usr/local/MacGPG2/bin
-    /usr/local/opt/coreutils/libexec/gnubin
+    # /usr/local/opt/coreutils/libexec/gnubin
     /usr/local/sbin
     /usr/local/share/npm/bin
     /usr/bin
@@ -15,7 +15,7 @@ path=(
     /bin
     /sbin
 )
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+# export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # use vim as the visual editor
 export VISUAL=vim

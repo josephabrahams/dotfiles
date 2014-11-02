@@ -9,14 +9,14 @@ alias ll="ls -alF"
 alias lsd="ls -AlF --color=always | grep '^d' --color=never"
 
 # other GNU aliases
-alias echo="/usr/local/bin/gecho"
-alias false="/usr/local/bin/gfalse"
-alias kill="/usr/local/bin/gkill"
-alias printf="/usr/local/bin/gprintf"
-alias pwd="/usr/local/bin/gpwd"
-alias test="/usr/local/bin/gtest"
-alias true="/usr/local/bin/gtrue"
-alias which="/usr/local/bin/which 2>/dev/null"
+#alias echo="/usr/local/bin/gecho"
+#alias false="/usr/local/bin/gfalse"
+#alias kill="/usr/local/bin/gkill"
+#alias printf="/usr/local/bin/gprintf"
+#alias pwd="/usr/local/bin/gpwd"
+#alias test="/usr/local/bin/gtest"
+#alias true="/usr/local/bin/gtrue"
+#alias which="/usr/local/bin/which 2>/dev/null"
 
 # helpers
 alias cp="cp -ir"
@@ -67,3 +67,4 @@ alias vimrcb="vim ~/.vimrc.bundles"
 alias zshenv="vim ~/.zshenv; source ~/.zshenv"
 alias zshrc="vim ~/.zshrc; source ~/.zshrc"
 alias zshrcl="vim ~/.zshrc.local; source ~/.zshrc.local"
+
