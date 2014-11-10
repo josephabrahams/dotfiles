@@ -36,3 +36,6 @@ export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
 if which rbenv &>/dev/null; then
     eval "$(rbenv init - zsh --no-rehash)"
 fi
+
+# local config
+[ -s ~/.zshenv.local ] && source ~/.zshenv.local

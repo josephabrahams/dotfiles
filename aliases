@@ -37,6 +37,7 @@ alias ptr="dig +short -x"
 alias rcup="rcup -v"
 alias scheme="rlwrap scheme"
 alias sudo="sudo " # use sudo with aliases
+alias top="htop"
 alias tree="t"
 alias tower="gittower ."
 
@@ -65,6 +66,7 @@ alias aliases="vim ~/.aliases; source ~/.aliases"
 alias vimrc="vim ~/.vimrc"
 alias vimrcb="vim ~/.vimrc.bundles"
 alias zshenv="vim ~/.zshenv; source ~/.zshenv"
+alias zshenvl="vim ~/.zshenv.local; source ~/.zshenv"
 alias zshrc="vim ~/.zshrc; source ~/.zshrc"
 alias zshrcl="vim ~/.zshrc.local; source ~/.zshrc.local"
 
