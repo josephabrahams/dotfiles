@@ -281,6 +281,14 @@ vnoremap <S-Tab> <gv
 " Align selection on character, i.e. `=` or `:`)
 noremap <leader>; :Align
 
+" TODO: set tabs based on filetype detection
+function! ResetTabs()
+    set shiftwidth=4
+    set softtabstop=4
+    set tabstop=4
+endfunction
+command! Tabs :call ResetTabs()
+
 
 " ---------------------------------------------------------
 " JavaScript
