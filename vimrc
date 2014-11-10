@@ -279,7 +279,7 @@ vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
 " Align selection on character, i.e. `=` or `:`)
-noremap <leader>= :Align
+noremap <leader>; :Align
 
 
 " ---------------------------------------------------------
