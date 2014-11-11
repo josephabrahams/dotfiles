@@ -53,6 +53,10 @@ fi
 if [ $(which npm) ]; then
     echo "\n${bold}Updating NPM...${unbold}";
     npm -g update
+    if [ ! $(which bower) ]; then
+        echo "\n${bold}Installing Bower...${unbold}";
+        npm -g install bower
+    fi
     if [ ! $(which jshint) ]; then
         echo "\n${bold}Installing JSHint...${unbold}";
         npm -g install jshint
