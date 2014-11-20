@@ -361,8 +361,8 @@ nnoremap <leader>f :NERDTreeFind<CR>
 
 " spacing for yaml
 autocmd BufRead,BufNewFile *.yml set shiftwidth=2 tabstop=2 softtabstop=2
-" fdocs are yaml
-autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
+" fdocs and salt states are yaml
+autocmd BufRead,BufNewFile *.fdoc,*.sls set filetype=yaml
 
 
 " --------------------------------------------------------
