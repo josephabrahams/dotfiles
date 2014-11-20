@@ -1,0 +1,12 @@
+#!/bin/sh
+# Convert string to title case
+# Requires gnu-sed: `brew install gnu-sed`
+
+# read from stdin if no argument provided
+if [ $# -eq 0 ]; then
+    read string
+else
+    string="$@"
+fi
+
+echo $string | sed -e 's/\b\(.\)/\u\1/g'
