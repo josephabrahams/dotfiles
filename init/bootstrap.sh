@@ -73,13 +73,15 @@ if [ $(which npm 2>/dev/null) ]; then
 fi
 
 # Ruby
-rbenv_version=$(rbenv install -l | awk '{print $1}' | grep '^2.0.0' | tail -1)
-if [ "$(rbenv global 2>/dev/null)" != "$rbenv_version" ]; then
+ruby_version='2.0.0'
+rbenv_version=$(rbenv versions 2>/dev/null | sed 's/^\*//g' | awk '{print $1}' | grep "^${ruby_version}" | tail -1)
+if [ -z "$rbenv_version" ]; then
+    rbenv_version=$(rbenv install -l | awk '{print $1}' | grep "^${ruby_version}" | tail -1)
     echo "\n${bold}Installing Ruby ${rbenv_version}...${unbold}"
     rbenv install $rbenv_version
-    rbenv global $rbenv_version
 fi
-unset rbenv_version
+rbenv global $rbenv_version
+unset ruby_version rbenv_version
 if [ ! $(which mux 2>/dev/null) ]; then
     echo "\n${bold}Installing Tmuxinator...${unbold}"
     [ -e $HOME/Dropbox ] && ln -sF $HOME/Dropbox/.tmuxinator/ $HOME/.tmuxinator/
@@ -104,6 +106,15 @@ else
     composer self-update
     echo "\n${bold}Updating Global Composer Packages...${unbold}"
     composer global update
+fi
+
+# WP-CLI - http://joseph.is/1t85XHk
+if [ ! $(which wp 2>/dev/null) ]; then
+    echo "\n${bold}Installing WP-CLI...${unbold}";
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    chmod +x wp-cli.phar
+    chgrp admin wp-cli.phar
+    mv wp-cli.phar /usr/local/bin/wp
 fi
 
 # Wordpress Coding Standards - http://joseph.is/1wdO6SC
