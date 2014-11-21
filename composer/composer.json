@@ -1,5 +1,7 @@
 {
     "require": {
-        "squizlabs/php_codesniffer": "dev-master"
+        "psy/psysh": "~0.2",
+        "squizlabs/php_codesniffer": "dev-master",
+        "wp-cli/wp-cli": "~0.17"
     }
 }
