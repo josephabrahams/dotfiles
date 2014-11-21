@@ -4,7 +4,7 @@
 
 function v() {
     if [ $# -eq 0 ]; then
-        vim .
+        vim +NERDTreeToggle
     else
         vim "$@"
     fi
