@@ -2,7 +2,7 @@
 # if doesn't exist, runs `mux list`
 
 function m() {
-    local dirname=$(basename $(pwd) | sed 's/\./\-/g')
+    local dirname=$(basename $(pwd) | sed 's/^\.//' | sed 's/\./\-/g')
 
     if [[ -z "$1" ]]; then
         if [[ -f "$HOME/.tmuxinator/${dirname}.yml" ]]; then
@@ -19,7 +19,11 @@ function m() {
             mux $@
         fi
     elif [[ "$1" == "kill" ]]; then
-        tmux kill-session -t $2
+        if [[ -z "$2" ]]; then
+            tmux kill-session -t $dirname
+        else
+            tmux kill-session -t $2
+        fi
     else
         for muxfile in $(mux list | grep -v "tmuxinator projects"); do
             if [[ "$1" == "$muxfile" ]]; then
@@ -34,4 +38,4 @@ function m() {
 }
 
 # TODO: create completion function
-compdef m=mux
+# compdef m=mux
