@@ -282,13 +282,18 @@ vnoremap <S-Tab> <gv
 noremap <leader>; :Align
 
 " TODO: set tabs based on filetype detection
-function! ResetTabs()
+function! Tab2()
+    set shiftwidth=2
+    set softtabstop=2
+    set tabstop=2
+endfunction
+function! Tab4()
     set shiftwidth=4
     set softtabstop=4
     set tabstop=4
 endfunction
-command! Tabs :call ResetTabs()
-
+command! Tab2 :call Tab2()
+command! Tab4 :call Tab4()
 
 " ---------------------------------------------------------
 " JavaScript
@@ -360,7 +365,7 @@ nnoremap <leader>f :NERDTreeFind<CR>
 " --------------------------------------------------------
 
 " spacing for yaml
-autocmd BufRead,BufNewFile *.yml set shiftwidth=2 tabstop=2 softtabstop=2
+autocmd BufRead,BufNewFile *.fdoc,*.sls,*.yml set shiftwidth=2 tabstop=2 softtabstop=2
 " fdocs and salt states are yaml
 autocmd BufRead,BufNewFile *.fdoc,*.sls set filetype=yaml
 
