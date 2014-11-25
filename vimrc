@@ -172,13 +172,8 @@ set nofoldenable                " Dont fold by default
 " Goto File
 " ---------------------------------------------------------
 
-" Automatically jump to a file at the correct line number
-" i.e. if your cursor is over /some/path.rb:50 then using 'gf' on it will take
-" you to that line
-
-" use ,gf to go to file in a vertical split
+" Automatically jump to a file at /some/path.rb:50
 nnoremap <silent> <leader>gf :vertical botright wincmd F<CR>
-nnoremap <silent> <C-F> :vertical botright wincmd F<CR>
 
 
 " --------------------------------------------------------
@@ -412,7 +407,7 @@ endif
 " Syntastic
 " --------------------------------------------------------
 
-let g:syntastic_check_on_open=1
+let g:syntastic_check_on_open=0
 let g:syntastic_python_checkers=["flake8"]
 
 
