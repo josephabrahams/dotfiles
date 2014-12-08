@@ -35,5 +35,6 @@ cask install tower
 cask install transmission
 cask install vagrant
 cask install virtualbox
+cask install viscosity
 cask install vmware-fusion
 cask install vlc
