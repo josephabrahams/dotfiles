@@ -42,7 +42,7 @@ set laststatus=2                " Always show statusbar
 set nocursorline                " Don't highlight current line
 set ruler                       " Show where you are
 
-" automatically rebalance windows on vim resize
+" Automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd=
 
 " Set 256 color space
@@ -79,7 +79,7 @@ cnoremap <Esc>b <S-Left>
 cnoremap <Esc>f <S-Right>
 cnoremap <C-K> <C-\>estrpart(getcmdline(), 0, getcmdpos()-1)<CR>
 
-" echo PWD in command mode
+" Echo PWD in command mode
 cnoremap <C-L> <C-R>=expand("%:p:h") . "/"<CR>
 
 
@@ -137,8 +137,8 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 " Clear the cache before search
 nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 
-"Cmd-Shift-(M)ethod - jump to a method (tag in current file)
-"Ctrl-m is not good - it overrides behavior of Enter
+" Cmd-Shift-(M)ethod - jump to a method (tag in current file)
+" Ctrl-m is not good - it overrides behavior of Enter
 nnoremap <silent> <D-M> :CtrlPBufTag<CR>
 
 
@@ -194,10 +194,10 @@ let g:grep_cmd_opts = '--line-number'
 " Line Length
 " --------------------------------------------------------
 
-" don't show line length bar on start
+" Don't show line length bar on start
 set colorcolumn=
 
-" toggle line length with <leader>l
+" Toggle line length with <leader>l
 function! ColorColumnToggle()
     if &colorcolumn
         set colorcolumn=
@@ -258,13 +258,13 @@ filetype plugin on
 filetype indent on
 
 set list
-set listchars=tab:▸\ ,trail:▫   " Show trailing whitespace
+set listchars=tab:▸\ ,trail:▫       " Show trailing whitespace
 
-" TODO: remove once mvim catches up to 7.4.338
+" TODO: Remove once mvim catches up to 7.4.338
 if has('gui_running')
     set nowrap
 else
-    set breakindent             " Smart line wraps
+    set breakindent                 " Smart line wraps
 endif
 
 nnoremap <Tab> >>_
@@ -276,7 +276,15 @@ vnoremap <S-Tab> <gv
 " Align selection on character, i.e. `=` or `:`)
 noremap <leader>; :Align
 
-" TODO: set tabs based on filetype detection
+" TODO: Set tabs based on filetype detection
+function! Spaces()
+    set expandtab
+    set listchars=tab:▸\ ,trail:▫   " Show trailing whitespace
+endfunction
+function! Tabs()
+    set noexpandtab
+    set listchars=tab:\ \ ,trail:▫  " don't show tabs
+endfunction
 function! Tab2()
     set shiftwidth=2
     set softtabstop=2
@@ -287,8 +295,11 @@ function! Tab4()
     set softtabstop=4
     set tabstop=4
 endfunction
+command! Spaces :call Spaces()
+command! Tabs :call Tabs()
 command! Tab2 :call Tab2()
 command! Tab4 :call Tab4()
+
 
 " ---------------------------------------------------------
 " JavaScript
@@ -344,12 +355,12 @@ inoremap kk <ESC>
 " NERD tree
 " --------------------------------------------------------
 
-let NERDTreeDirArrows = 1
-let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows=1
+let NERDTreeMinimalUI=1
 let g:NERDSpaceDelims=1
 let g:NERDTreeShowHidden=2
 let g:NERDTreeIgnore=['^\.DS_Store$', '^\.git$']
-let g:NERDTreeWinSize = 30
+let g:NERDTreeWinSize=30
 
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
@@ -359,10 +370,8 @@ nnoremap <leader>f :NERDTreeFind<CR>
 " Ruby
 " --------------------------------------------------------
 
-" spacing for yaml
-autocmd BufRead,BufNewFile *.fdoc,*.sls,*.yml set shiftwidth=2 tabstop=2 softtabstop=2
-" fdocs and salt states are yaml
-autocmd BufRead,BufNewFile *.fdoc,*.sls set filetype=yaml
+" Spacing for YAML and Salt States
+autocmd BufRead,BufNewFile *.sls,*.yml set shiftwidth=2 tabstop=2 softtabstop=2 filetype=yaml
 
 
 " --------------------------------------------------------
@@ -384,8 +393,24 @@ set viminfo='100,f1             " Save up to 100 marks, enable capital marks
 set ignorecase                  " Ignore case when searching...
 set smartcase                   " ...unless we type a capital
 
-" clear search results
+" Clear search results
 nnoremap <silent> <leader>/ :let @/ = ""<CR>
+
+
+" --------------------------------------------------------
+" Spellcheck
+" --------------------------------------------------------
+
+set spelllang=en_us
+
+" Share spelling file across machines
+if filewritable( expand('~/Dropbox') ) == 2
+    silent !mkdir -p ~/Dropbox/.vim/spell 2>/dev/null
+    set spellfile=~/Dropbox/.vim/spell/en.utf-8.add
+endif
+
+nnoremap <F7> :setlocal spell!<CR>
+inoremap <F7> <C-o>:setlocal spell!<CR>
 
 
 " --------------------------------------------------------
@@ -397,7 +422,7 @@ set backupcopy=yes              " Enable backup (see :help crontab)
 set backupdir=~/tmp//,~//       " Set backup directory
 
 if has('persistent_undo')
-    silent !mkdir ~/.vim/undo > /dev/null 2>&1
+    silent !mkdir -p ~/.vim/undo 2>/dev/null
     set undodir=~/.vim/undo//,~/tmp//,~//
     set undofile
 endif
@@ -463,8 +488,7 @@ vnoremap <leader><space> :s/\s\+$//e<CR>
 
 function! EnableWordPress()
     let g:syntastic_php_phpcs_args='--report=csv --standard=WordPress'
-    set noexpandtab
-    set listchars=tab:\ \ ,trail:▫   " don't show tabs
+    call Tabs()
 endfunction
 command! WordPress :call EnableWordPress()
 
