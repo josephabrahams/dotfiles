@@ -3,14 +3,20 @@
    * See http://jshint.com/docs/options/ for more options
    */
 
+  // Don't allow bitwise operators as they are very rare and often & is simply a mistyped &&
+  "bitwise": true,
+
   // Force all variable names to use either camelCase style or UPPER_CASE with underscores
   "camelcase": true,
+
+  // Always require curley braces around blocks in loops and conditionals
+  "curly": true,
 
   // Prohibit use of == and != in favor of === and !==
   "eqeqeq": true,
 
-  // Suppress warnings about == null comparisons
-  "eqnull": true,
+  // Require all for in loops to filter object's items; see http://joseph.is/1sBYaXX
+  "forin": true,
 
   // Enforce tab width of 2 spaces
   "indent": 2,
