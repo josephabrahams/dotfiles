@@ -310,7 +310,7 @@ autocmd BufRead,BufNewFile *.js set ft=javascript syntax=jquery
 " Uses 2 spaces for tabs in js and json files
 autocmd BufRead,BufNewFile *.js,*.json set shiftwidth=2 tabstop=2 softtabstop=2
 " Swig uses Django syntax
-autocmd BufRead,BufNewFile *.swig set filetype=htmldjango
+autocmd BufRead,BufNewFile *.hbs,*.swig,*.twig set filetype=htmldjango
 
 
 " --------------------------------------------------------
@@ -320,7 +320,7 @@ autocmd BufRead,BufNewFile *.swig set filetype=htmldjango
 " Use GitHub Markdown (jtratner/vim-flavored-markdown)
 augroup markdown
     au!
-    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown spell
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown textwidth=80 spell
 augroup END
 
 " Open current file with Marked 2
@@ -347,8 +347,8 @@ vnoremap <C-J> :m '>+1<CR>gv=gv
 vnoremap <C-K> :m '<-2<CR>gv=gv
 
 " Exit insert mode when trying to move up/down
-inoremap jj <ESC>
-inoremap kk <ESC>
+"inoremap jj <ESC>
+"inoremap kk <ESC>
 
 
 " --------------------------------------------------------
@@ -370,7 +370,7 @@ nnoremap <leader>f :NERDTreeFind<CR>
 " Ruby
 " --------------------------------------------------------
 
-" Spacing for YAML and Salt States
+" Spacing for Salt States and YAML
 autocmd BufRead,BufNewFile *.sls,*.yml set shiftwidth=2 tabstop=2 softtabstop=2 filetype=yaml
 
 
@@ -434,6 +434,14 @@ endif
 
 let g:syntastic_check_on_open=0
 let g:syntastic_python_checkers=["flake8"]
+let g:syntastic_html_tidy_exec="tidy5"
+let g:syntastic_html_tidy_ignore_errors=[
+    \ "proprietary attribute \"ng-",
+    \ "trimming empty ",
+    \ "<input> isn't allowed in <body> elements",
+    \ "inserting implicit <form>",
+    \ "missing </form> before "
+    \]
 
 
 " --------------------------------------------------------

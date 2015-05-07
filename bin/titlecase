@@ -2,10 +2,14 @@
 # Convert string to title case
 # Requires gnu-sed: `brew install gnu-sed`
 
+function caseit {
+    sed -e 's/\b\(.\)/\u\1/g'
+}
+
 # read from stdin if no argument provided
 if [ $# -eq 0 ]; then
-    cat | sed -e 's/\b\(.\)/\u\1/g'
+    cat | caseit
 else
-    echo $@ | sed -e 's/\b\(.\)/\u\1/g'
+    echo $@ | caseit
 fi
 

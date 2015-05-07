@@ -5,11 +5,15 @@ DISABLE_UPDATE_PROMPT="true"
 ZSH_THEME="robbyrussell"
 plugins=(
     bower
-    bundler
     brew
+    brew-cask
+    bundler
+    catimg
     colored-man
+    colorize
     fabric
     gem
+    go
     npm
     osx
     pip
@@ -41,6 +45,10 @@ export LS_COLORS='di=1;36:ln=35:so=32:ex=31:bd=34:cd=34'
 
 # grc beautifies all the things
 [ $+commands[grc] ] && [ $+commands[brew] ] && source /usr/local/etc/grc.bashrc
+
+# enable autoenv
+#[ -s /usr/local/opt/autoenv/activate.sh ] \
+#    && source /usr/local/opt/autoenv/activate.sh
 
 # more autocompletion scripts
 eval "$(grunt --completion=zsh)"

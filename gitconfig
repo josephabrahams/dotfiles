@@ -1,7 +1,10 @@
 [alias]
+    base = rev-parse --show-toplevel
     fix = commit --amend
     list = !git --no-pager log --reverse --decorate --pretty=oneline --abbrev-commit
+    root = rev-parse --show-toplevel
     tree = log --graph --decorate --pretty=oneline --abbrev-commit
+    up = !git pull --rebase --prune $@ && git submodule update --init --recursive
 [color]
     ui = auto
 [core]
@@ -18,3 +21,7 @@
     default = simple
 [include]
     path = ~/.gitconfig.local
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true

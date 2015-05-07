@@ -6,6 +6,7 @@ alias rd="rmdir"
 alias ls="/usr/local/bin/gls --color=auto"
 alias l="ls -AF"
 alias ll="ls -alF"
+alias lll="ls -alF --color=always | less -R"
 alias lsd="ls -AlF --color=always | grep '^d' --color=never"
 
 # other GNU aliases
@@ -26,6 +27,8 @@ alias digga="dig +short"
 alias down="cd ~/Downloads/"
 alias dots="cd ~/.dotfiles/"
 alias drop="cd ~/Dropbox/"
+alias how="apropos"
+alias json="python -mjson.tool"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com" # get external ip
 alias pubkey="cat ~/.ssh/id_rsa.pub"
 alias ln="ln -iv"
@@ -35,10 +38,10 @@ alias p="cd ~/Projects"
 alias proj="cd ~/Projects"
 alias ptr="dig +short -x"
 alias rcup="rcup -v"
-alias scheme="rlwrap scheme"
+alias scheme="rlwrap csi"
 alias sudo="sudo " # use sudo with aliases
+alias tl="tmux list-sessions | awk '{print \$1}' | sed 's/:$//g' | column -x"
 alias top="htop"
-alias tree="t"
 alias tower="gittower ."
 
 # git
@@ -58,6 +61,7 @@ alias gri="git rebase -i"
 alias gr2="git rebase -i HEAD~2"
 alias gs="git status"
 alias gt="git tree"
+alias gu="git up"
 alias pull="git pull"
 alias push="git push"
 

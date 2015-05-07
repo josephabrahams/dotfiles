@@ -4,5 +4,5 @@
 # http://joseph.is/1yOpjYV
 
 function t() {
-    tree -aC -I '.DS_Store|.Trash|.bundle|.git|.sass-cache|bower_components|node_modules' --dirsfirst "$@" | less -FR
+    tree -aC -I '.DS_Store|.Trash|.bundle|.git|.sass-cache|bower_components|node_modules' --dirsfirst "$@" | less -R
 }

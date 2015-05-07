@@ -27,6 +27,9 @@ export BOTO_CONFIG="$HOME/.aws/config"
 # Brew Cask install path
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
+# golang
+export GOPATH=$HOME/go
+
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 # cache pip-installed packages to avoid re-downloading

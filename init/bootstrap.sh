@@ -62,6 +62,10 @@ if [ $(which npm 2>/dev/null) ]; then
         echo "\n${bold}Installing JSHint...${unbold}"
         npm -g install jshint
     fi
+    if [ ! $(which keybase 2>/dev/null) ]; then
+        echo "\n${bold}Installing Keybase...${unbold}"
+        npm -g install keybase-installer
+    fi
     if [ ! $(which grunt 2>/dev/null) ]; then
         echo "\n${bold}Installing Grunt...${unbold}"
         npm -g install grunt-cli
@@ -69,6 +73,10 @@ if [ $(which npm 2>/dev/null) ]; then
     if [ ! $(which gulp 2>/dev/null) ]; then
         echo "\n${bold}Installing Gulp...${unbold}"
         npm -g install gulp
+    fi
+    if [ ! $(which yo 2>/dev/null) ]; then
+        echo "\n${bold}Installing Yeoman...${unbold}"
+        npm -g install yo
     fi
 fi
 

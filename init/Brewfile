@@ -9,6 +9,7 @@ install ack
 install autoenv
 install bash                        # add `/usr/local/bin/bash` to /etc/shells
 install cabal-install
+install chicken
 install coreutils                   # add `/usr/local/gnubin` to $PATH
 install ctags
 install diffutils
@@ -20,6 +21,7 @@ install git
 install gnu-sed --default-names
 install gnu-tar --default-names
 install gnu-which --default-names
+install go
 install grc
 install grep --default-names
 install gzip
@@ -27,12 +29,12 @@ install hub
 install imagemagick --with-webp
 install less
 install lynx
-# install mit-scheme                # install joseph.is/XQuartz first
 install moreutils
-install node                        # TODO switch to nvm
+install node                            # TODO switch to nvm
 install openssh --with-brewed-openssl
+install postgresql
 install pv
-install python --with-brewed-openssl
+install python --with-brewed-openssl    # TODO switch to pyenv
 install rbenv
 install rbenv-gem-rehash
 install rcm
@@ -42,6 +44,7 @@ install rlwrap
 install ruby-build
 install rsync
 install the_silver_searcher
+install tidy --HEAD
 install tmux
 install tree
 install unzip

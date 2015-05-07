@@ -2,37 +2,58 @@
 # if doesn't exist, runs `mux list`
 
 function m() {
-    local dirname=$(basename $(pwd) | sed 's/^\.//' | sed 's/\./\-/g')
+
+    function project_list() {
+        mux list | grep -v "tmuxinator projects"
+    }
+
+    git rev-parse --show-toplevel > /dev/null 2>&1
+
+    if [ $? -eq 0 ]; then
+        local dirname=$(basename $(git rev-parse --show-toplevel))
+    else
+        local dirname=$(basename $(pwd))
+    fi
+
+    dirname=$(echo $dirname | sed 's/^\.//' | sed 's/\./\-/g')
 
     if [[ -z "$1" ]]; then
         if [[ -f "$HOME/.tmuxinator/${dirname}.yml" ]]; then
+            echo "Using $dirname"
             mux start $(basename $dirname)
         else
-            mux list
+            echo "$dirname not found"
+            project_list
         fi
     elif [[ "$1" == "list" || "$1" == "ls" ]]; then
-        mux list
+        project_list
     elif [[ "$1" == "new" || "$1" == "open" ]]; then
         if [[ -z "$2" ]]; then
+            echo "Using $dirname"
             mux new $dirname
         else
+            echo "Using $@"
             mux $@
         fi
     elif [[ "$1" == "kill" ]]; then
         if [[ -z "$2" ]]; then
+            echo "Killing $dirname"
             tmux kill-session -t $dirname
         else
+            echo "Killing $2"
             tmux kill-session -t $2
         fi
     else
-        for muxfile in $(mux list | grep -v "tmuxinator projects"); do
+        # loop through all tmuxinator projects
+        # start mux if matching 1st arg
+        for muxfile in $(project_list); do
             if [[ "$1" == "$muxfile" ]]; then
                 mux start $muxfile
                 return 0
             fi
         done
 
-        mux list
+        project_list
         return 1
     fi
 }
