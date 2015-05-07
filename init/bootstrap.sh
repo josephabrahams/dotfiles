@@ -6,6 +6,7 @@ unbold='\033[0m'
 
 # Make common directories
 ln -sf $HOME/.bin $HOME/bin &>/dev/null
+ln -sf $HOME/Dropbox\ \(Personal\) $HOME/Dropbox &>/dev/null
 mkdir -p $HOME/Projects 2>/dev/null
 mkdir -p $HOME/tmp 2>/dev/null
 [ -e $HOME/Dropbox ] && mkdir -p $HOME/Dropbox/.tmuxinator 2>/dev/null

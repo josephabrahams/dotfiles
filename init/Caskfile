@@ -5,7 +5,6 @@ install caskroom/cask/brew-cask
 tap caskroom/versions
 
 # cask install a-better-finder-rename
-cask install adobe-air
 cask install airfoil
 cask install alfred
 cask install caffeine
@@ -26,7 +25,6 @@ cask install karabiner
 cask install marked
 cask install macvim
 cask install nottingham
-cask install pandora-one
 # cask install pg-commander
 cask install postgres
 cask install sequel-pro

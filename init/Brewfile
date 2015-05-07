@@ -44,7 +44,7 @@ install rlwrap
 install ruby-build
 install rsync
 install the_silver_searcher
-install tidy --HEAD
+install tidy-html5
 install tmux
 install tree
 install unzip
