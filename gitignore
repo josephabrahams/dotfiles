@@ -1,5 +1,8 @@
-# Bundler
+# Ruby
 .bundle
+
+# Python
+.python-version
 
 # OSX
 .DS_Store

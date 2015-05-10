@@ -7,6 +7,9 @@ unbold='\033[0m'
 # Make common directories
 ln -sf $HOME/.bin $HOME/bin &>/dev/null
 ln -sf $HOME/Dropbox\ \(Personal\) $HOME/Dropbox &>/dev/null
+mkdir -p $HOME/.nvm 2>/dev/null
+ln -shf $(brew --prefix nvm)/nvm-exec $HOME/.nvm/nvm-exec
+ln -shf $(brew --prefix nvm)/nvm.sh $HOME/.nvm/nvm.sh
 mkdir -p $HOME/Projects 2>/dev/null
 mkdir -p $HOME/tmp 2>/dev/null
 [ -e $HOME/Dropbox ] && mkdir -p $HOME/Dropbox/.tmuxinator 2>/dev/null
@@ -53,7 +56,7 @@ fi
 
 # JavaScript - http://joseph.is/1p6nO5g
 if [ $(which npm 2>/dev/null) ]; then
-    echo "\n${bold}Updating NPM...${unbold}"
+    # echo "\n${bold}Updating NPM...${unbold}"
     # npm -g update
     if [ ! $(which bower 2>/dev/null) ]; then
         echo "\n${bold}Installing Bower...${unbold}"
@@ -82,48 +85,18 @@ if [ $(which npm 2>/dev/null) ]; then
 fi
 
 # Ruby
-ruby_version='2.0.0'
-rbenv_version=$(rbenv versions 2>/dev/null | sed 's/^\*//g' | awk '{print $1}' | grep "^${ruby_version}" | tail -1)
-if [ -z "$rbenv_version" ]; then
-    rbenv_version=$(rbenv install -l | awk '{print $1}' | grep "^${ruby_version}" | tail -1)
-    echo "\n${bold}Installing Ruby ${rbenv_version}...${unbold}"
-    rbenv install $rbenv_version
-fi
-rbenv global $rbenv_version
-unset ruby_version rbenv_version
 if [ ! $(which mux 2>/dev/null) ]; then
     echo "\n${bold}Installing Tmuxinator...${unbold}"
-    [ -e $HOME/Dropbox ] && ln -sF $HOME/Dropbox/.tmuxinator/ $HOME/.tmuxinator/
+    [ -e $HOME/Dropbox ] && ln -sF $HOME/Dropbox/.tmuxinator/ $HOME/.tmuxinator
     gem install tmuxinator
-    rbenv rehash
 fi
 if [ ! $(which bundle 2>/dev/null) ]; then
     echo "\n${bold}Installing Bundler...${unbold}"
     gem install bundler
-    rbenv rehash
 fi
-
-# PHP - http://joseph.is/1tTzucL
-if [ ! $(which composer 2>/dev/null) ]; then
-    echo "\n${bold}Installing Composer...${unbold}";
-    curl -sS https://getcomposer.org/installer | php
-    mv composer.phar /usr/local/bin/composer
-    echo "\n${bold}Installing Global Composer Packages...${unbold}"
-    composer global install
-else
-    echo "\n${bold}Updating Composer...${unbold}";
-    composer self-update
-    echo "\n${bold}Updating Global Composer Packages...${unbold}"
-    composer global update
-fi
-
-# WP-CLI - http://joseph.is/1t85XHk
-if [ ! $(which wp 2>/dev/null) ]; then
-    echo "\n${bold}Installing WP-CLI...${unbold}";
-    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-    chmod +x wp-cli.phar
-    chgrp admin wp-cli.phar
-    mv wp-cli.phar /usr/local/bin/wp
+if [ ! $(which travis 2>/dev/null) ]; then
+    echo "\n${bold}Installing Travis...${unbold}"
+    gem install travis
 fi
 
 # Wordpress Coding Standards - http://joseph.is/1wdO6SC

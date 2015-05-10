@@ -15,14 +15,15 @@ plugins=(
     gem
     go
     npm
+    # nvm
     osx
     pip
+    # pyenv
     python
-    rbenv
+    # rbenv
     tmux
     tmuxinator
     vagrant
-    virtualenvwrapper
     z
     zsh-syntax-highlighting
 )
@@ -51,8 +52,10 @@ export LS_COLORS='di=1;36:ln=35:so=32:ex=31:bd=34:cd=34'
 #    && source /usr/local/opt/autoenv/activate.sh
 
 # more autocompletion scripts
+# TODO: load all brew completions
 eval "$(grunt --completion=zsh)"
 eval "$(gulp --completion=zsh)"
+eval "$(cat /usr/local/etc/bash_completion.d/nvm)"
 if which aws_zsh_completer.sh &>/dev/null; then
     source `which aws_zsh_completer.sh`
 fi
@@ -66,3 +69,4 @@ bindkey \^U backward-kill-line
 
 # local config
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
+

@@ -1,9 +1,3 @@
-Fabric
-Jinja2
-Unipath
 awscli
-boto
 bpython
 flake8
-virtualenv
-virtualenvwrapper

@@ -3,7 +3,7 @@
 
 function php() {
     if [[ $# > 0 ]]; then
-        /usr/bin/php $@
+        /usr/local/bin/php $@
     else
         psysh
     fi

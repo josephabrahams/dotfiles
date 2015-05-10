@@ -65,6 +65,12 @@ alias gu="git up"
 alias pull="git pull"
 alias push="git push"
 
+# virtualenv
+alias mkvirtualenv="pyenv virtualenv"
+alias lsvirtualenv="pyenv virtualenvs"
+alias rmvirtualenv="pyenv uninstall"
+alias workon="pyenv activate"
+
 # rc files
 alias aliases="vim ~/.aliases; source ~/.aliases"
 alias vimrc="vim ~/.vimrc"

@@ -30,6 +30,10 @@ Set sensible hacker defaults for OS X:
 
     $HOME/.dotfiles/init/osx.sh
 
+Install PHP dependencies:
+
+    composer global install
+
 Install Python dependencies:
 
     pip install -r $HOME/.dotfiles/init/requirements.txt
