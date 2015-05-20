@@ -5,14 +5,14 @@ bold='\033[1m'
 unbold='\033[0m'
 
 # Make common directories
+mkdir -p $HOME/tmp 2>/dev/null
+mkdir -p $HOME/Projects 2>/dev/null
 ln -sf $HOME/.bin $HOME/bin &>/dev/null
 ln -sf $HOME/Dropbox\ \(Personal\) $HOME/Dropbox &>/dev/null
+[ -e $HOME/Dropbox ] && mkdir -p $HOME/Dropbox/.tmuxinator 2>/dev/null
 mkdir -p $HOME/.nvm 2>/dev/null
 ln -shf $(brew --prefix nvm)/nvm-exec $HOME/.nvm/nvm-exec
 ln -shf $(brew --prefix nvm)/nvm.sh $HOME/.nvm/nvm.sh
-mkdir -p $HOME/Projects 2>/dev/null
-mkdir -p $HOME/tmp 2>/dev/null
-[ -e $HOME/Dropbox ] && mkdir -p $HOME/Dropbox/.tmuxinator 2>/dev/null
 
 # Homebrew - http://joseph.is/1DCbIBY
 echo "\n${bold}Updating Homebrew formulas...${unbold}"
@@ -85,18 +85,11 @@ if [ $(which npm 2>/dev/null) ]; then
 fi
 
 # Ruby
-if [ ! $(which mux 2>/dev/null) ]; then
-    echo "\n${bold}Installing Tmuxinator...${unbold}"
-    [ -e $HOME/Dropbox ] && ln -sF $HOME/Dropbox/.tmuxinator/ $HOME/.tmuxinator
-    gem install tmuxinator
-fi
 if [ ! $(which bundle 2>/dev/null) ]; then
     echo "\n${bold}Installing Bundler...${unbold}"
     gem install bundler
-fi
-if [ ! $(which travis 2>/dev/null) ]; then
-    echo "\n${bold}Installing Travis...${unbold}"
-    gem install travis
+    echo "\n${bold}Installing Ruby dependencies...${unbold}"
+    bundle install --system --gemfile $HOME/.dotfiles/init/Gemfile
 fi
 
 # Wordpress Coding Standards - http://joseph.is/1wdO6SC
