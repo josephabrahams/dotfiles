@@ -29,6 +29,7 @@ install grep --default-names
 install gzip
 install hub
 install imagemagick --with-webp
+install jq
 install less
 install lynx
 install moreutils

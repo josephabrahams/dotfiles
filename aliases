@@ -28,7 +28,7 @@ alias down="cd ~/Downloads/"
 alias dots="cd ~/.dotfiles/"
 alias drop="cd ~/Dropbox/"
 alias how="apropos"
-alias json="python -mjson.tool"
+alias json="jq ."
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com" # get external ip
 alias pubkey="cat ~/.ssh/id_rsa.pub"
 alias ln="ln -iv"
@@ -43,6 +43,7 @@ alias sudo="sudo " # use sudo with aliases
 alias tl="tmux list-sessions | awk '{print \$1}' | sed 's/:$//g' | column -x"
 alias top="htop"
 alias tower="gittower ."
+alias x="exit"
 
 # git
 alias git="hub"
