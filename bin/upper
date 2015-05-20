@@ -1,0 +1,13 @@
+#!/bin/sh
+# Convert string to uppercase
+
+function uppercase {
+    tr '[a-z]' '[A-Z]'
+}
+
+# read from stdin if no argument provided
+if [ $# -eq 0 ]; then
+    cat | uppercase
+else
+    echo $@ | uppercase
+fi

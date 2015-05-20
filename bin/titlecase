@@ -12,4 +12,3 @@ if [ $# -eq 0 ]; then
 else
     echo $@ | caseit
 fi
-

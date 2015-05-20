@@ -1,0 +1,14 @@
+#!/bin/sh
+# Convert string to lowercase
+
+function lowercase {
+    tr '[A-Z]' '[a-z]'
+}
+
+# read from stdin if no argument provided
+if [ $# -eq 0 ]; then
+    cat | lowercase
+else
+    echo $@ | lowercase
+fi
+
