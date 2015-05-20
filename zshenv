@@ -3,6 +3,7 @@ path=(
     .git/safe/../../bin
     ~/.bin
     ~/.composer/vendor/bin
+    ~/go/bin
     /usr/local/bin
     /usr/local/heroku/bin
     /usr/local/MacGPG2/bin
