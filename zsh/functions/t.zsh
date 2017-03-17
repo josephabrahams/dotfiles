@@ -3,6 +3,6 @@
 # unless the output is small enough for one screen.
 # http://joseph.is/1yOpjYV
 
-function t() {
+t() {
     tree -aC -I '.DS_Store|.Trash|.bundle|.git|.sass-cache|bower_components|node_modules' --dirsfirst "$@" | less -R
 }

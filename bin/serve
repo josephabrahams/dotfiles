@@ -1,18 +1,62 @@
-#!/bin/sh
-# quick python webserver
+#!/usr/bin/env python
+# Simple HTTP Server
 
-python=$(which python)
-if [ $? != 0 ]; then
-    echo "Unable to find Python"
-    exit 1
-fi
+import os
+import sys
+from http import HTTPStatus
+from http.server import HTTPServer, SimpleHTTPRequestHandler
 
-if [ "$#" -eq 0 ]; then
-    port=8080
-else
-    port="$1"
-fi
 
-echo "http://localhost:$port" | pbcopy # && echo "\n\033[1mhttp://localhost:$PORT copied to the clipboard!\033[m"
+class HTTPRequestHandler(SimpleHTTPRequestHandler):
+    def log_message(self, message, *args):
+        print('[{}] {} {}'.format(self.log_date_time_string(),
+                                  self.address_string(), message))
 
-$python -m SimpleHTTPServer $port
+    def log_request(self, code='-', *args):
+        if isinstance(code, HTTPStatus):
+            code = code.value
+        self.log_message('{} [{}]: {}'.format(self.command, code, self.path))
+
+    def log_error(self, *args):
+        return
+
+
+def serve(directory=None, host='127.0.0.1', port=8000):
+    try:
+        if directory is not None:
+            os.chdir(directory)
+
+        print("Serving '{}' at http://{}:{}"
+              .format(directory, host, str(port)))
+
+        with HTTPServer((host, port), HTTPRequestHandler) as httpd:
+            print('Use Ctrl-C to quit.')
+            try:
+                httpd.serve_forever()
+            except KeyboardInterrupt:
+                print()
+                sys.exit()
+
+    except OSError as e:
+        print('Error: {}'.format(e.strerror))
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path', nargs='?', default='',
+                        help='specify a directory to serve [default: cwd]')
+    parser.add_argument('--port', nargs='?', default=8000, type=int,
+                        help='specify an alternate port [default: 8000]')
+    parser.add_argument('--public', action='store_true',
+                        help='bind to 0.0.0.0 instead of 127.0.0.1')
+
+    args = parser.parse_args()
+
+    directory = os.path.join(os.getcwd(), args.path)
+    port = args.port if args.port is not None else 8000
+    host = '0.0.0.0' if args.public else '127.0.0.1'
+
+    serve(directory, host, port)

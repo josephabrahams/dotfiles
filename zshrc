@@ -1,31 +1,62 @@
 # oh-my-zsh settings
+path=(
+    .git/safe/../../bin
+    .git/safe/../../node_modules/.bin
+    .git/safe/../../vendor/bin
+    ~/.bin
+    ~/.composer/vendor/bin
+    ~/go/bin
+    /usr/local/heroku/bin
+    /usr/local/MacGPG2/bin
+    /usr/local/share/npm/bin
+    /usr/local/bin
+    /usr/local/sbin
+    /usr/bin
+    /usr/sbin
+    /bin
+    /sbin
+)
+
+# use vim as the visual editor
+export VISUAL=vim
+export EDITOR=$VISUAL
+
+# golang
+export GOPATH=$HOME/go
+
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+
+# oh my zsh
 export ZSH=$HOME/.zsh
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UPDATE_PROMPT="true"
 ZSH_THEME="robbyrussell"
 plugins=(
-    bower
-    brew
-    brew-cask
-    bundler
-    catimg
-    colored-man
-    colorize
-    fabric
-    gem
-    go
-    npm
-    # nvm
-    osx
-    pip
-    # pyenv
-    python
-    # rbenv
-    tmux
+    aws
+    #brew
+    #brew-cask
+    #bundler
+    colored-man-pages
+    #colorize
+    #docker
+    #docker-compose
+    #fabric
+    #gem
+    #go
+    # heroku
+    #npm
+    nvm
+    #osx
+    #pip
+    #pyenv
+    #python
+    #rbenv
+    #tmux
     tmuxinator
-    vagrant
+    virtualenvwrapper
     z
-    zsh-syntax-highlighting
+    #zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -36,37 +67,22 @@ done
 unset function_file
 
 # Base16 shell theme
-if [[ "${TERM#*256}" != "$TERM" ]]; then
-    BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
-    [ -s $BASE16_SHELL ] && source $BASE16_SHELL
-fi
+source $HOME/.config/base16-shell/base16-shell.plugin.zsh
 
 # ls colors - joseph.is/1vozPB8
 export LS_COLORS='di=1;36:ln=35:so=32:ex=31:bd=34:cd=34'
 
 # grc beautifies all the things
-[ $+commands[grc] ] && [ $+commands[brew] ] && source /usr/local/etc/grc.bashrc
-
-# enable autoenv
-#[ -s /usr/local/opt/autoenv/activate.sh ] \
-#    && source /usr/local/opt/autoenv/activate.sh
-
-# more autocompletion scripts
-# TODO: load all brew completions
-eval "$(grunt --completion=zsh)"
-eval "$(gulp --completion=zsh)"
-eval "$(cat /usr/local/etc/bash_completion.d/nvm)"
-if which aws_zsh_completer.sh &>/dev/null; then
-    source `which aws_zsh_completer.sh`
-fi
-[ -s ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+source /usr/local/etc/grc.bashrc
 
 # keybindings
 bindkey \^U backward-kill-line
+
+# hub alias
+eval "$(hub alias -s)"
 
 # aliases
 [ -s ~/.aliases ] && source ~/.aliases
 
 # local config
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
-

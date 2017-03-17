@@ -2,22 +2,11 @@
 alias md="mkdir -p"
 alias rd="rmdir"
 
-# GNU ls
-alias ls="/usr/local/bin/gls --color=auto"
+# ls
+alias ls="ls -G"
 alias l="ls -AF"
 alias ll="ls -alF"
-alias lll="ls -alF --color=always | less -R"
-alias lsd="ls -AlF --color=always | grep '^d' --color=never"
-
-# other GNU aliases
-#alias echo="/usr/local/bin/gecho"
-#alias false="/usr/local/bin/gfalse"
-#alias kill="/usr/local/bin/gkill"
-#alias printf="/usr/local/bin/gprintf"
-#alias pwd="/usr/local/bin/gpwd"
-#alias test="/usr/local/bin/gtest"
-#alias true="/usr/local/bin/gtrue"
-#alias which="/usr/local/bin/which 2>/dev/null"
+alias lL="ll -L"
 
 # helpers
 alias cp="cp -ir"
@@ -27,31 +16,38 @@ alias digga="dig +short"
 alias down="cd ~/Downloads/"
 alias dots="cd ~/.dotfiles/"
 alias drop="cd ~/Dropbox/"
+alias fm="foreman run python manage.py"
+alias fr="foreman run"
+alias fs="foreman start"
 alias how="apropos"
-alias json="jq ."
+alias json="jq . -C"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com" # get external ip
 alias pubkey="cat ~/.ssh/id_rsa.pub"
 alias ln="ln -iv"
 alias mv="mv -i"
+alias mux="tmuxinator"
 alias o="open ."
 alias p="cd ~/Projects"
 alias proj="cd ~/Projects"
-alias ptr="dig +short -x"
+alias ptr="dig ptr +short"
 alias rcup="rcup -v"
 alias scheme="rlwrap csi"
 alias sudo="sudo " # use sudo with aliases
 alias tl="tmux list-sessions | awk '{print \$1}' | sed 's/:$//g' | column -x"
 alias top="htop"
 alias tower="gittower ."
+alias trim="tr -d ' \t\n\r\f'"
 alias x="exit"
 
 # git
-alias git="hub"
+#alias git="hub"
 alias ga="git add"
 alias gaa="git add -A"
 alias gb="git branch"
 alias gc="git commit"
-alias gcam="git commit -am"
+alias gc="git commit"
+alias gca="git commit --amend --no-edit"
+alias gcam="git commit --amend"
 alias gcm="git commit -m"
 alias gf="git fetch"
 alias gh="git browse"
@@ -66,12 +62,6 @@ alias gu="git up"
 alias pull="git pull"
 alias push="git push"
 
-# virtualenv
-alias mkvirtualenv="pyenv virtualenv"
-alias lsvirtualenv="pyenv virtualenvs"
-alias rmvirtualenv="pyenv uninstall"
-alias workon="pyenv activate"
-
 # rc files
 alias aliases="vim ~/.aliases; source ~/.aliases"
 alias vimrc="vim ~/.vimrc"
@@ -80,4 +70,3 @@ alias zshenv="vim ~/.zshenv; source ~/.zshenv"
 alias zshenvl="vim ~/.zshenv.local; source ~/.zshenv"
 alias zshrc="vim ~/.zshrc; source ~/.zshrc"
 alias zshrcl="vim ~/.zshrc.local; source ~/.zshrc.local"
-

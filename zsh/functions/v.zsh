@@ -2,7 +2,7 @@
 # otherwise opens the given location
 # http://joseph.is/1yOpjYV
 
-function v() {
+v() {
     if [ $# -eq 0 ]; then
         vim +NERDTreeToggle
     else

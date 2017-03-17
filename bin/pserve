@@ -15,5 +15,5 @@ fi
 
 echo "http://localhost:$port" | pbcopy # && echo "\n\033[1mhttp://localhost:$PORT copied to the clipboard!\033[m"
 
-$php -S localhost:$port
+$php -d variables_order=EGPCS -S localhost:$port
 echo "\n"

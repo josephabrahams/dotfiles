@@ -5,6 +5,7 @@
     root = rev-parse --show-toplevel
     tree = log --graph --decorate --pretty=oneline --abbrev-commit
     up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+    unstage = reset HEAD
 [color]
     ui = auto
 [core]

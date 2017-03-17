@@ -1,0 +1,31 @@
+#!/bin/sh
+# upgrade all the things
+
+bold='\033[1m'
+unbold='\033[0m'
+
+# Homebrew - http://joseph.is/1DCbIBY
+echo "\n${bold}Updating Homebrew formulas...${unbold}"
+brew update
+echo "\n${bold}Upgrading installed brews...${unbold}"
+brew upgrade
+echo "\n${bold}Remove unneeded brews...${unbold}"
+brew cleanup
+
+# Zsh Syntax Highlighting - http://joseph.is/1yPtYtq
+echo "\n${bold}Updating Zsh Syntax Highlighting...${unbold}"
+cd $HOME/.zsh/custom/plugins/zsh-syntax-highlighting; git pull
+
+# Base16 color scheme - http://joseph.is/11RoQHA
+echo "\n${bold}Updating Base16 iTerm2 color scheme...${unbold}"
+cd $HOME/.config/base16-iterm2; git pull
+echo "\n${bold}Updating Base16 shell color scheme...${unbold}"
+cd $HOME/.config/base16-shell; git pull
+
+# Vim - http://joseph.is/1sZma4R
+echo "\n${bold}Updating Vundle...${unbold}"
+cd $HOME/.vim/bundle/Vundle.vim; git pull
+echo "\n${bold}Installing/updating Vundle Plugins...${unbold}"
+vim -u $HOME/.vimrc.bundles +PluginInstall +PluginClean! +qa
+
+echo "\nDone."

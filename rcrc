@@ -1,1 +1,1 @@
-EXCLUDES="LICENSE README.md init"
+EXCLUDES="Gemfile LICENSE README.md scripts"

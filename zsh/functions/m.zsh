@@ -1,10 +1,10 @@
 # tries to start mux with session called current dir name
 # if doesn't exist, runs `mux list`
 
-function m() {
+m() {
 
-    function project_list() {
-        mux list | grep -v "tmuxinator projects"
+    project_list() {
+        tmuxinator list | grep -v "tmuxinator projects"
     }
 
     git rev-parse --show-toplevel > /dev/null 2>&1
@@ -20,7 +20,7 @@ function m() {
     if [[ -z "$1" ]]; then
         if [[ -f "$HOME/.tmuxinator/${dirname}.yml" ]]; then
             echo "Using $dirname"
-            mux start $(basename $dirname)
+            tmuxinator start $(basename $dirname)
         else
             echo "$dirname not found"
             project_list
@@ -30,10 +30,10 @@ function m() {
     elif [[ "$1" == "new" || "$1" == "open" ]]; then
         if [[ -z "$2" ]]; then
             echo "Using $dirname"
-            mux new $dirname
+            tmuxinator new $dirname
         else
             echo "Using $@"
-            mux $@
+            tmuxinator $@
         fi
     elif [[ "$1" == "kill" ]]; then
         if [[ -z "$2" ]]; then
@@ -48,7 +48,7 @@ function m() {
         # start mux if matching 1st arg
         for muxfile in $(project_list); do
             if [[ "$1" == "$muxfile" ]]; then
-                mux start $muxfile
+                tmuxinator start $muxfile
                 return 0
             fi
         done

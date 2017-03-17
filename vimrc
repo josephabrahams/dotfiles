@@ -48,23 +48,20 @@ autocmd VimResized * :wincmd=
 " Set 256 color space
 if matchstr($TERM,256) || has('gui_running')
     set t_Co=256
+    let base16colorspace=256
 endif
 
-" Enable Base16 color scheme
-if &t_Co == 256
-    let base16colorspace=256
-    colorscheme base16-default
-    if has('gui_running')
-        set guioptions-=rLT     " Disable MacVim scrollbars and toolbar
-        set guifont=Menlo:h14
-        set linespace=1
-        set background=light
-        hi LineNr guibg=#f5f5f5 " Match background of light theme
-    else
-        set background=dark
-        hi LineNr ctermbg=00    " Match background of dark theme
-    endif
+if has('gui_running')
+    colorscheme base16-default-light
+    set guioptions-=rLT     " Disable MacVim scrollbars and toolbar
+    set guifont=Menlo:h14
+    set linespace=1
+    hi LineNr guibg=#f5f5f5 " Match background of light theme
+else
+    colorscheme base16-default-dark
+    hi LineNr ctermbg=00    " Match background of dark theme
 endif
+
 
 
 " --------------------------------------------------------
@@ -81,6 +78,13 @@ cnoremap <C-K> <C-\>estrpart(getcmdline(), 0, getcmdpos()-1)<CR>
 
 " Echo PWD in command mode
 cnoremap <C-L> <C-R>=expand("%:p:h") . "/"<CR>
+
+
+" --------------------------------------------------------
+" Completion
+" --------------------------------------------------------
+
+noremap <leader>/ :Commentary<cr>
 
 
 " --------------------------------------------------------
@@ -158,6 +162,19 @@ nnoremap <leader>y ^v$hy
 " Select all text
 noremap <C-G> ggVG
 
+
+" --------------------------------------------------------
+" Django Templates
+" --------------------------------------------------------
+
+autocmd BufRead,BufNewFile *.hbs,*.html,*.swig,*.twig,*.nunjucks set filetype=htmldjango
+
+
+" --------------------------------------------------------
+" EditorConfig
+" --------------------------------------------------------
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " --------------------------------------------------------
 " Folds
@@ -306,11 +323,9 @@ command! Tab4 :call Tab4()
 " ---------------------------------------------------------
 
 " Use jQuery syntax highlighting
-autocmd BufRead,BufNewFile *.js set ft=javascript syntax=jquery
+" autocmd BufRead,BufNewFile *.js set ft=javascript syntax=jquery
 " Uses 2 spaces for tabs in js and json files
 autocmd BufRead,BufNewFile *.js,*.json set shiftwidth=2 tabstop=2 softtabstop=2
-" Swig uses Django syntax
-autocmd BufRead,BufNewFile *.hbs,*.swig,*.twig set filetype=htmldjango
 
 
 " --------------------------------------------------------
@@ -425,6 +440,7 @@ if has('persistent_undo')
     silent !mkdir -p ~/.vim/undo 2>/dev/null
     set undodir=~/.vim/undo//,~/tmp//,~//
     set undofile
+    set ul=500
 endif
 
 
@@ -500,3 +516,10 @@ function! EnableWordPress()
 endfunction
 command! WordPress :call EnableWordPress()
 
+" --------------------------------------------------------
+" Local overrides
+" --------------------------------------------------------
+
+if filereadable( expand('~/.vimrc.local') )
+    source ~/.vimrc.local
+endif

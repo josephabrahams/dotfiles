@@ -21,6 +21,3 @@ alias egrep='egrep --color=auto'
 alias ..="cd .."
 alias l="ls -AF"
 alias ll="ls -alF"
-
-# added by travis gem
-[ -f /Users/jabrahams/.travis/travis.sh ] && source /Users/jabrahams/.travis/travis.sh
