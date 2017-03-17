@@ -15,6 +15,9 @@
   // Prohibit use of == and != in favor of === and !==
   "eqeqeq": true,
 
+  // Allow ES6 Syntax
+  "esnext": true,
+
   // Require all for in loops to filter object's items; see http://joseph.is/1sBYaXX
   "forin": true,
 

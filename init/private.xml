@@ -29,6 +29,21 @@
             </item>
         </item>
         <item>
+            <name>Preserve Force Quit</name>
+            <item>
+                <!-- Must come before commandEscape2commandBackquote && escape2hyper -->
+                <name>Command+Option+Escape to Command+Option+Escape</name>
+                <appendix>Preserve Force Quit when Escape Key is modified</appendix>
+                <appendix>i.e. Happy Hacking Keyboard || Hyper</appendix>
+                <identifier>0x6A6F73657068.commandOptionEscape2commandOptionEscape</identifier>
+                <autogen>
+                    __KeyToKey__
+                    KeyCode::ESCAPE, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_OPTION | MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_COMMAND,
+                    KeyCode::ESCAPE, ModifierFlag::OPTION_L | ModifierFlag::COMMAND_L,
+                </autogen>
+            </item>
+        </item>
+        <item>
             <name>Happy Hacking Keyboard</name>
             <item>
                 <!-- Must come before escape2hyper -->
@@ -63,7 +78,6 @@
                 </autogen>
             </item>
         </item>
-
         <item>
             <name>Hyper</name>
             <item>
@@ -79,16 +93,6 @@
                 </autogen>
             </item>
             <item>
-                <name>Command_R to Hyper</name>
-                <appendix>Maps Command_R to custom Hyper key</appendix>
-                <identifier>0x6A6F73657068.commandR2hyper</identifier>
-                <autogen>
-                    __KeyToKey__
-                    KeyCode::COMMAND_R,
-                    KeyCode::COMMAND_L, ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L
-                </autogen>
-            </item>
-            <item>
                 <name>Hyper+D to Show Desktop</name>
                 <identifier>0x6A6F73657068.hyperD2showDesktop</identifier>
                 <autogen>
@@ -96,6 +100,36 @@
                     KeyCode::D, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L,
                     KeyCode::MISSION_CONTROL, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_COMMAND
                 </autogen>
+            </item>
+        </item>
+        <item>
+            <name>Realforce 23UB Numpad</name>
+            <item>
+                <name>Numlock Force On</name>
+                <identifier>private.realforce_force_numlock_on</identifier>
+                <autogen>
+                    __ForceNumLockOn__
+                    DeviceVendor::RawValue::0x0853,
+                    DeviceProduct::RawValue::0x0117
+                </autogen>
+            </item>
+            <item>
+                <name>Numlock Fix</name>
+                <identifier>private.pc_numlock_to_mac_numlock</identifier>
+                <autogen>
+                    __KeyToKey__
+                    KeyCode::KEYPAD_CLEAR,
+                    KeyCode::VK_IOHIKEYBOARD_TOGGLE_NUMLOCK
+                </autogen>
+            </item>
+            <item>
+                <name>Equal key fix</name>
+                <identifier>private.realforce_eq_to_mac_eq</identifier>
+                <autogen>
+                    __SimultaneousKeyPresses__
+                    KeyCode::KEYPAD_1, KeyCode::KEYPAD_6, ModifierFlag::OPTION_L,
+                    KeyCode::KEYPAD_EQUAL
+            </autogen>
             </item>
         </item>
     </item>

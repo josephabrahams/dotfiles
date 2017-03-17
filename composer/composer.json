@@ -1,7 +1,8 @@
 {
     "require": {
-        "psy/psysh": "~0.2",
+        "bartlett/php-compatinfo": "4.5.2",
+        "psy/psysh": "*",
         "squizlabs/php_codesniffer": "dev-master",
-        "wp-cli/wp-cli": "~0.17"
+        "wp-cli/wp-cli": "*"
     }
 }

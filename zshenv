@@ -1,6 +1,8 @@
 # all the paths
 path=(
     .git/safe/../../bin
+    .git/safe/../../node_modules/.bin
+    .git/safe/../../vendor/bin
     ~/.bin
     ~/.composer/vendor/bin
     ~/go/bin
@@ -21,9 +23,6 @@ path=(
 export VISUAL=vim
 export EDITOR=$VISUAL
 
-# have Boto use AWS CLI config
-export BOTO_CONFIG="$HOME/.aws/config"
-
 # Brew Cask install path
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
@@ -36,15 +35,15 @@ export NVM_DIR=$HOME/.nvm
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 # cache pip-installed packages to avoid re-downloading
-export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+# export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
 
 # load pyenv if available
-if which pyenv > /dev/null; then
-    eval "$(pyenv init -)"
-fi
-if which pyenv-virtualenv-init > /dev/null; then
-    eval "$(pyenv virtualenv-init -)";
-fi
+# if which pyenv > /dev/null; then
+#     eval "$(pyenv init -)"
+# fi
+# if which pyenv-virtualenv-init > /dev/null; then
+#     eval "$(pyenv virtualenv-init -)";
+# fi
 
 # load rbenv if available
 if which rbenv > /dev/null; then

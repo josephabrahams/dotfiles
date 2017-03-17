@@ -160,6 +160,19 @@ noremap <C-G> ggVG
 
 
 " --------------------------------------------------------
+" Django Templates
+" --------------------------------------------------------
+
+autocmd BufRead,BufNewFile *.hbs,*.html,*.swig,*.twig,*.nunjucks set filetype=htmldjango
+
+
+" --------------------------------------------------------
+" EditorConfig
+" --------------------------------------------------------
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+" --------------------------------------------------------
 " Folds
 " --------------------------------------------------------
 
@@ -306,11 +319,9 @@ command! Tab4 :call Tab4()
 " ---------------------------------------------------------
 
 " Use jQuery syntax highlighting
-autocmd BufRead,BufNewFile *.js set ft=javascript syntax=jquery
+" autocmd BufRead,BufNewFile *.js set ft=javascript syntax=jquery
 " Uses 2 spaces for tabs in js and json files
 autocmd BufRead,BufNewFile *.js,*.json set shiftwidth=2 tabstop=2 softtabstop=2
-" Swig uses Django syntax
-autocmd BufRead,BufNewFile *.hbs,*.swig,*.twig set filetype=htmldjango
 
 
 " --------------------------------------------------------
@@ -425,6 +436,7 @@ if has('persistent_undo')
     silent !mkdir -p ~/.vim/undo 2>/dev/null
     set undodir=~/.vim/undo//,~/tmp//,~//
     set undofile
+    set ul=500
 endif
 
 
@@ -500,3 +512,10 @@ function! EnableWordPress()
 endfunction
 command! WordPress :call EnableWordPress()
 
+" --------------------------------------------------------
+" Local overrides
+" --------------------------------------------------------
+
+if filereadable( expand('~/.vimrc.local') )
+    source ~/.vimrc.local
+endif

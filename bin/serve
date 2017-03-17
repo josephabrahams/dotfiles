@@ -13,6 +13,7 @@ else
     port="$1"
 fi
 
-echo "http://localhost:$port" | pbcopy # && echo "\n\033[1mhttp://localhost:$PORT copied to the clipboard!\033[m"
+# echo "http://localhost:$port" | pbcopy && echo "\n\033[1mhttp://localhost:$PORT copied to the clipboard!\033[m"
+open "http://localhost:$port"
 
 $python -m SimpleHTTPServer $port

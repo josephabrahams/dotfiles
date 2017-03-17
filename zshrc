@@ -11,8 +11,10 @@ plugins=(
     catimg
     colored-man
     colorize
+    docker
+    docker-compose
     fabric
-    gem
+    # gem
     go
     npm
     # nvm
@@ -24,6 +26,7 @@ plugins=(
     tmux
     tmuxinator
     vagrant
+    virtualenvwrapper
     z
     zsh-syntax-highlighting
 )
