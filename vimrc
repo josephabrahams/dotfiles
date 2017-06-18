@@ -226,6 +226,14 @@ nnoremap <leader>l :call ColorColumnToggle()<CR>
 
 
 " --------------------------------------------------------
+" SingleCompile
+" --------------------------------------------------------
+
+ nmap <F9> :SCCompile<cr>
+ nmap <F10> :SCCompileRun<cr>
+
+
+" --------------------------------------------------------
 " GitGutter
 " --------------------------------------------------------
 
@@ -335,7 +343,8 @@ autocmd BufRead,BufNewFile *.js,*.json set shiftwidth=2 tabstop=2 softtabstop=2
 " Use GitHub Markdown (jtratner/vim-flavored-markdown)
 augroup markdown
     au!
-    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown textwidth=80 spell
+    " au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown textwidth=80 spell
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown spell
 augroup END
 
 " Open current file with Marked 2
