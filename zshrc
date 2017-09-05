@@ -6,6 +6,9 @@ path=(
     ~/.bin
     ~/.composer/vendor/bin
     ~/go/bin
+    #/usr/local/opt/coreutils/libexec/gnubin
+    /usr/local/opt/gnu-sed/libexec/gnubin
+    /usr/local/opt/opencv3/bin
     /usr/local/heroku/bin
     /usr/local/MacGPG2/bin
     /usr/local/share/npm/bin
@@ -67,7 +70,15 @@ done
 unset function_file
 
 # Base16 shell theme
+if [ -n "$ITERM_PROFILE" ]; then
+    export BASE16_THEME=$ITERM_PROFILE
+fi
+if [ -z "$BASE16_THEME" ]; then
+    export BASE16_THEME=base16-default-dark
+fi
+ln -sf $HOME/.config/base16-shell/scripts/${BASE16_THEME}.sh $HOME/.base16_theme
 source $HOME/.config/base16-shell/base16-shell.plugin.zsh
+rm $HOME/.base16_theme
 
 # ls colors - joseph.is/1vozPB8
 export LS_COLORS='di=1;36:ln=35:so=32:ex=31:bd=34:cd=34'

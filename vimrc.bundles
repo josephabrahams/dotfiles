@@ -12,6 +12,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " Plugins
 Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'austintaylor/vim-indentobject'
 Plugin 'chriskempson/base16-vim'

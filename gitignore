@@ -20,6 +20,7 @@ Temporary Items
 # Leave 2 spaces after Icon
 Icon
 
+
 # Vim
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
@@ -27,3 +28,6 @@ Icon
 Session.vim
 .netrwhist
 *~
+
+# JetBrains
+.idea/

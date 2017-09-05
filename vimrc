@@ -51,15 +51,24 @@ if matchstr($TERM,256) || has('gui_running')
     let base16colorspace=256
 endif
 
-if has('gui_running')
+function! ColorLight()
     colorscheme base16-default-light
+    hi LineNr guibg=#f5f5f5 " Match background of light theme
+endfunction
+function! ColorDark()
+    colorscheme base16-default-dark
+    hi LineNr ctermbg=00    " Match background of dark theme
+endfunction
+command! ColorLight :call ColorLight()
+command! ColorDark :call ColorDark()
+
+if has('gui_running')
     set guioptions-=rLT     " Disable MacVim scrollbars and toolbar
     set guifont=Menlo:h14
     set linespace=1
-    hi LineNr guibg=#f5f5f5 " Match background of light theme
+    call ColorLight()
 else
-    colorscheme base16-default-dark
-    hi LineNr ctermbg=00    " Match background of dark theme
+    call ColorDark()
 endif
 
 

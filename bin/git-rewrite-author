@@ -6,7 +6,7 @@
 
 function usage {
 cat <<EOM
-usage: git-author-rewrite old-email
+usage: git-rewrite-author old-email
         rewrites all occurances of "old-email"
         to "\$(git config user.name) <\$(git config user.email)>"
 EOM
@@ -36,7 +36,7 @@ if [[ ! $REPLY =~ ^[Yy]$ && -n $REPLY ]]; then
     exit 1
 fi
 
-git filter-branch --env-filter '
+git filter-branch -f --env-filter '
 
 if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]; then
     export GIT_COMMITTER_NAME="$CORRECT_NAME"
