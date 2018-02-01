@@ -26,6 +26,6 @@ cd $HOME/.config/base16-shell; git pull
 echo "\n${bold}Updating Vundle...${unbold}"
 cd $HOME/.vim/bundle/Vundle.vim; git pull
 echo "\n${bold}Installing/updating Vundle Plugins...${unbold}"
-vim -u $HOME/.vimrc.bundles +PluginInstall +PluginClean! +qa
+vim -u $HOME/.vimrc.bundles +PluginInstall +PluginClean! +qa < /dev/tty > /dev/tty
 
 echo "\nDone."

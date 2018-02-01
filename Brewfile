@@ -1,59 +1,46 @@
-# Install command-line tools
-# Usage: `brew bundle`
-
-tap 'istrategylabs/isl'
-tap 'thoughtbot/formulae'
-
-brew 'heroku-toolbelt'
-brew 'go'
-brew 'grc'
-brew 'hub'
-brew 'imagemagick', args: ['with-webp']
-brew 'mo'
-brew 'jq'
-brew 'mas'
-brew 'macvim', args: ['with-override-system-vim']
-brew 'mysql'
-brew 'nvm'
-brew 'postgresql'
-brew 'python3'
-brew 'rcm'
-brew 'reattach-to-user-namespace'
-brew 'the_silver_searcher'
-brew 'tidy-html5'
-brew 'tmux'
-brew 'z'
-brew 'zsh'  # add `/usr/local/bin/zsh` to /etc/shells
-
-cask 'a-better-finder-rename'
-cask 'airfoil'
-cask 'alfred'
-cask 'caffeine'
-cask 'charles'
-cask 'dropbox'
-cask 'evernote'
-cask 'find-any-file'
-cask 'firefox'
-cask 'flux'
-cask 'google-chrome'
-cask 'gpgtools'
-cask 'imagealpha'
-cask 'imageoptim'
-cask 'iterm2'
-cask 'karabiner'
-cask 'marked'
-cask 'microsoft-office'
-cask 'pg-commander'
-cask 'sequel-pro'
-cask 'slack'
-cask 'slate'
-cask 'spotify'
-cask 'the-unarchiver'
-cask 'tower'
-cask 'transmission'
-cask 'vagrant'
-cask 'viscosity'
-cask 'vmware-fusion'
-cask 'vlc'
-
-#mas 'Transmit'
+tap "thoughtbot/formulae"
+tap "homebrew/core"
+tap "homebrew/bundle"
+tap "homebrew/services"
+tap "caskroom/cask"
+brew "awscli"
+brew "cmake"
+brew "coreutils"
+brew "flake8"
+brew "git"
+brew "go"
+brew "grc"
+brew "heroku"
+brew "hub"
+brew "imagemagick"
+brew "jq"
+brew "python"
+brew "macvim"
+brew "nvm"
+brew "postgresql"
+brew "reattach-to-user-namespace"
+brew "the_silver_searcher"
+brew "tidy-html5"
+brew "tmux"
+brew "tree"
+brew "z"
+brew "zsh"
+brew "thoughtbot/formulae/rcm"
+cask "1password"
+cask "alfred"
+cask "caffeine"
+cask "dropbox"
+cask "evernote"
+cask "imageoptim"
+cask "intellij-idea"
+cask "iterm2"
+cask "java"
+cask "karabiner-elements"
+cask "mactex"
+cask "marked"
+cask "slack"
+cask "slate"
+cask "spotify"
+cask "the-unarchiver"
+cask "tower"
+cask "transmit"

@@ -8,17 +8,11 @@ unbold='\033[0m'
 mkdir -p $HOME/tmp 2>/dev/null
 mkdir -p $HOME/Projects 2>/dev/null
 ln -sf $HOME/.bin $HOME/bin &>/dev/null
-ln -sf $HOME/Dropbox\ \(Personal\) $HOME/Dropbox &>/dev/null
-[ -e $HOME/Dropbox ] && mkdir -p $HOME/Dropbox/.tmuxinator 2>/dev/null
+[ -e $HOME/Dropbox ] && mkdir -p $HOME/Dropbox/.tmuxinator 2>/dev/null && ln -shf $HOME/Dropbox/.tmuxinator/ $HOME/.tmuxinator
+[ -e $HOME/Dropbox ] && mkdir -p $HOME/Dropbox/.karabiner 2>/dev/null && ln -shf $HOME/Dropbox/.karabiner/ $HOME/.config/karabiner
 mkdir -p $HOME/.nvm 2>/dev/null
-ln -shf $(brew --prefix nvm)/nvm-exec $HOME/.nvm/nvm-exec
-ln -shf $(brew --prefix nvm)/nvm.sh $HOME/.nvm/nvm.sh
-
-# Install PHP dependencies
-composer global install
-
-# Install Python dependencies
-pip install -r $HOME/.dotfiles/init/requirements.txt
+ln -shf `brew --prefix nvm`/nvm-exec $HOME/.nvm/nvm-exec
+ln -shf `brew --prefix nvm`/nvm.sh $HOME/.nvm/nvm.sh
 
 # Install Homebrew
 echo "\n${bold}Installing Brew packages...${unbold}"
@@ -47,6 +41,6 @@ git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-
 echo "\n${bold}Installing Vundle...${unbold}"
 git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 echo "\n${bold}Installing Vundle Plugins...${unbold}"
-vim -u $HOME/.vimrc.bundles +PluginInstall +PluginClean! +qa
+vim -u $HOME/.vimrc.bundles +PluginInstall +PluginClean! +qa < /dev/tty > /dev/tty
 
 echo "\nDone."

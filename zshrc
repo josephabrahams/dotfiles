@@ -6,6 +6,7 @@ path=(
     ~/.bin
     ~/.composer/vendor/bin
     ~/go/bin
+    /Library/TeX/texbin
     #/usr/local/opt/coreutils/libexec/gnubin
     #/usr/local/opt/gnu-sed/libexec/gnubin
     #/usr/local/opt/opencv3/bin
@@ -28,24 +29,8 @@ export EDITOR=$VISUAL
 # golang
 export GOPATH=$HOME/go
 
-# homebrew
-# export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
-
-# android
-export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
-export ANDROID_NDK_HOME=/usr/local/share/android-ndk
-export ANDROID_HOME=/usr/local/share/android-sdk
-export ANT_HOME=/usr/local/opt/ant
-export MAVEN_HOME=/usr/local/opt/maven
-export GRADLE_HOME=/usr/local/opt/gradle
-export PATH=$ANT_HOME/bin:$PATH
-export PATH=$MAVEN_HOME/bin:$PATH
-export PATH=$GRADLE_HOME/bin:$PATH
-export PATH=$ANDROID_HOME/tools:$PATH
-export PATH=$ANDROID_HOME/platform-tools:$PATH
 
 # oh my zsh
 export ZSH=$HOME/.zsh
@@ -87,17 +72,8 @@ done
 unset function_file
 
 # Base16 shell theme
-if [ -z "$TMUX" ]; then
-    if [ -n "$ITERM_PROFILE" ]; then
-        export BASE16_THEME=$ITERM_PROFILE
-    fi
-    if [ -z "$BASE16_THEME" ]; then
-        export BASE16_THEME=base16-default-dark
-    fi
-    ln -sf $HOME/.config/base16-shell/scripts/${BASE16_THEME}.sh $HOME/.base16_theme
-    source $HOME/.config/base16-shell/base16-shell.plugin.zsh
-    rm $HOME/.base16_theme
-fi
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # ls colors - joseph.is/1vozPB8
 export LS_COLORS='di=1;36:ln=35:so=32:ex=31:bd=34:cd=34'

@@ -15,7 +15,7 @@ if [ -z "$VIRTUAL_ENV" ]; then
 fi
 
 # non-virtualenv Python executable to use
-PYTHON=/usr/bin/python
+PYTHON=/usr/local/bin/python2
 
 # run Python with the virtualenv set as Python's HOME
 PYTHONHOME=$VIRTUAL_ENV exec $PYTHON "$@"

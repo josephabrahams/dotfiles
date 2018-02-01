@@ -347,6 +347,16 @@ autocmd BufRead,BufNewFile *.js,*.json set shiftwidth=2 tabstop=2 softtabstop=2
 
 
 " --------------------------------------------------------
+" LaTeX
+" --------------------------------------------------------
+
+" Run with :Latexmk
+let g:LatexBox_latexmk_preview_continuously = 1
+let g:LatexBox_quickfix = 2
+let g:LatexBox_latexmk_options = "-d"
+
+
+" --------------------------------------------------------
 " Markdown
 " --------------------------------------------------------
 

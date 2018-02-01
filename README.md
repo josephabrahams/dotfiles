@@ -28,7 +28,17 @@ $ git clone https://github.com/josephabrahams/dotfiles.git $HOME/.dotfiles
 Install/update most other dependencies:
 
 ```bash
-$ $HOME/.dotfiles/scripts/bootstrap.sh
+$ $HOME/.dotfiles/scripts/install
+```
+
+Install PHP dependencies:
+```bash
+composer global install
+```
+
+Install Python dependencies:
+```bash
+syspip install virtualenvwrapper
 ```
 
 iTerm2 Preferences
@@ -41,21 +51,6 @@ iTerm2 Preferences
     * `Key Mappings`
         * `+` Keyboard Shortcut: `Control+Tab`, Action: `Next Tab`
         * `+` Keyboard Shortcut: `Control+Shift+Tab`, Action `Previous Tab`
-
-Karabiner Preferences
----------------------
-
-* Change Key Tab:
-    * &#x2713; all options under `Custom Settings` and:
-    * `Control_L to Control_L (+ When you type Control_L only, send Escape)`
-    * `Control+Delete to Forward Delete`
-    * `Shift+Delete to Forward Delete (if no other modifiers pressed)`
-    * `Use "hjkl" keys as arrow keys if you are not editing text.`
-
-* Key Repeat Tab:
-    * &#x2713; `Override the key repeat values of system`
-    * Delay Until Repeat: `300ms`
-    * Key Repeat: `30ms`
 
 Make your own customizations
 ----------------------------
