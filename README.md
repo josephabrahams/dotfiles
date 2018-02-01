@@ -1,79 +1,61 @@
 Joseph does dotfiles
 ====================
 
-
 Requirements
 ------------
 
-Install [Homebrew](http://brew.sh/):
+Xcode installed from the App Store (make sure to accept the license agreement):
 
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew tap homebrew/boneyard
+```bash
+$ sudo xcodebuild -license accept
+```
 
+[Homebrew](http://brew.sh/):
 
-Install
--------
+```bash
+$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Installation
+------------
 
 Clone the dotfiles repo:
 
-    git clone https://github.com/josephabrahams/dotfiles.git $HOME/.dotfiles
-
-Install command-line tools:
-
-    brew bundle $HOME/.dotfiles/init/Brewfile
-
-Install OS X native apps:
-
-    HOMEBREW_CASK_OPTS="--appdir=/Applications" brew bundle $HOME/.dotfiles/init/Caskfile
-
-Set sensible hacker defaults for OS X:
-
-    $HOME/.dotfiles/init/osx.sh
-
-Install PHP dependencies:
-
-    composer global install
-
-Install Python dependencies:
-
-    pip install -r $HOME/.dotfiles/init/requirements.txt
+```bash
+$ git clone https://github.com/josephabrahams/dotfiles.git $HOME/.dotfiles
+```
 
 Install/update most other dependencies:
 
-    $HOME/.dotfiles/init/bootstrap.sh
+```bash
+$ $HOME/.dotfiles/scripts/bootstrap.sh
+```
 
-Install the dotfiles, oh-my-zsh, and vim plugins:
+iTerm2 Preferences
+------------------
 
-    RCRC=$HOME/.dotfiles/rcrc rcup -fv
+* Profiles Tab:
+    * `Colors` &rarr; `Load Presets...` &rarr; `base16-default.dark.256`
 
-Add brewed bash and zsh to `/etc/shells`:
+* Keys Tab:
+    * `Key Mappings`
+        * `+` Keyboard Shortcut: `Control+Tab`, Action: `Next Tab`
+        * `+` Keyboard Shortcut: `Control+Shift+Tab`, Action `Previous Tab`
 
-    sudo sh -c "echo '/usr/local/bin/bash\n/usr/local/bin/zsh' >> /etc/shells"
+Karabiner Preferences
+---------------------
 
-Set brewed zsh as your login shell:
+* Change Key Tab:
+    * &#x2713; all options under `Custom Settings` and:
+    * `Control_L to Control_L (+ When you type Control_L only, send Escape)`
+    * `Control+Delete to Forward Delete`
+    * `Shift+Delete to Forward Delete (if no other modifiers pressed)`
+    * `Use "hjkl" keys as arrow keys if you are not editing text.`
 
-    chsh -s /usr/local/bin/zsh
-
-Configure iTerm2:
-
-* `Preferences...` &rarr; `Profiles` &rarr; `Colors` &rarr; `Load Presets...` &rarr; `base16-default.dark.256`
-
-* `Preferences...` &rarr; `Keys` &rarr; `Global Key Shortcuts`
-    * `+` Keyboard Shortcut: `Control+Tab`, Action: `Next Tab`
-    * `+` Keyboard Shortcut: `Control+Shift+Tab`, Action `Previous Tab`
-
-Configure Karabiner:
-
-&#x2713; all options under `Custom Settings` and:
-
-* `Control_L to Control_L (+ When you type Control_L only, send Escape)`
-* `Control+Delete to Forward Delete`
-* `Shift+Delete to Forward Delete (if no other modifiers pressed)`
-* `Use "hjkl" keys as arrow keys if you are not editing text.`
-* Delay Until Repeat: 300ms
-* Key Repeat: 30ms
-* Key Overlaid Modifier Timeout: 200ms
-
+* Key Repeat Tab:
+    * &#x2713; `Override the key repeat values of system`
+    * Delay Until Repeat: `300ms`
+    * Key Repeat: `30ms`
 
 Make your own customizations
 ----------------------------
@@ -81,11 +63,12 @@ Make your own customizations
 Put your customizations in dotfiles appended with `.local`:
 
 * `~/.gitconfig.local`
-* `~/.zshenv.local`
+* `~/.vimrc.local`
 * `~/.zshrc.local`
 
+Inspired by
+-----------
 
-## Inspired by
 * [Mathias Bynens](http://joseph.is/104CHsR)
 * [Mike Losh](http://joseph.is/1zNYLIu)
 * [Mike Solomon](http://joseph.is/1sLgmai)
@@ -93,4 +76,3 @@ Put your customizations in dotfiles appended with `.local`:
 * [Square](http://joseph.is/1FZKGbF)
 * [Thoughtbot](http://joseph.is/1FZKRUl)
 * and many more...
-

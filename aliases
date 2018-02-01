@@ -2,8 +2,8 @@
 alias md="mkdir -p"
 alias rd="rmdir"
 
-# GNU ls
-alias ls="/usr/local/bin/gls --color=auto"
+# ls
+alias ls="ls -G"
 alias l="ls -AF"
 alias ll="ls -alF"
 alias lL="ll -L"
@@ -35,10 +35,11 @@ alias myip="dig +short myip.opendns.com @resolver1.opendns.com" # get external i
 alias pubkey="cat ~/.ssh/id_rsa.pub"
 alias ln="ln -iv"
 alias mv="mv -i"
+alias mux="tmuxinator"
 alias o="open ."
 alias p="cd ~/Projects"
 alias proj="cd ~/Projects"
-alias ptr="dig +short -x"
+alias ptr="dig ptr +short"
 alias rcup="rcup -v"
 alias scheme="rlwrap csi"
 alias sudo="sudo " # use sudo with aliases
@@ -49,7 +50,7 @@ alias trim="tr -d ' \t\n\r\f'"
 alias x="exit"
 
 # git
-alias git="hub"
+#alias git="hub"
 alias ga="git add"
 alias gaa="git add -A"
 alias gb="git branch"
@@ -84,4 +85,3 @@ alias zshenv="vim ~/.zshenv; source ~/.zshenv"
 alias zshenvl="vim ~/.zshenv.local; source ~/.zshenv"
 alias zshrc="vim ~/.zshrc; source ~/.zshrc"
 alias zshrcl="vim ~/.zshrc.local; source ~/.zshrc.local"
-

@@ -12,7 +12,9 @@ Plugin 'gmarik/Vundle.vim'
 
 " Plugins
 Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
+" Plugin 'ashisha/image.vim'
 Plugin 'austintaylor/vim-indentobject'
 Plugin 'chriskempson/base16-vim'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -42,13 +44,14 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/Align'
+Plugin 'vim-scripts/SingleCompile'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'vim-scripts/camelcasemotion'
 Plugin 'vim-scripts/greplace.vim'
 Plugin 'vim-scripts/matchit.zip'
+Bundle 'vim-scripts/Vim-R-plugin'
 Plugin 'wookiehangover/jshint.vim'
 
 call vundle#end()
 
 filetype plugin indent on
-

@@ -1,11 +1,9 @@
 # `lll` runs `ll` and pipes the output to less
-
-function lll() {
-    gls -alF --color=always "$@" | less -R
+lll() {
+    CLICOLOR_FORCE=1 ls -alFG "$@" | less -R
 }
 
-# `lLl` follows symlinks
-
-function lLl() {
-    gls -alLF --color=always "$@" | less -R
+# `llll` follows symlinks
+llll() {
+    CLICOLOR_FORCE=1 ls -alLFG "$@" | less -R
 }

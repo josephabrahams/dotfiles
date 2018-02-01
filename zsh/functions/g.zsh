@@ -2,7 +2,7 @@
 # With arguments: acts like `git`
 # http://joseph.is/1oujSLs
 
-function g() {
+g() {
     if [[ $# > 0 ]]; then
         git $@
     else

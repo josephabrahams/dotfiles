@@ -2,4 +2,3 @@ source 'https://rubygems.org'
 
 gem 'foreman'
 gem 'tmuxinator'
-gem 'travis'

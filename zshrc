@@ -1,34 +1,82 @@
 # oh-my-zsh settings
+path=(
+    .git/safe/../../bin
+    .git/safe/../../node_modules/.bin
+    .git/safe/../../vendor/bin
+    ~/.bin
+    ~/.composer/vendor/bin
+    ~/go/bin
+    #/usr/local/opt/coreutils/libexec/gnubin
+    #/usr/local/opt/gnu-sed/libexec/gnubin
+    #/usr/local/opt/opencv3/bin
+    /usr/local/opt/python/libexec/bin
+    /usr/local/heroku/bin
+    /usr/local/MacGPG2/bin
+    /usr/local/share/npm/bin
+    /usr/local/bin
+    /usr/local/sbin
+    /usr/bin
+    /usr/sbin
+    /bin
+    /sbin
+)
+
+# use vim as the visual editor
+export VISUAL=vim
+export EDITOR=$VISUAL
+
+# golang
+export GOPATH=$HOME/go
+
+# homebrew
+# export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+
+# android
+export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
+export ANDROID_NDK_HOME=/usr/local/share/android-ndk
+export ANDROID_HOME=/usr/local/share/android-sdk
+export ANT_HOME=/usr/local/opt/ant
+export MAVEN_HOME=/usr/local/opt/maven
+export GRADLE_HOME=/usr/local/opt/gradle
+export PATH=$ANT_HOME/bin:$PATH
+export PATH=$MAVEN_HOME/bin:$PATH
+export PATH=$GRADLE_HOME/bin:$PATH
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+
+# oh my zsh
 export ZSH=$HOME/.zsh
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UPDATE_PROMPT="true"
 ZSH_THEME="robbyrussell"
 plugins=(
-    bower
-    brew
-    brew-cask
-    bundler
-    catimg
-    colored-man
-    colorize
-    docker
-    docker-compose
-    fabric
-    # gem
-    go
-    npm
-    # nvm
-    osx
-    pip
-    # pyenv
-    python
-    # rbenv
-    tmux
+    aws
+    #brew
+    #brew-cask
+    #bundler
+    colored-man-pages
+    #colorize
+    #docker
+    #docker-compose
+    #fabric
+    #gem
+    #go
+    # heroku
+    #npm
+    nvm
+    #osx
+    #pip
+    #pyenv
+    #python
+    #rbenv
+    #tmux
     tmuxinator
-    vagrant
     virtualenvwrapper
     z
-    zsh-syntax-highlighting
+    #zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -39,37 +87,32 @@ done
 unset function_file
 
 # Base16 shell theme
-if [[ "${TERM#*256}" != "$TERM" ]]; then
-    BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
-    [ -s $BASE16_SHELL ] && source $BASE16_SHELL
+if [ -z "$TMUX" ]; then
+    if [ -n "$ITERM_PROFILE" ]; then
+        export BASE16_THEME=$ITERM_PROFILE
+    fi
+    if [ -z "$BASE16_THEME" ]; then
+        export BASE16_THEME=base16-default-dark
+    fi
+    ln -sf $HOME/.config/base16-shell/scripts/${BASE16_THEME}.sh $HOME/.base16_theme
+    source $HOME/.config/base16-shell/base16-shell.plugin.zsh
+    rm $HOME/.base16_theme
 fi
 
 # ls colors - joseph.is/1vozPB8
 export LS_COLORS='di=1;36:ln=35:so=32:ex=31:bd=34:cd=34'
 
 # grc beautifies all the things
-[ $+commands[grc] ] && [ $+commands[brew] ] && source /usr/local/etc/grc.bashrc
-
-# enable autoenv
-#[ -s /usr/local/opt/autoenv/activate.sh ] \
-#    && source /usr/local/opt/autoenv/activate.sh
-
-# more autocompletion scripts
-# TODO: load all brew completions
-eval "$(grunt --completion=zsh)"
-eval "$(gulp --completion=zsh)"
-eval "$(cat /usr/local/etc/bash_completion.d/nvm)"
-if which aws_zsh_completer.sh &>/dev/null; then
-    source `which aws_zsh_completer.sh`
-fi
-[ -s ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+source /usr/local/etc/grc.bashrc
 
 # keybindings
 bindkey \^U backward-kill-line
+
+# hub alias
+eval "$(hub alias -s)"
 
 # aliases
 [ -s ~/.aliases ] && source ~/.aliases
 
 # local config
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
-

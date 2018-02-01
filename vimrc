@@ -18,8 +18,9 @@ set hidden
 " Enable syntax highlighting
 syntax on
 
-" Change leader to a comma
+" Change leader to command and local leader to backslash
 let mapleader=','
+let maplocalleader = '\'
 
 " Load Vundle plugins
 if filereadable( expand('~/.vimrc.bundles') )
@@ -48,22 +49,27 @@ autocmd VimResized * :wincmd=
 " Set 256 color space
 if matchstr($TERM,256) || has('gui_running')
     set t_Co=256
+    let base16colorspace=256
 endif
 
-" Enable Base16 color scheme
-if &t_Co == 256
-    let base16colorspace=256
-    colorscheme base16-default
-    if has('gui_running')
-        set guioptions-=rLT     " Disable MacVim scrollbars and toolbar
-        set guifont=Menlo:h14
-        set linespace=1
-        set background=light
-        hi LineNr guibg=#f5f5f5 " Match background of light theme
-    else
-        set background=dark
-        hi LineNr ctermbg=00    " Match background of dark theme
-    endif
+function! ColorLight()
+    colorscheme base16-default-light
+    hi LineNr guibg=#f5f5f5 " Match background of light theme
+endfunction
+function! ColorDark()
+    colorscheme base16-default-dark
+    hi LineNr ctermbg=00    " Match background of dark theme
+endfunction
+command! ColorLight :call ColorLight()
+command! ColorDark :call ColorDark()
+
+if has('gui_running')
+    set guioptions-=rLT     " Disable MacVim scrollbars and toolbar
+    set guifont=Menlo:h14
+    set linespace=1
+    call ColorLight()
+else
+    call ColorDark()
 endif
 
 
@@ -87,6 +93,13 @@ cnoremap <C-L> <C-R>=expand("%:p:h") . "/"<CR>
 " Completion
 " --------------------------------------------------------
 
+noremap <leader>/ :Commentary<cr>
+
+
+" --------------------------------------------------------
+" Completion
+" --------------------------------------------------------
+
 set wildmode=list:longest
 set wildmenu                    " Enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~     " Stuff to ignore when tab completing
@@ -100,7 +113,7 @@ set wildignore+=*.sql
 set wildignore+=log/**
 set wildignore+=node_modules/**
 set wildignore+=tmp/**
-set wildignore+=*.png,*.jpeg,*.jpg,*.gif
+set wildignore+=*.jpg,*.jpeg,*.png,*.gif
 
 
 " ---------------------------------------------------------
@@ -149,7 +162,7 @@ nnoremap <silent> <D-M> :CtrlPBufTag<CR>
 " Yank and paste with the system clipboard
 set clipboard=unnamed
 
-" Don't copy the contents of an overwritten selection.
+" Don't yank when replace-pasting
 vnoremap p "_dP
 
 " Copy a whole line, but not linebreaks
@@ -222,6 +235,14 @@ nnoremap <leader>l :call ColorColumnToggle()<CR>
 
 
 " --------------------------------------------------------
+" SingleCompile
+" --------------------------------------------------------
+
+ nmap <F9> :SCCompile<cr>
+ nmap <F10> :SCCompileRun<cr>
+
+
+" --------------------------------------------------------
 " GitGutter
 " --------------------------------------------------------
 
@@ -252,7 +273,7 @@ nnoremap <leader><leader> <c-^>
 noremap <S-Q> @q
 
 " Reload .vimrc
-noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:echo 'vimrc reloaded'<CR>
 
 
 " --------------------------------------------------------
@@ -273,12 +294,13 @@ filetype indent on
 set list
 set listchars=tab:▸\ ,trail:▫       " Show trailing whitespace
 
+set breakindent                 " Smart line wraps
 " TODO: Remove once mvim catches up to 7.4.338
-if has('gui_running')
-    set nowrap
-else
-    set breakindent                 " Smart line wraps
-endif
+"if has('gui_running')
+"    set nowrap
+"else
+"    set breakindent                 " Smart line wraps
+"endif
 
 nnoremap <Tab> >>_
 nnoremap <S-Tab> <<_
@@ -331,7 +353,8 @@ autocmd BufRead,BufNewFile *.js,*.json set shiftwidth=2 tabstop=2 softtabstop=2
 " Use GitHub Markdown (jtratner/vim-flavored-markdown)
 augroup markdown
     au!
-    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown textwidth=80 spell
+    " au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown textwidth=80 spell
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown spell
 augroup END
 
 " Open current file with Marked 2
@@ -375,6 +398,16 @@ let g:NERDTreeWinSize=30
 
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
+
+
+" --------------------------------------------------------
+" R                               http://joseph.is/2fJg5fz
+" --------------------------------------------------------
+
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine
+let vimrplugin_applescript=0
+let vimrplugin_vsplit=1
 
 
 " --------------------------------------------------------

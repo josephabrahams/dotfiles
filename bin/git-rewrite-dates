@@ -1,0 +1,40 @@
+#!/bin/bash
+# git-rewrite-dates [days-offset]
+# change git commit dates
+#
+# WARNING: git history will be rewritten
+
+set -e
+
+offset=$1
+# make sure days-offset is an int
+error_message="error: days-offset must be an integer"
+test $offset -eq $offset 2>/dev/null || ( echo $error_message && exit 1 )
+test "${offset:0:1}" = "-" -o "${offset:0:1}" = "+" && ( echo $error_message && exit 1 )
+
+end_date_format="+%Y-%m-%d"
+export date_format="+%Y-%m-%d 12:00:00"
+export n=$(git rev-list --count --branches)
+
+if [ -z "$offset" ]; then
+    offset=0
+fi
+
+end_date=$(date -v -$(( offset + 1 ))d "$end_date_format")
+n=$(( n + offset ))
+
+echo "Preparing to rewrite all commit dates to be one day apart, ending on $end_date"
+echo "WARNING: git history will be rewritten"
+read -n 1 -p "Do you wish to continue? [Y/n] "
+echo ""
+if [[ ! $REPLY =~ ^[Yy]$ && -n $REPLY ]]; then
+    echo "Aborting."
+    exit 1
+fi
+
+git filter-branch -f --env-filter '
+    new_date=$(date -v -${n}d "$date_format")
+    export GIT_COMMITTER_DATE=$new_date
+    export GIT_AUTHOR_DATE=$new_date
+    (( n-- ))
+' --tag-name-filter cat -- --branches --tags

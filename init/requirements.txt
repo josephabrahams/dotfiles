@@ -1,3 +1,0 @@
-awscli
-bpython
-flake8

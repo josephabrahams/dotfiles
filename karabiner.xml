@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- Karabiner Custom Settings File -->
-<!-- ln -sf $HOME/.dotfiles/init/private.xml $HOME/Library/Application\ Support/Karabiner/private.xml -->
+<!-- ln -sf $HOME/.dotfiles/karabiner.xml $HOME/Library/Application\ Support/Karabiner/private.xml -->
 
 <root>
     <item>
