@@ -18,8 +18,9 @@ set hidden
 " Enable syntax highlighting
 syntax on
 
-" Change leader to a comma
+" Change leader to command and local leader to backslash
 let mapleader=','
+let maplocalleader = '\'
 
 " Load Vundle plugins
 if filereadable( expand('~/.vimrc.bundles') )
@@ -72,7 +73,6 @@ else
 endif
 
 
-
 " --------------------------------------------------------
 " Command Mode
 " --------------------------------------------------------
@@ -113,7 +113,7 @@ set wildignore+=*.sql
 set wildignore+=log/**
 set wildignore+=node_modules/**
 set wildignore+=tmp/**
-set wildignore+=*.png,*.jpeg,*.jpg,*.gif
+set wildignore+=*.jpg,*.jpeg,*.png,*.gif
 
 
 " ---------------------------------------------------------
@@ -162,7 +162,7 @@ nnoremap <silent> <D-M> :CtrlPBufTag<CR>
 " Yank and paste with the system clipboard
 set clipboard=unnamed
 
-" Don't copy the contents of an overwritten selection.
+" Don't yank when replace-pasting
 vnoremap p "_dP
 
 " Copy a whole line, but not linebreaks
@@ -273,7 +273,7 @@ nnoremap <leader><leader> <c-^>
 noremap <S-Q> @q
 
 " Reload .vimrc
-noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:echo 'vimrc reloaded'<CR>
 
 
 " --------------------------------------------------------
@@ -294,12 +294,13 @@ filetype indent on
 set list
 set listchars=tab:▸\ ,trail:▫       " Show trailing whitespace
 
+set breakindent                 " Smart line wraps
 " TODO: Remove once mvim catches up to 7.4.338
-if has('gui_running')
-    set nowrap
-else
-    set breakindent                 " Smart line wraps
-endif
+"if has('gui_running')
+"    set nowrap
+"else
+"    set breakindent                 " Smart line wraps
+"endif
 
 nnoremap <Tab> >>_
 nnoremap <S-Tab> <<_
@@ -397,6 +398,16 @@ let g:NERDTreeWinSize=30
 
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
+
+
+" --------------------------------------------------------
+" R                               http://joseph.is/2fJg5fz
+" --------------------------------------------------------
+
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine
+let vimrplugin_applescript=0
+let vimrplugin_vsplit=1
 
 
 " --------------------------------------------------------
@@ -533,6 +544,7 @@ function! EnableWordPress()
     call Tabs()
 endfunction
 command! WordPress :call EnableWordPress()
+
 
 " --------------------------------------------------------
 " Local overrides
