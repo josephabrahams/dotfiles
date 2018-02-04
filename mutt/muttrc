@@ -1,0 +1,39 @@
+set ssl_starttls = yes
+set ssl_force_tls = yes
+# set imap_user = ""
+# set imap_pass = ""  # https://myaccount.google.com/apppasswords
+# set from = ""
+# set realname = ""
+set folder = "imaps://imap.gmail.com/"
+set spoolfile = "imaps://imap.gmail.com/INBOX"
+set postponed = "imaps://imap.gmail.com/[Gmail]/Drafts"
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+set smtp_url = "smtp://$imap_user@smtp.gmail.com:587/"
+set smtp_pass = "$imap_pass"
+set smtp_authenticators = "gssapi:login"
+set move = no
+set imap_keepalive = 900
+
+# b toggles sidebar visibility
+macro index b '<enter-command>toggle sidebar_visible<enter>'
+macro pager b '<enter-command>toggle sidebar_visible<enter>'
+
+# Remap bounce-message function to “B”
+bind index B bounce-message
+
+# set up the sidebar, default not visible
+set sidebar_width=12
+set sidebar_visible=no
+set sidebar_delim='|'
+set sidebar_sort=yes
+
+# which mailboxes to list in the sidebar
+mailboxes =inbox =ml
+
+# color of folders with new mail
+color sidebar_new yellow default
+
+source ~/.mutt/muttrc.local
+source ~/.config/base16-mutt/base16.muttrc

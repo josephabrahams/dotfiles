@@ -58,6 +58,7 @@ Make your own customizations
 Put your customizations in dotfiles appended with `.local`:
 
 * `~/.gitconfig.local`
+* `~/.mutt/muttrc.local`
 * `~/.vimrc.local`
 * `~/.zshrc.local`
 

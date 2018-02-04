@@ -21,6 +21,8 @@ echo "\n${bold}Updating Base16 iTerm2 color scheme...${unbold}"
 cd $HOME/.config/base16-iterm2; git pull
 echo "\n${bold}Updating Base16 shell color scheme...${unbold}"
 cd $HOME/.config/base16-shell; git pull
+echo "\n${bold}Updating Base16 Mutt color scheme...${unbold}"
+cd $HOME/.config/base16-mutt; git pull
 
 # Vim - http://joseph.is/1sZma4R
 echo "\n${bold}Updating Vundle...${unbold}"

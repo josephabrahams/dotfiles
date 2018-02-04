@@ -1,0 +1,28 @@
+" vi:ft=vim
+
+" General Settings
+set showmode                    " Show current mode down the bottom
+let mapleader=','               " Change leader to a comma
+
+" Cut/Paste
+set clipboard=unnamed           " Yank and paste with the system clipboard
+                                " Don't yank when replace-pasting
+vnoremap p "_dP
+
+" Search
+set incsearch                   " Find the next match as we type the search
+set ignorecase                  " Ignore case when searching...
+set smartcase                   " ...unless we type a capital
+
+" Scrolling
+set scrolloff=7                 " Scroll 7 lines away from top/bottom
+set sidescroll=1                " Keep the cursor on the screen
+
+" Tabs
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" Reload .vimrc
+noremap <silent> <leader>V :source ~/.ideavimrc<CR>:echo 'ideavimrc reloaded'<CR>
