@@ -1,8 +1,8 @@
 " vi:ft=vim
 
 " General Settings
-set showmode                    " Show current mode down the bottom
-let mapleader=','               " Change leader to a comma
+"set showmode                    " Show current mode down the bottom
+let mapleader = ','               " Change leader to a comma
 
 " Cut/Paste
 set clipboard=unnamed           " Yank and paste with the system clipboard

@@ -1,19 +1,11 @@
 # oh-my-zsh settings
 path=(
-    .git/safe/../../bin
-    .git/safe/../../node_modules/.bin
-    .git/safe/../../vendor/bin
     ~/.bin
     ~/.composer/vendor/bin
     ~/go/bin
     /Library/TeX/texbin
-    #/usr/local/opt/coreutils/libexec/gnubin
-    #/usr/local/opt/gnu-sed/libexec/gnubin
-    #/usr/local/opt/opencv3/bin
-    /usr/local/opt/python/libexec/bin
-    /usr/local/heroku/bin
-    /usr/local/MacGPG2/bin
-    /usr/local/share/npm/bin
+    # /usr/local/MacGPG2/bin
+    /usr/local/opt/python@2/bin
     /usr/local/bin
     /usr/local/sbin
     /usr/bin
@@ -22,20 +14,25 @@ path=(
     /sbin
 )
 
+
+# locale
+export LANG="en_US.UTF-8"
+
 # use vim as the visual editor
-export VISUAL=vim
-export EDITOR=$VISUAL
+export VISUAL="vim"
+export EDITOR="vim"
 
 # golang
-export GOPATH=$HOME/go
+export GOPATH="$HOME/go"
 
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
+export PIPENV_VENV_IN_PROJECT=true
 
 # oh my zsh
-export ZSH=$HOME/.zsh
-COMPLETION_WAITING_DOTS="true"
-DISABLE_UPDATE_PROMPT="true"
+export ZSH="$HOME/.zsh"
+COMPLETION_WAITING_DOTS=true
+DISABLE_UPDATE_PROMPT=true
 ZSH_THEME="robbyrussell"
 plugins=(
     aws
@@ -49,17 +46,17 @@ plugins=(
     #fabric
     #gem
     #go
-    # heroku
+    heroku
     #npm
     nvm
     #osx
     #pip
     #pyenv
-    #python
+    # python
     #rbenv
     #tmux
     tmuxinator
-    virtualenvwrapper
+    # virtualenvwrapper
     z
     #zsh-syntax-highlighting
 )
@@ -76,7 +73,7 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # ls colors - joseph.is/1vozPB8
-export LS_COLORS='di=1;36:ln=35:so=32:ex=31:bd=34:cd=34'
+export LS_COLORS="di=1;36:ln=35:so=32:ex=31:bd=34:cd=34"
 
 # grc beautifies all the things
 source /usr/local/etc/grc.bashrc
@@ -87,8 +84,13 @@ bindkey \^U backward-kill-line
 # hub alias
 eval "$(hub alias -s)"
 
+# pipenv completion
+eval "$(pipenv --completion)"
+
 # aliases
 [ -s ~/.aliases ] && source ~/.aliases
 
 # local config
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
+
+[ -z "$TMUX" ] && [ -z "$PIPENV_ACTIVE" ] && fortune | cowsay && echo

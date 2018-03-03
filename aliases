@@ -39,6 +39,7 @@ alias mux="tmuxinator"
 alias o="open ."
 alias p="cd ~/Projects"
 alias proj="cd ~/Projects"
+alias prp="pipenv run python"
 alias ptr="dig ptr +short"
 alias rcup="rcup -v"
 alias scheme="rlwrap csi"
@@ -48,6 +49,7 @@ alias top="htop"
 alias tower="gittower ."
 alias trim="tr -d ' \t\n\r\f'"
 alias x="exit"
+alias x11="open /Applications/Utilities/XQuartz.app"
 
 # git
 #alias git="hub"
@@ -71,11 +73,6 @@ alias gt="git tree"
 alias gu="git up"
 alias pull="git pull"
 alias push="git push"
-
-# virtualenv
-alias mkvirtualenv3="mkvirtualenv --python=$(which python3)"
-alias mkvenv="mkvirtualenv $(basename $(pwd))"
-alias mkvenv3="mkvirtualenv3 $(basename $(pwd))"
 
 # rc files
 alias aliases="vim ~/.aliases; source ~/.aliases"

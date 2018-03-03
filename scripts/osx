@@ -422,12 +422,19 @@ defaults write org.m0k.transmission WarningLegal -bool false
 
 
 ###############################################################################
+# XQuartz                                                                     #
+###############################################################################
+
+defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
+
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
     "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
-    "Terminal" "Transmission" "iCal"; do
+    "Terminal" "Transmission" "iCal" "XQuartz"; do
     killall "${app}" > /dev/null 2>&1
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."

@@ -36,9 +36,9 @@ Install PHP dependencies:
 composer global install
 ```
 
-Install Python dependencies:
+Install Ruby dependencies:
 ```bash
-syspip install virtualenvwrapper
+gem install foreman tmuxinator
 ```
 
 iTerm2 Preferences
