@@ -7,13 +7,13 @@ Requirements
 Xcode installed from the App Store (make sure to accept the license agreement):
 
 ```bash
-$ sudo xcodebuild -license accept
+sudo xcodebuild -license accept
 ```
 
 [Homebrew](http://brew.sh/):
 
 ```bash
-$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
 Installation
@@ -22,13 +22,19 @@ Installation
 Clone the dotfiles repo:
 
 ```bash
-$ git clone https://github.com/josephabrahams/dotfiles.git $HOME/.dotfiles
+git clone https://github.com/josephabrahams/dotfiles.git $HOME/.dotfiles
 ```
 
 Install/update most other dependencies:
 
 ```bash
-$ $HOME/.dotfiles/scripts/install
+$HOME/.dotfiles/scripts/install
+```
+
+Install Node.js dependencies:
+```bash
+nvm alias default system
+npm -g install eslint
 ```
 
 Install PHP dependencies:
