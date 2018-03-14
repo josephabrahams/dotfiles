@@ -1,19 +1,19 @@
 # oh-my-zsh settings
-path=(
-    ~/.bin
-    ~/.composer/vendor/bin
-    ~/go/bin
-    /Library/TeX/texbin
-    # /usr/local/MacGPG2/bin
-    /usr/local/opt/python@2/bin
-    /usr/local/bin
-    /usr/local/sbin
-    /usr/bin
-    /usr/sbin
-    /bin
-    /sbin
-)
-
+if [[ -o login ]]; then
+    path=(
+        ~/.bin
+        ~/.composer/vendor/bin
+        ~/go/bin
+        /Library/TeX/texbin
+        /usr/local/opt/python/libexec/bin
+        /usr/local/bin
+        /usr/local/sbin
+        /usr/bin
+        /usr/sbin
+        /bin
+        /sbin
+    )
+fi
 
 # locale
 export LANG="en_US.UTF-8"
@@ -27,40 +27,62 @@ export GOPATH="$HOME/go"
 
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
+export PIPENV_DONT_LOAD_ENV=true
+export PIPENV_SHELL_FANCY=true
 export PIPENV_VENV_IN_PROJECT=true
 
 # oh my zsh
 export ZSH="$HOME/.zsh"
 COMPLETION_WAITING_DOTS=true
 DISABLE_UPDATE_PROMPT=true
-ZSH_THEME="robbyrussell"
+ZSH_THEME="bureau"
 plugins=(
-    aws
-    #brew
-    #brew-cask
-    #bundler
+    # aws
+    # catimg
+    chucknorris
     colored-man-pages
-    #colorize
-    #docker
-    #docker-compose
-    #fabric
-    #gem
-    #go
+    # docker
+    # docker-compose
+    # docker-machine
+    # ember-cli
+    # gem
+    github
+    gitignore
+    # gnu-utils
+    # golang
     heroku
-    #npm
+    history-substring-search
+    iterm2
+    marked2
+    # nmap
+    # node
+    # npm
     nvm
-    #osx
-    #pip
-    #pyenv
+    osx
+    # pyenv
     # python
-    #rbenv
-    #tmux
+    # redis-cli
+    safe-paste
+    # tmux
     tmuxinator
-    # virtualenvwrapper
+    # wp-cli
+    # vi-mode
+    # vundle
     z
-    #zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
+
+nvm_prompt_info() {
+    if [ -n "$NVM_BIN" ]; then
+        echo "${ZSH_THEME_NVM_PROMPT_PREFIX}$(basename $(dirname $NVM_BIN))${ZSH_THEME_NVM_PROMPT_SUFFIX} "
+    fi
+}
+pipenv_prompt_info() {
+    if [ -n "$VIRTUAL_ENV" ]; then
+        echo "($(basename $WORKON_HOME)) "
+    fi
+}
+RPROMPT='$(nvm_prompt_info)$(pipenv_prompt_info)$(bureau_git_prompt)'
 
 # load custom executable functions
 for function_file in $ZSH/functions/*; do
@@ -81,9 +103,6 @@ source /usr/local/etc/grc.bashrc
 # keybindings
 bindkey \^U backward-kill-line
 
-# hub alias
-eval "$(hub alias -s)"
-
 # pipenv completion
 eval "$(pipenv --completion)"
 
@@ -93,4 +112,4 @@ eval "$(pipenv --completion)"
 # local config
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
 
-[ -z "$TMUX" ] && [ -z "$PIPENV_ACTIVE" ] && fortune | cowsay && echo
+[ -z "$TMUX" ] && [ -z "$PIPENV_ACTIVE" ] && chuck_cow
