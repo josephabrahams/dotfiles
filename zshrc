@@ -67,7 +67,7 @@ plugins=(
     tmuxinator
     # wp-cli
     # vi-mode
-    # vundle
+    vundle
     z
 )
 source $ZSH/oh-my-zsh.sh
@@ -102,6 +102,8 @@ source /usr/local/etc/grc.bashrc
 
 # keybindings
 bindkey \^U backward-kill-line
+bindkey '\e[A' history-beginning-search-backward
+bindkey '\e[B' history-beginning-search-forward
 
 # pipenv completion
 eval "$(pipenv --completion)"
@@ -112,4 +114,4 @@ eval "$(pipenv --completion)"
 # local config
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
 
-[ -z "$TMUX" ] && [ -z "$PIPENV_ACTIVE" ] && chuck_cow
+# [ -z "$TMUX" ] && [ -z "$PIPENV_ACTIVE" ] && chuck_cow

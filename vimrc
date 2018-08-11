@@ -409,6 +409,11 @@ let g:NERDTreeWinSize=30
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 
+" --------------------------------------------------------
+" Octave
+" --------------------------------------------------------
+autocmd FileType octave set commentstring=#\ %s
+
 
 " --------------------------------------------------------
 " R                               http://joseph.is/2fJg5fz
@@ -489,9 +494,10 @@ endif
 
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ["eslint"]
-let g:syntastic_python_checkers = ["flake8"]
-let g:syntastic_html_tidy_exec = "tidy5"
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_octave_checkers = ['matlab/mlint']
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_html_tidy_exec = 'tidy5'
 let g:syntastic_html_tidy_ignore_errors=[
     \ "proprietary attribute \"ng-",
     \ "trimming empty ",
