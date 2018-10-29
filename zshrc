@@ -79,7 +79,11 @@ nvm_prompt_info() {
 }
 pipenv_prompt_info() {
     if [ -n "$VIRTUAL_ENV" ]; then
-        echo "($(basename $WORKON_HOME)) "
+        if [ -n "$PIPENV_VENV_IN_PROJECT" ]; then
+            echo "($(basename $(dirname $VIRTUAL_ENV))) "
+        else
+            echo "($(basename $VIRTUAL_ENV)) "
+        fi
     fi
 }
 RPROMPT='$(nvm_prompt_info)$(pipenv_prompt_info)$(bureau_git_prompt)'
@@ -107,6 +111,9 @@ bindkey '\e[B' history-beginning-search-forward
 
 # pipenv completion
 eval "$(pipenv --completion)"
+
+# use minikube's daemon by default
+#eval $(minikube docker-env)
 
 # aliases
 [ -s ~/.aliases ] && source ~/.aliases
