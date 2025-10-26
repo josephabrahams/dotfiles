@@ -1,9 +1,0 @@
-#!/bin/sh
-# outputs the difference of two files
-
-if [ -f "$1" -a -f "$2" ]; then
-    comm --nocheck-order -3 $1 $2 | tr -d '\t'
-    exit 0;
-fi;
-
-echo "diffit takes two files as arguments to diff"
