@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Creating standard directories..."
+mkdir -pv ~/Projects ~/tmp
+
+if [ ! -e ~/.gitconfig.local ]; then
+    echo "Creating .gitconfig.local..."
+    touch ~/.gitconfig.local
+fi
+
+if [ ! -e ~/.hushlogin ]; then
+    echo "Creating .hushlogin..."
+    touch ~/.hushlogin
+fi
+
+echo "Done."

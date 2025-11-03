@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+EXT_FILE="$DOTFILES_DIR/vscode/extensions.txt"
+
+if [[ ! -f "$EXT_FILE" ]]; then
+    echo "No extensions.txt found at $EXT_FILE"
+    exit 1
+fi
+
+install_extensions() {
+    local app_name="$1"
+    local bin_path="$2"
+
+    echo "Installing $app_name extensions..."
+    if [[ -x "$bin_path" ]]; then
+        xargs -n1 "$bin_path" --force --install-extension <"$EXT_FILE" 2>&1 | grep -v "Installing extensions..."
+    else
+        echo "$app_name application not found. Skipping."
+    fi
+}
+
+install_extensions "VS Code" "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+install_extensions "Cursor" "/Applications/Cursor.app/Contents/Resources/app/bin/code"
+
+echo "Done."

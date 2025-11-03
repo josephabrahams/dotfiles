@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+echo "Running Dotbot to set up symlinks..."
+dotbot -c $DOTFILES_DIR/install.conf.yaml
+
+echo "Done."

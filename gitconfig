@@ -1,0 +1,31 @@
+[alias]
+    base = rev-parse --show-toplevel
+    fix = commit --amend
+    list = !git --no-pager log --reverse --decorate --pretty=oneline --abbrev-commit
+    root = rev-parse --show-toplevel
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit
+    up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+    unstage = reset HEAD
+
+[core]
+    editor = mvim -v
+    excludesfile = ~/.gitignore
+
+[color]
+    ui = auto
+
+[commit]
+    gpgsign = true
+    template = ~/.gitmessage
+
+[credential]
+    helper = osxkeychain
+
+[push]
+    default = simple
+
+[pull]
+    rebase = false
+
+[include]
+    path = ~/.gitconfig.local

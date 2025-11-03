@@ -1,0 +1,9 @@
+# Ignore everything
+*
+
+# Except these files
+!.gitignore
+!karabiner.json
+!assets/
+!assets/complex_modifications/
+!assets/complex_modifications/*.json

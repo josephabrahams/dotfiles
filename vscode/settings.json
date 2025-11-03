@@ -1,0 +1,172 @@
+// https://code.visualstudio.com/api/references/commands
+{
+  /**
+   * Language-specific formatters
+   * https://code.visualstudio.com/docs/getstarted/settings#_default-settings
+   */
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "mkhl.shfmt"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  /**
+   * Editor settings
+   */
+  "editor.fontFamily": "'Hack Nerd Font', Menlo, Monaco, 'Courier New', monospace",
+  "editor.inlineSuggest.enabled": true,
+  "editor.rulers": [80],
+  /**
+   * Markdown settings
+   */
+  /**
+   * Files & Explorer settings
+   */
+  "explorer.autoRevealExclude": {
+    "**/.venv": true
+  },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  /**
+   * Terminal settings
+   */
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
+  "terminal.integrated.showExitAlert": false,
+  /**
+   * Window & Workbench settings
+   */
+  "window.zoomLevel": 0.75,
+  "workbench.colorTheme": "Base16 Default Dark",
+  "workbench.colorCustomizations": {
+    "[Base16 Default Dark]": {
+      "tab.activeBackground": "#0f0f0f",
+      "tab.inactiveBackground": "#181818",
+      "editorGroupHeader.tabsBackground": "#181818",
+      "breadcrumb.background": "#181818",
+      "sideBar.background": "#181818"
+    }
+  },
+  "workbench.startupEditor": "none",
+  /**
+   * Python settings
+   * https://code.visualstudio.com/docs/python/settings-reference
+   */
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  /**
+   * Spell checker settings
+   * https://github.com/streetsidesoftware/vscode-spell-checker#vs-code-configuration-settings
+   */
+  "cSpell.enabledLanguageIds": [
+    "asciidoc",
+    "git-commit",
+    "html",
+    "jupyter",
+    "latex",
+    "markdown",
+    "plaintext",
+    "restructuredtext",
+    "text"
+  ],
+  "cSpell.userWords": ["Abrahams"],
+  /**
+   * Vim settings
+   * https://github.com/VSCodeVim/Vim#%EF%B8%8F-settings
+   */
+  "vim.camelCaseMotion.enable": true,
+  "vim.hlsearch": true,
+  "vim.leader": ",",
+  "vim.overrideCopy": true,
+  "vim.useSystemClipboard": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "/"],
+      "commands": [":noh"]
+    },
+    {
+      "before": ["<S-q>"],
+      "after": ["@", "q"]
+    },
+    {
+      "before": ["<leader>", "<space>"],
+      "commands": ["editor.action.trimTrailingWhitespace"]
+    },
+    {
+      "before": ["<leader>", "d"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["revealInExplorer"]
+    },
+    {
+      "before": ["<leader>", "r", "f"],
+      "commands": ["fileutils.renameFile"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "commands": ["workbench.action.splitEditor"]
+    },
+    {
+      "before": ["<leader>", "v"],
+      "commands": ["workbench.action.splitEditorOrthogonal"]
+    },
+    {
+      "before": ["<Tab>"],
+      "after": [">", ">", "_"]
+    },
+    {
+      "before": ["<S-Tab>"],
+      "after": ["<", "<", "_"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["p"],
+      "after": ["p", "g", "v", "y"]
+    },
+    {
+      "before": ["<Tab>"],
+      "after": [">", "g", "v"]
+    },
+    {
+      "before": ["<S-Tab>"],
+      "after": ["<", "g", "v"]
+    },
+    {
+      "before": ["<C-k>"],
+      "commands": ["editor.action.moveLinesUpAction"]
+    },
+    {
+      "before": ["C-j"],
+      "commands": ["editor.action.moveLinesDownAction"]
+    }
+  ]
+}

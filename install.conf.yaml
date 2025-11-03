@@ -1,0 +1,58 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean:
+    - "~"
+    - "~/.config"
+    - "~/.config/zsh"
+    - "~/.config/karabiner"
+    - "~/Library/Application Support/Code/User"
+    - "~/Library/Application Support/Cursor/User"
+
+- link:
+    # Zsh
+    ~/.zshenv: zshenv
+    ~/.config/zsh/.zshrc: zshrc
+    ~/.config/zsh/aliases.zsh: aliases.zsh
+    ~/.config/zsh/functions.zsh: functions.zsh
+    ~/.config/zsh/plugins.txt: plugins.txt
+    ~/.config/starship.toml: starship.toml
+
+    # Git
+    ~/.gitconfig: gitconfig
+    ~/.gitignore: gitignore
+    ~/.gitmessage: gitmessage
+
+    # curl & wget
+    ~/.curlrc: curlrc
+    ~/.wgetrc: wgetrc
+
+    # EditorConfig
+    ~/.editorconfig: editorconfig
+
+    # Vim
+    ~/.vimrc: vimrc
+    ~/.vim/colors/base16-default-dark.vim: base16-default-dark.vim
+
+    # Karabiner Elements
+    ~/.config/karabiner: karabiner
+
+    # Hammerspoon
+    ~/.hammerspoon/init.lua: hammerspoon.lua
+
+    # VS Code
+    ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
+    ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json
+    ~/Library/Application Support/Code/User/tasks.json: vscode/tasks.json
+    ~/Library/Application Support/Code/User/snippets: vscode/snippets
+
+    # Cursor
+    ~/Library/Application Support/Cursor/User/settings.json: vscode/settings.json
+    ~/Library/Application Support/Cursor/User/keybindings.json: vscode/keybindings.json
+    ~/Library/Application Support/Cursor/User/tasks.json: vscode/tasks.json
+    ~/Library/Application Support/Cursor/User/snippets: vscode/snippets
+
+    # bin
+    ~/bin: bin

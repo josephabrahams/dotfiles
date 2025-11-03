@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+echo "Applying macOS defaults..."
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+
+###############################################################################
+# General
+###############################################################################
+
+# Set a blazingly fast key repeat
+defaults write -g KeyRepeat -int 1
+defaults write -g InitialKeyRepeat -int 15
+
+# Disable press and hold for keys in favor of key repeat
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+
+###############################################################################
+# Finder
+###############################################################################
+
+# Show all filename extensions
+defaults write -g AppleShowAllExtensions -bool true
+
+# Show hidden files
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Don't show external drives on desktop
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
+
+# Use column view in all Finder windows by default
+# Four-letter codes for the other view modes: `icnv`, `Nlsv`, `glyv`
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
+# Sort icons by name on the desktop and in other icon views
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy name" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy name" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy name" ~/Library/Preferences/com.apple.finder.plist
+
+
+###############################################################################
+# Dock
+###############################################################################
+
+# Automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
+
+# Remove all apps from Dock
+defaults write com.apple.dock persistent-apps -array
+
+# Disable click wallpaper to reveal desktop
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -int 0
+
+
+###############################################################################
+# iTerm2
+###############################################################################
+
+# Disable prompt when using Cmd+Q with a single tab
+defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
+# Disable shutdown confirmation
+defaults write com.googlecode.iterm2 DisableShutdownConfirmations -bool true
+
+# Import the Base16 Default Dark Iterm2 color scheme (if not already present)
+if ! defaults read com.googlecode.iterm2 "Custom Color Presets" 2>/dev/null | grep -q "base16-default.dark.256"; then
+    echo "Importing Base16 Default Dark color scheme for iTerm2..."
+    open "$DOTFILES_DIR/base16-default.dark.256.itermcolors"
+    echo "Set colors in Settings → Profiles → Colors → Color Presets → base16-default.dark.256"
+fi
+
+
+###############################################################################
+# Terminal
+###############################################################################
+
+# Import the Base16 Default Dark Terminal color scheme (if not already present)
+if ! defaults read com.apple.Terminal "Window Settings" 2>/dev/null | grep -q "base16-default.dark.256"; then
+    echo "Importing Base16 Default Dark color scheme for Terminal.app..."
+    open "$DOTFILES_DIR/base16-default.dark.256.terminal"
+    echo "Set colors in Settings → Profiles → base16-default-dark.256 → Default"
+    echo "Set font in Settings → Profiles → Text → Font → Hack Nerd Font Mono Regular12"
+fi
+
+
+###############################################################################
+# Kill affected applications
+###############################################################################
+
+killall Finder
+killall Dock
+killall WindowManager
+
+echo "Done. Note that some of these changes require a logout/restart to take effect."

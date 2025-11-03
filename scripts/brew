@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+echo "Running Brew bundle..."
+brew bundle --file=$DOTFILES_DIR/Brewfile
+
+if ! test -L "$(brew --prefix postgresql@18)"; then
+    brew link --force --overwrite postgresql@18
+fi
+
+if ! brew services list | grep "postgresql@18" | grep -q "started"; then
+    brew services start postgresql@18
+fi
+
+if ! brew services list | grep "redis" | grep -q "started"; then
+    brew services start redis
+fi
+
+echo "Done."
