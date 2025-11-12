@@ -7,6 +7,10 @@
     - "~"
     - "~/.config"
     - "~/.config/zsh"
+    - "~/.config/git"
+    - "~/.config/vim"
+    - "~/.config/curl"
+    - "~/.config/wget"
     - "~/.config/karabiner"
     - "~/Library/Application Support/Code/User"
     - "~/Library/Application Support/Cursor/User"
@@ -21,20 +25,20 @@
     ~/.config/starship.toml: starship.toml
 
     # Git
-    ~/.gitconfig: gitconfig
-    ~/.gitignore: gitignore
-    ~/.gitmessage: gitmessage
+    ~/.config/git/config: gitconfig
+    ~/.config/git/ignore: gitignore
+    ~/.config/git/message: gitmessage
 
     # curl & wget
-    ~/.curlrc: curlrc
-    ~/.wgetrc: wgetrc
+    ~/.config/curl/curlrc: curlrc
+    ~/.config/wget/wgetrc: wgetrc
 
     # EditorConfig
     ~/.editorconfig: editorconfig
 
-    # Vim
-    ~/.vimrc: vimrc
-    ~/.vim/colors/base16-default-dark.vim: base16-default-dark.vim
+    # Vim (XDG)
+    ~/.config/vim/vimrc: vimrc
+    ~/.config/vim/colors/base16-default-dark.vim: base16-default-dark.vim
 
     # Karabiner Elements
     ~/.config/karabiner: karabiner

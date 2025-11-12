@@ -2,10 +2,21 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-EXT_FILE="$DOTFILES_DIR/vscode/extensions.txt"
+EXT_FILE="$DOTFILES_DIR/vscode/extensions.json"
 
 if [[ ! -f "$EXT_FILE" ]]; then
-    echo "No extensions.txt found at $EXT_FILE"
+    echo "No extensions.json found at $EXT_FILE"
+    exit 1
+fi
+
+# Check for required tools
+if ! command -v json5 &>/dev/null; then
+    echo "Error: json5 is not installed. Install it with: brew install json5"
+    exit 1
+fi
+
+if ! command -v jq &>/dev/null; then
+    echo "Error: jq is not installed. Install it with: brew install jq"
     exit 1
 fi
 
@@ -15,7 +26,9 @@ install_extensions() {
 
     echo "Installing $app_name extensions..."
     if [[ -x "$bin_path" ]]; then
-        xargs -n1 "$bin_path" --force --install-extension <"$EXT_FILE" 2>&1 | grep -v "Installing extensions..."
+        json5 "$EXT_FILE" | jq -r '.recommendations[]' | while read -r ext; do
+            "$bin_path" --force --install-extension "$ext" 2>&1 | grep -v "Installing extensions..."
+        done
     else
         echo "$app_name application not found. Skipping."
     fi

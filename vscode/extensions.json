@@ -1,0 +1,51 @@
+{
+  "recommendations": [
+    // Core Tools
+    "anthropic.claude-code",
+    "editorconfig.editorconfig",
+    "sleistner.vscode-fileutils",
+    "vscodevim.vim",
+
+    // Language Support & Frameworks
+    "batisteo.vscode-django",
+    "vue.volar",
+
+    // Formatters & Linters
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "monosans.djlint",
+    "mkhl.shfmt",
+
+    // Python Tools
+    "ms-python.black-formatter",
+    "ms-python.debugpy",
+    "ms-python.flake8",
+    "ms-python.isort",
+    "ms-python.python",
+
+    // Markup & Data Formats
+    "bierner.markdown-preview-github-styles",
+    "redhat.vscode-yaml",
+    "tamasfe.even-better-toml",
+    "tomoki1207.pdf",
+
+    // CSS & Styling
+    "bradlc.vscode-tailwindcss",
+
+    // Infrastructure & DevOps
+    "hashicorp.terraform",
+    "benspaulding.procfile",
+    "github.vscode-github-actions",
+
+    // File Types
+    "mikestead.dotenv",
+
+    // Editor Support
+    "xadillax.viml",
+
+    // Utilities
+    "golf1052.base16-generator",
+    "streetsidesoftware.code-spell-checker",
+    "sumneko.lua"
+  ]
+}

@@ -14,37 +14,34 @@ Install the following programs:
 
 ## System Utilities
 [ ] [Alfred](https://www.alfredapp.com/)
-[ ] [Karabiner Elements](https://karabiner-elements.pqrs.org/)
-[ ] [Hammerspoon](https://github.com/Hammerspoon/hammerspoon/releases)
 [ ] [Ejectify](https://app.lemonsqueezy.com/my-orders/)
+[ ] [Hammerspoon](https://github.com/Hammerspoon/hammerspoon/releases)
+[ ] [Karabiner Elements](https://karabiner-elements.pqrs.org/)
+[ ] [Logitech Options+](https://www.logitech.com/en-us/software/logi-options-plus.html)
 
 ## Development Tools
 [ ] [Cursor](https://cursor.com/download)
+[ ] [ChatGPT](https://chatgpt.com/download/)
+[ ] [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 [ ] [iTerm2](https://iterm2.com/downloads.html)
 [ ] [MacVim](https://macvim.org/)
 [ ] [Postico](https://eggerapps.at/postico2/)
-[ ] [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-## AI Tools
-[ ] [ChatGPT](https://chatgpt.com/download/)
+## Communication
+[ ] [Slack](https://slack.com/downloads)
+[ ] [Zoom](https://zoom.us/download)
+[ ] [Teams](https://www.microsoft.com/en-us/microsoft-teams/download-app)
+[ ] [Superhuman](https://superhuman.com/download)
 
-## Cloud Storage
-[ ] [Dropbox](https://www.dropbox.com/install)
-
-## Note-taking & Productivity
+## Productivity
 [ ] [Evernote](https://evernote.com/download)
-
-## Microsoft Office
 [ ] [Word](https://apps.apple.com/us/app/microsoft-word/id462054704?mt=12)
 [ ] [Excel](https://apps.apple.com/us/app/microsoft-excel/id462058435?mt=12)
 [ ] [PowerPoint](https://apps.apple.com/us/app/microsoft-powerpoint/id462062816?mt=12)
 [ ] [Outlook](https://apps.apple.com/us/app/microsoft-outlook/id985367838?mt=12)
 
-## Communication
-[ ] [Slack](https://slack.com/downloads)
-[ ] [Superhuman](https://superhuman.com/download)
-[ ] [Teams](https://www.microsoft.com/en-us/microsoft-teams/download-app)
-[ ] [Zoom](https://zoom.us/download)
+## Cloud Storage
+[ ] [Dropbox](https://www.dropbox.com/install)
 
 ## Media
 [ ] [Spotify](https://www.spotify.com/download)

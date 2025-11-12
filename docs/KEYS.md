@@ -6,7 +6,7 @@ Quick guide for transferring keys from another computer.
 
 ```bash
 cp /path/to/backup/.gitconfig.local ~/
-chmod 644 ~/.gitconfig.local
+chmod 644 ~/.config/git/config.local
 ```
 
 ## SSH Keys
@@ -43,7 +43,7 @@ gpg --edit-key <KEYID>
 trust  # choose 5 = ultimate
 save
 
-# Configure Git (if not in .gitconfig.local)
+# Configure Git (if not in .config/git/config.local)
 git config --global user.signingkey <KEYID>
 git config --global commit.gpgsign true
 ```

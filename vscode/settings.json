@@ -1,13 +1,20 @@
-// https://code.visualstudio.com/api/references/commands
 {
-  /**
-   * Language-specific formatters
-   * https://code.visualstudio.com/docs/getstarted/settings#_default-settings
-   */
+  // ===================================================================
+  // Language-specific formatters
+  // ===================================================================
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[django-html]": {
+    "editor.defaultFormatter": "monosans.djlint"
+  },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
@@ -18,6 +25,9 @@
   },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "sumneko.lua"
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
@@ -37,32 +47,33 @@
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  /**
-   * Editor settings
-   */
+
+  // ===================================================================
+  // Editor settings
+  // ===================================================================
   "editor.fontFamily": "'Hack Nerd Font', Menlo, Monaco, 'Courier New', monospace",
   "editor.inlineSuggest.enabled": true,
   "editor.rulers": [80],
-  /**
-   * Markdown settings
-   */
-  /**
-   * Files & Explorer settings
-   */
+
+  // ===================================================================
+  // Files & Explorer settings
+  // ===================================================================
   "explorer.autoRevealExclude": {
     "**/.venv": true
   },
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
-  /**
-   * Terminal settings
-   */
+
+  // ===================================================================
+  // Terminal settings
+  // ===================================================================
   "terminal.integrated.enableMultiLinePasteWarning": false,
   "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
   "terminal.integrated.showExitAlert": false,
-  /**
-   * Window & Workbench settings
-   */
+
+  // ===================================================================
+  // Window & Workbench settings
+  // ===================================================================
   "window.zoomLevel": 0.75,
   "workbench.colorTheme": "Base16 Default Dark",
   "workbench.colorCustomizations": {
@@ -75,31 +86,43 @@
     }
   },
   "workbench.startupEditor": "none",
-  /**
-   * Python settings
-   * https://code.visualstudio.com/docs/python/settings-reference
-   */
+
+  // ===================================================================
+  // Python settings
+  // ===================================================================
   "python.terminal.activateEnvInCurrentTerminal": true,
-  /**
-   * Spell checker settings
-   * https://github.com/streetsidesoftware/vscode-spell-checker#vs-code-configuration-settings
-   */
-  "cSpell.enabledLanguageIds": [
-    "asciidoc",
-    "git-commit",
-    "html",
-    "jupyter",
-    "latex",
-    "markdown",
-    "plaintext",
-    "restructuredtext",
-    "text"
-  ],
+
+  // ===================================================================
+  // Spell checker settings
+  // ===================================================================
+  "cSpell.enabled": true,
+  "cSpell.checkOnlyEnabledFileTypes": true,
+  "cSpell.enabledFileTypes": {
+    "*": false,
+    "asciidoc": true,
+    "csv": true,
+    "git-commit": true,
+    "html": true,
+    "ini": true,
+    "jupyter": true,
+    "latex": true,
+    "log": true,
+    "markdown": true,
+    "mdx": true,
+    "org": true,
+    "plaintext": true,
+    "properties": true,
+    "restructuredtext": true,
+    "rst": true,
+    "text": true,
+    "toml": true,
+    "yaml": true
+  },
   "cSpell.userWords": ["Abrahams"],
-  /**
-   * Vim settings
-   * https://github.com/VSCodeVim/Vim#%EF%B8%8F-settings
-   */
+
+  // ===================================================================
+  // Vim settings
+  // ===================================================================
   "vim.camelCaseMotion.enable": true,
   "vim.hlsearch": true,
   "vim.leader": ",",

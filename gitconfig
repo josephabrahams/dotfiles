@@ -9,14 +9,14 @@
 
 [core]
     editor = mvim -v
-    excludesfile = ~/.gitignore
+    excludesfile = ~/.config/git/ignore
 
 [color]
     ui = auto
 
 [commit]
     gpgsign = true
-    template = ~/.gitmessage
+    template = ~/.config/git/message:
 
 [credential]
     helper = osxkeychain
@@ -28,4 +28,7 @@
     rebase = false
 
 [include]
-    path = ~/.gitconfig.local
+    path = ~/.config/git/config.local
+
+[init]
+	defaultBranch = main
