@@ -68,7 +68,7 @@ defaults write com.googlecode.iterm2 DisableShutdownConfirmations -bool true
 # Import the Base16 Default Dark Iterm2 color scheme (if not already present)
 if ! defaults read com.googlecode.iterm2 "Custom Color Presets" 2>/dev/null | grep -q "base16-default.dark.256"; then
     echo "Importing Base16 Default Dark color scheme for iTerm2..."
-    open "$DOTFILES_DIR/base16-default.dark.256.itermcolors"
+    open "$DOTFILES_DIR/colors/base16-default.dark.256.itermcolors"
     echo "Set colors in Settings → Profiles → Colors → Color Presets → base16-default.dark.256"
     echo "Silence bell in Settings → Profiles → Terminal → Silence bell"
 fi
@@ -80,7 +80,7 @@ fi
 # Import the Base16 Default Dark Terminal color scheme (if not already present)
 if ! defaults read com.apple.Terminal "Window Settings" 2>/dev/null | grep -q "base16-default.dark.256"; then
     echo "Importing Base16 Default Dark color scheme for Terminal.app..."
-    open "$DOTFILES_DIR/base16-default.dark.256.terminal"
+    open "$DOTFILES_DIR/colors/base16-default.dark.256.terminal"
     echo "Set colors in Settings → Profiles → base16-default-dark.256 → Default"
     echo "Set font in Settings → Profiles → Text → Font → Hack Nerd Font Mono Regular12"
     echo "Silence bell in Settings → Profiles → Advanced → Audible bell"

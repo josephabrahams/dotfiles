@@ -49,5 +49,5 @@ Manually install MacOS apps from the checklist in [docs/APPS.md](docs/APPS.md).
 
 ## Acknowledgements
 
-- Dotfiles based on [Sensible hacker defaults for macOS](https://github.com/mathiasbynens/dotfiles) by Mathias Bynens
-- Color palettes are taken from various [Base16](https://github.com/chriskempson/base16) projects by Chris Kempson
+- Dotfiles based on [sensible macOS defaults](https://github.com/mathiasbynens/dotfiles) by Mathias Bynens.
+- Colors are [Base16](https://github.com/chriskempson/base16) by Chris Kempson.

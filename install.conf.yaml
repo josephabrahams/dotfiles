@@ -38,7 +38,7 @@
 
     # Vim (XDG)
     ~/.config/vim/vimrc: vimrc
-    ~/.config/vim/colors/base16-default-dark.vim: base16-default-dark.vim
+    ~/.config/vim/colors/base16-default-dark.vim: colors/base16-default-dark.vim
 
     # Karabiner Elements
     ~/.config/karabiner: karabiner
