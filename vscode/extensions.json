@@ -24,7 +24,7 @@
     "ms-python.python",
 
     // Markup & Data Formats
-    "bierner.markdown-preview-github-styles",
+    "shd101wyy.markdown-preview-enhanced",
     "redhat.vscode-yaml",
     "tamasfe.even-better-toml",
     "tomoki1207.pdf",

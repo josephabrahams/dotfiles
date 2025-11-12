@@ -121,6 +121,15 @@
   "cSpell.userWords": ["Abrahams"],
 
   // ===================================================================
+  // Markdown Preview settings
+  // ===================================================================
+  "markdown-preview-enhanced.previewTheme": "github-dark.css",
+  "markdown-preview-enhanced.liveUpdate": true,
+  "markdown-preview-enhanced.previewRefreshOnThemeChange": true,
+  "markdown-preview-enhanced.enableScriptExecution": true,
+
+
+  // ===================================================================
   // Vim settings
   // ===================================================================
   "vim.camelCaseMotion.enable": true,
