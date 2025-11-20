@@ -49,6 +49,32 @@
   },
 
   // ===================================================================
+  // File associations
+  // ===================================================================
+  "files.associations": {
+    ".env": "dotenv",
+    ".env.*": "dotenv",
+    "*.html": "html",
+    "**/templates/**/*.html": "django-html"
+  },
+
+  // ===================================================================
+  // Formatter settings
+  // ===================================================================
+  "djlint.formatLanguages": [
+    "django-html",
+    "jinja",
+    "jinja-html",
+    "nj",
+    "njk",
+    "nunjucks",
+    "twig",
+    "handlebars",
+    "hbs",
+    "mustache"
+  ],
+
+  // ===================================================================
   // Editor settings
   // ===================================================================
   "editor.fontFamily": "'Hack Nerd Font', Menlo, Monaco, 'Courier New', monospace",
@@ -127,7 +153,6 @@
   "markdown-preview-enhanced.liveUpdate": true,
   "markdown-preview-enhanced.previewRefreshOnThemeChange": true,
   "markdown-preview-enhanced.enableScriptExecution": true,
-
 
   // ===================================================================
   // Vim settings

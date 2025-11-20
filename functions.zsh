@@ -20,6 +20,12 @@ o() {
 # File & Directory Operations
 # ======================================================================
 
+# Reminder to use rg instead of ag
+ag() {
+    echo "use rg instead"
+    return 1
+}
+
 # Case insensitive search for files by name
 f() {
     if [ -z "$1" ]; then
@@ -85,12 +91,11 @@ targz() {
 
 # Load .env file into shell session for environment variables
 envup() {
-    if [ -s .env ]; then
-        export $(cat .env)
-    else
+    if [ ! -s .env ]; then
         echo 'No .env file found' 1>&2
         return 1
     fi
+    export $(cat .env)
 }
 
 # Start an HTTP server from a directory, optionally specifying the port
@@ -98,8 +103,7 @@ server() {
     local port="${1:-8000}"
     sleep 1 && open "http://localhost:${port}/" &
     # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
-    # And serve everything as UTF-8 (although not technically correct, this doesn't break anything for binary files)
-    python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port"
+    python3 -c "import http.server; h = http.server.SimpleHTTPRequestHandler; h.extensions_map[''] = 'text/plain'; http.server.test(HandlerClass=h, port=$port)"
 }
 
 # ======================================================================
@@ -116,7 +120,7 @@ fi
 # GitHub CLI wrapper
 gh() {
     if [ $# -eq 0 ]; then
-        command gh repo view --web
+        command gh repo view -wb $(git branch --show-current)
     else
         command gh "$@"
     fi

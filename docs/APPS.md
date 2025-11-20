@@ -49,5 +49,5 @@ Install the following programs:
 
 ## Creative & Photography
 - [ ] [Creative Cloud](https://www.adobe.com)
-- [ ] [Photo Mechanic](https://legacy.camerabits.com/)
+- [ ] [Photo Mechanic](https://users.camerabits.com/)
 - [ ] [Negative Lab Pro](https://app.lemonsqueezy.com/my-orders/)

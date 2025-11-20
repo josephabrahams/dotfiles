@@ -41,7 +41,7 @@ brew "prettier"
 brew "shfmt"
 
 # Editors
-brew "macvim"
+cask "macvim"
 
 # Modern CLI Toolkit
 brew "bat"

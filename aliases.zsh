@@ -15,8 +15,8 @@ alias p='cd ~/Projects'
 # ======================================================================
 
 alias ls='eza --icons --group-directories-first --color=always'
-alias l='ls -AF'
-alias ll='ls -alF'
+alias l='ls -A --classify=auto'
+alias ll='ls -al --classify=auto'
 alias lt='ls --tree --level=2'
 alias lss='grc --colour=auto /bin/ls' # Fallback to system ls
 
