@@ -225,5 +225,10 @@
       "before": ["C-j"],
       "commands": ["editor.action.moveLinesDownAction"]
     }
-  ]
+  ],
+
+  // ===================================================================
+  // Claude settings
+  // ===================================================================
+  "claudeCode.preferredLocation": "panel"
 }

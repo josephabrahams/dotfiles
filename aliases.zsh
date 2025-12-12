@@ -4,10 +4,11 @@
 
 alias ..='cd ..'
 alias ...='cd ../..'
-alias j='z'
-alias dots='cd ~/.dotfiles'
+alias b='cd -'
+
 alias d='cd ~/Desktop'
 alias dl='cd ~/Downloads'
+alias dots='cd ~/.dotfiles'
 alias p='cd ~/Projects'
 
 # ======================================================================
@@ -54,7 +55,9 @@ alias gm='git merge'
 alias gr='git rebase'
 alias gri='git rebase -i'
 alias gr2='git rebase -i HEAD~2'
-alias gs='git status'
+alias grs='git restore'
+alias grss='git restore --staged'
+alias gs='git switch'
 alias gt='git tree'
 alias gu='git up'
 alias pull='git pull'
@@ -66,7 +69,7 @@ alias push='git push'
 
 alias fs='foreman start'
 alias fr='foreman run'
-alias fm='foreman run django manage.py'
+alias fm='foreman run python manage.py'
 
 # ======================================================================
 # System & Shell
