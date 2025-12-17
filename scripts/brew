@@ -15,12 +15,4 @@ if ! test -L "$(brew --prefix postgresql@18)"; then
     brew link --force --overwrite postgresql@18
 fi
 
-if ! brew services list | grep "postgresql@18" | grep -q "started"; then
-    brew services start postgresql@18
-fi
-
-if ! brew services list | grep "redis" | grep -q "started"; then
-    brew services start redis
-fi
-
 echo "Done."

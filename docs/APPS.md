@@ -50,4 +50,5 @@ Install the following programs:
 ## Creative & Photography
 - [ ] [Creative Cloud](https://www.adobe.com)
 - [ ] [Photo Mechanic](https://users.camerabits.com/)
+- [ ] [ImageOptim](https://imageoptim.com/mac)
 - [ ] [Negative Lab Pro](https://app.lemonsqueezy.com/my-orders/)

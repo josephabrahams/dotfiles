@@ -78,6 +78,9 @@ eval "$(starship init zsh)"
 # fzf key bindings and completion
 eval "$(fzf --zsh)"
 
+# Only show Makefile targets, not files
+zstyle ':completion:*:make:*' file-patterns ''
+
 # Ensure emacs mode
 bindkey -e
 
