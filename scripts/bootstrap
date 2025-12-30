@@ -4,9 +4,10 @@ set -euo pipefail
 echo "Creating standard directories..."
 mkdir -pv ~/Projects ~/tmp
 
-if [ ! -e ~/.gitconfig.local ]; then
-    echo "Creating .gitconfig.local..."
-    touch ~/.gitconfig.local
+if [ ! -e ~/.config/git/config.local ]; then
+    echo "Creating config.local for git..."
+    mkdir -p ~/.config/git
+    touch ~/.config/git/config.local
 fi
 
 if [ ! -e ~/.hushlogin ]; then

@@ -41,6 +41,9 @@ export LESS="-R"  # Preserve ANSI color codes in less
 # GPG - required for commit signing and terminal passphrase prompts
 export GPG_TTY=$(tty)
 
+# AWS - load config from ~/.aws/config
+export AWS_SDK_LOAD_CONFIG=1
+
 # Colorize common commands
 export GRC_ALIASES=true
 [[ -s "$(brew --prefix)/etc/grc.zsh" ]] && source "$(brew --prefix)/etc/grc.zsh"

@@ -7,7 +7,10 @@ This repo uses [Dotbot](https://github.com/anishathalye/dotbot) to symlink dotfi
 ## Prerequisites
 
 ### Remap Caps Lock key to Control
-Settings → Keyboard → Keyboard Shortcuts… → Modifier Keys → Apple Internal Keyboard
+`Settings` → `Keyboard` → `Keyboard Shortcuts…` → `Modifier Keys` → `Apple Internal Keyboard`
+
+### Enable Ctrl + scroll to zoom
+`Settings` → `Accessibility` → `Zoom` → `Use scroll gesture with modifier keys to zoom`
 
 ### Set up Git, SSH, and GPG
 See [docs/KEYS.md](docs/KEYS.md) for a quick guide on transferring keys from another machine.
@@ -16,7 +19,7 @@ See [docs/KEYS.md](docs/KEYS.md) for a quick guide on transferring keys from ano
 
 ### Download dotfiles
 ```bash
-git clone git@github:josephabrahams/dotfiles ~/.dotfiles
+git clone git@github.com:josephabrahams/dotfiles ~/.dotfiles
 ```
 
 ### Create default folders and local overrides
@@ -44,8 +47,8 @@ scripts/macos
 scripts/vscode
 ```
 
-### Install MacOS apps
-Manually install MacOS apps from the checklist in [docs/APPS.md](docs/APPS.md).
+### Install macOS apps
+Manually install macOS apps from the checklist in [docs/APPS.md](docs/APPS.md).
 
 ## Acknowledgements
 

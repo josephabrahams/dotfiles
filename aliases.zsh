@@ -41,27 +41,39 @@ alias map='xargs -n1' # Map function: find . -name .gitattributes | map dirname
 # Git
 # ======================================================================
 
+# Status & info
 alias g='git status'
+alias glg='git log'
+alias gt='git tree'
+
+# Branching
+alias gb='git branch'
+alias gbd='git branch -D'
+alias gs='git switch'
+alias gsc='git switch -c'
+
+# Staging
 alias ga='git add'
 alias gaa='git add -A'
-alias gb='git branch'
+alias gr='git restore'
+alias grs='git restore --staged'
+
+# Committing
 alias gc='git commit'
+alias gcm='git commit -m'
 alias gca='git commit --amend --no-edit'
 alias gcam='git commit --amend'
-alias gcm='git commit -m'
-alias gf='git fetch'
-alias gl='git log'
-alias gm='git merge'
-alias gr='git rebase'
-alias gri='git rebase -i'
-alias gr2='git rebase -i HEAD~2'
-alias grs='git restore'
-alias grss='git restore --staged'
-alias gs='git switch'
-alias gt='git tree'
-alias gu='git up'
-alias pull='git pull'
-alias push='git push'
+
+# Syncing
+alias gl='git pull'
+alias gp='git push'
+alias gpf='git push --force-with-lease --force-if-includes'
+alias gpu='git push -u origin $(git branch --show-current)'
+
+# Rewriting history
+alias grb='git rebase'
+alias grbi='git rebase -i'
+alias grb2='git rebase -i HEAD~2'
 
 # ======================================================================
 # Development Tools

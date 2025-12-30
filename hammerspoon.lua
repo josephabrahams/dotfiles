@@ -79,6 +79,7 @@ hs.hotkey.bind(hyper, "1", moveToNextScreen)
 ------------------------------------------------------------------------
 
 local function spotify(cmd)
+    if not hs.application.find("Spotify") then return end
     hs.osascript.applescript(string.format([[
     tell application "Spotify"
       %s

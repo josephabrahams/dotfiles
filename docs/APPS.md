@@ -20,35 +20,37 @@ Install the following programs:
 - [ ] [Logitech Options+](https://www.logitech.com/en-us/software/logi-options-plus.html)
 
 ## Development Tools
-- [ ] [Cursor](https://cursor.com/download)
 - [ ] [ChatGPT](https://chatgpt.com/download/)
+- [ ] [Cursor](https://cursor.com/download)
 - [ ] [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [ ] [iTerm2](https://iterm2.com/downloads.html)
 - [ ] [MacVim](https://macvim.org/)
 - [ ] [Postico](https://eggerapps.at/postico2/)
 
 ## Communication
+- [ ] [Loom](https://www.loom.com/download)
 - [ ] [Slack](https://slack.com/downloads)
-- [ ] [Zoom](https://zoom.us/download)
-- [ ] [Teams](https://www.microsoft.com/en-us/microsoft-teams/download-app)
 - [ ] [Superhuman](https://superhuman.com/download)
+- [ ] [Teams](https://www.microsoft.com/en-us/microsoft-teams/download-app)
+- [ ] [Zoom](https://zoom.us/download)
 
 ## Productivity
 - [ ] [Evernote](https://evernote.com/download)
-- [ ] [Word](https://apps.apple.com/us/app/microsoft-word/id462054704?mt=12)
 - [ ] [Excel](https://apps.apple.com/us/app/microsoft-excel/id462058435?mt=12)
-- [ ] [PowerPoint](https://apps.apple.com/us/app/microsoft-powerpoint/id462062816?mt=12)
 - [ ] [Outlook](https://apps.apple.com/us/app/microsoft-outlook/id985367838?mt=12)
+- [ ] [PDF Expert](https://pdfexpert.com/)
+- [ ] [PowerPoint](https://apps.apple.com/us/app/microsoft-powerpoint/id462062816?mt=12)
+- [ ] [Word](https://apps.apple.com/us/app/microsoft-word/id462054704?mt=12)
 
 ## Cloud Storage
 - [ ] [Dropbox](https://www.dropbox.com/install)
 
 ## Media
-- [ ] [Spotify](https://www.spotify.com/download)
 - [ ] [IINA](https://iina.io/download/)
+- [ ] [Spotify](https://www.spotify.com/download)
 
 ## Creative & Photography
 - [ ] [Creative Cloud](https://www.adobe.com)
-- [ ] [Photo Mechanic](https://users.camerabits.com/)
 - [ ] [ImageOptim](https://imageoptim.com/mac)
 - [ ] [Negative Lab Pro](https://app.lemonsqueezy.com/my-orders/)
+- [ ] [Photo Mechanic](https://users.camerabits.com/)
