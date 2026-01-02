@@ -45,6 +45,8 @@ alias map='xargs -n1' # Map function: find . -name .gitattributes | map dirname
 alias g='git status'
 alias glg='git log'
 alias gt='git tree'
+alias gd='git diff'
+alias gds='git diff --staged'
 
 # Branching
 alias gb='git branch'
