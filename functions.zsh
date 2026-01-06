@@ -186,6 +186,29 @@ gh() {
     fi
 }
 
+# Open CI page (GitHub Actions or CircleCI)
+ci() {
+    local remote_url repo_path
+
+    remote_url=$(git remote get-url origin 2>/dev/null)
+    if [[ -z "$remote_url" ]]; then
+        echo "Not a git repository or no origin remote" >&2
+        return 1
+    fi
+
+    # Extract owner/repo from remote URL
+    repo_path=$(echo "$remote_url" | sed -E 's#(git@|https://)([^:/]+)[:/]##' | sed 's/\.git$//')
+
+    if [[ -d ".circleci" ]]; then
+        open "https://app.circleci.com/pipelines/github/${repo_path}"
+    elif [[ -d ".github/workflows" ]]; then
+        open "https://github.com/${repo_path}/actions"
+    else
+        echo "No CI configuration found (.github/workflows or .circleci)" >&2
+        return 1
+    fi
+}
+
 # Start an HTTP server from a directory, optionally specifying the port
 server() {
     local port="${1:-8000}"
