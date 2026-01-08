@@ -103,8 +103,6 @@ alias ip='curl checkip.amazonaws.com'
 alias localip='ipconfig getifaddr en0'
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias jcurl='curl -H "Content-Type: application/json"'
-alias digga='dig +short'
-alias ptr='dig ptr +short'
 
 # ======================================================================
 # Data & Text Processing

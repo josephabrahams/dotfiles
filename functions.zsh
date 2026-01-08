@@ -209,6 +209,30 @@ ci() {
     fi
 }
 
+# DNS lookup
+digga() {
+    if [ $# -gt 0 ]; then
+        dig +short "$@"
+    elif [ ! -t 0 ]; then
+        xargs -n1 dig +short
+    else
+        echo "usage: digga <domain>..." >&2
+        return 1
+    fi
+}
+
+# Reverse DNS lookup
+ptr() {
+    if [ $# -gt 0 ]; then
+        dig ptr +short "$@"
+    elif [ ! -t 0 ]; then
+        xargs -n1 dig ptr +short
+    else
+        echo "usage: ptr <ip>..." >&2
+        return 1
+    fi
+}
+
 # Start an HTTP server from a directory, optionally specifying the port
 server() {
     local port="${1:-8000}"
