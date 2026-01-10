@@ -93,7 +93,7 @@ targz() {
         "${tar_cmd[@]}" || return 1
     fi
 
-    size=$(stat -f"%z" "${tmpFile}")
+    size=$(wc -c < "${tmpFile}" | tr -d ' ')
 
     local cmd=""
     if ((size < 52428800)) && hash zopfli 2>/dev/null; then
@@ -116,7 +116,7 @@ targz() {
     fi
     [ -f "${tmpFile}" ] && rm "${tmpFile}"
 
-    zippedSize=$(stat -f"%z" "${tmpFile}.gz")
+    zippedSize=$(wc -c < "${tmpFile}.gz" | tr -d ' ')
 
     local ratio=$((100 - (zippedSize * 100 / size)))
     echo "${tmpFile}.gz created successfully ($((zippedSize / 1000)) kB, ${ratio}% reduction)"
