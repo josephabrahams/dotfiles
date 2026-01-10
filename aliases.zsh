@@ -64,7 +64,8 @@ alias grs='git restore --staged'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit --amend --no-edit'
-alias gcam='git commit --amend'
+alias gcac='git commit --amend'
+alias gcam='git commit --amend -m'
 
 # Syncing
 alias gl='git pull'
