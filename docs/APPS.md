@@ -18,6 +18,7 @@ Install the following programs:
 - [ ] [Hammerspoon](https://github.com/Hammerspoon/hammerspoon/releases)
 - [ ] [Karabiner Elements](https://karabiner-elements.pqrs.org/)
 - [ ] [Logitech Options+](https://www.logitech.com/en-us/software/logi-options-plus.html)
+- [ ] [Viscosity](https://www.sparklabs.com/viscosity/download/)
 
 ## Development Tools
 - [ ] [ChatGPT](https://chatgpt.com/download/)

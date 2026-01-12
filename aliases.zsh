@@ -9,6 +9,7 @@ alias b='cd -'
 alias d='cd ~/Desktop'
 alias dl='cd ~/Downloads'
 alias dots='cd ~/.dotfiles'
+alias dr='cd ~/Dropbox'
 alias p='cd ~/Projects'
 
 # ======================================================================

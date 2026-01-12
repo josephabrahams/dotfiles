@@ -1,5 +1,55 @@
 {
   // ===================================================================
+  // Editor settings
+  // ===================================================================
+  "editor.fontFamily": "'Hack Nerd Font', Menlo, Monaco, 'Courier New', monospace",
+  "editor.inlineSuggest.enabled": true,
+  "editor.rulers": [80],
+
+  // ===================================================================
+  // Files & Explorer settings
+  // ===================================================================
+  "explorer.autoRevealExclude": {
+    "**/.venv": true
+  },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.associations": {
+    ".env": "dotenv",
+    ".env.*": "dotenv",
+    "*.html": "html",
+    "*.svg": "svg",
+    "**/templates/**/*.html": "django-html"
+  },
+
+  // ===================================================================
+  // Terminal settings
+  // ===================================================================
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
+  "terminal.integrated.showExitAlert": false,
+
+  // ===================================================================
+  // Window & Workbench settings
+  // ===================================================================
+  "window.zoomLevel": 0.75,
+  "workbench.colorTheme": "Base16 Default Dark",
+  "workbench.colorCustomizations": {
+    "[Base16 Default Dark]": {
+      "tab.activeBackground": "#0f0f0f",
+      "tab.inactiveBackground": "#181818",
+      "editorGroupHeader.tabsBackground": "#181818",
+      "breadcrumb.background": "#181818",
+      "sideBar.background": "#181818"
+    }
+  },
+  "workbench.editor.enablePreview": false,
+  "workbench.editorAssociations": {
+    "*.svg": "default"
+  },
+  "workbench.startupEditor": "none",
+
+  // ===================================================================
   // Language-specific formatters
   // ===================================================================
   "[css]": {
@@ -23,17 +73,20 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[lua]": {
     "editor.defaultFormatter": "sumneko.lua"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt"
+  },
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -44,82 +97,20 @@
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
   // ===================================================================
-  // File associations
+  // Extension: Claude
   // ===================================================================
-  "files.associations": {
-    ".env": "dotenv",
-    ".env.*": "dotenv",
-    "*.html": "html",
-    "**/templates/**/*.html": "django-html"
-  },
+  "claudeCode.preferredLocation": "panel",
 
   // ===================================================================
-  // Formatter settings
-  // ===================================================================
-  "djlint.formatLanguages": [
-    "django-html",
-    "jinja",
-    "jinja-html",
-    "nj",
-    "njk",
-    "nunjucks",
-    "twig",
-    "handlebars",
-    "hbs",
-    "mustache"
-  ],
-
-  // ===================================================================
-  // Editor settings
-  // ===================================================================
-  "editor.fontFamily": "'Hack Nerd Font', Menlo, Monaco, 'Courier New', monospace",
-  "editor.inlineSuggest.enabled": true,
-  "editor.rulers": [80],
-
-  // ===================================================================
-  // Files & Explorer settings
-  // ===================================================================
-  "explorer.autoRevealExclude": {
-    "**/.venv": true
-  },
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
-
-  // ===================================================================
-  // Terminal settings
-  // ===================================================================
-  "terminal.integrated.enableMultiLinePasteWarning": false,
-  "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
-  "terminal.integrated.showExitAlert": false,
-
-  // ===================================================================
-  // Window & Workbench settings
-  // ===================================================================
-  "window.zoomLevel": 0.75,
-  "workbench.colorTheme": "Base16 Default Dark",
-  "workbench.colorCustomizations": {
-    "[Base16 Default Dark]": {
-      "tab.activeBackground": "#0f0f0f",
-      "tab.inactiveBackground": "#181818",
-      "editorGroupHeader.tabsBackground": "#181818",
-      "breadcrumb.background": "#181818",
-      "sideBar.background": "#181818"
-    }
-  },
-  "workbench.startupEditor": "none",
-
-  // ===================================================================
-  // Python settings
-  // ===================================================================
-  "python.terminal.activateEnvInCurrentTerminal": true,
-
-  // ===================================================================
-  // Spell checker settings
+  // Extension: cSpell
   // ===================================================================
   "cSpell.enabled": true,
   "cSpell.checkOnlyEnabledFileTypes": true,
@@ -147,7 +138,23 @@
   "cSpell.userWords": ["Abrahams"],
 
   // ===================================================================
-  // Markdown Preview settings
+  // Extension: djlint
+  // ===================================================================
+  "djlint.formatLanguages": [
+    "django-html",
+    "jinja",
+    "jinja-html",
+    "nj",
+    "njk",
+    "nunjucks",
+    "twig",
+    "handlebars",
+    "hbs",
+    "mustache"
+  ],
+
+  // ===================================================================
+  // Extension: Markdown Preview Enhanced
   // ===================================================================
   "markdown-preview-enhanced.previewTheme": "github-dark.css",
   "markdown-preview-enhanced.liveUpdate": true,
@@ -155,7 +162,17 @@
   "markdown-preview-enhanced.enableScriptExecution": true,
 
   // ===================================================================
-  // Vim settings
+  // Extension: Python
+  // ===================================================================
+  "python.terminal.activateEnvInCurrentTerminal": true,
+
+  // ===================================================================
+  // Extension: RedHat XML
+  // ===================================================================
+  "xml.validation.noGrammar": "ignore",
+
+  // ===================================================================
+  // Extension: Vim
   // ===================================================================
   "vim.camelCaseMotion.enable": true,
   "vim.hlsearch": true,
@@ -226,9 +243,5 @@
       "commands": ["editor.action.moveLinesDownAction"]
     }
   ],
-
-  // ===================================================================
-  // Claude settings
-  // ===================================================================
-  "claudeCode.preferredLocation": "panel"
+  "svg.preview.mode": "img"
 }

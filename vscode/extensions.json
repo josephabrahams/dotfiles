@@ -13,8 +13,9 @@
     // Formatters & Linters
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "monosans.djlint",
     "mkhl.shfmt",
+    "monosans.djlint",
+    "redhat.vscode-xml",
 
     // Python Tools
     "ms-python.black-formatter",
@@ -25,7 +26,6 @@
 
     // Markup & Data Formats
     "shd101wyy.markdown-preview-enhanced",
-    "redhat.vscode-yaml",
     "tamasfe.even-better-toml",
     "tomoki1207.pdf",
 
@@ -38,6 +38,7 @@
     "github.vscode-github-actions",
 
     // File Types
+    "jock.svg",
     "mikestead.dotenv",
 
     // Editor Support

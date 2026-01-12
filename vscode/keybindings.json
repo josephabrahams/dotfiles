@@ -176,11 +176,11 @@
     "command": "eslint.executeAutofix",
     "when": "editorTextFocus && !editorReadonly"
   },
-
-  // ===================================================================
-  // Miscellaneous
-  // ===================================================================
-
+  {
+    "key": "cmd+shift+v",
+    "command": "svg.showSvg",
+    "when": "resourceExtname == .svg"
+  },
   {
     "key": "cmd+i",
     "command": "composerMode.agent"
