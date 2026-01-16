@@ -9,7 +9,7 @@ set runtimepath^=~/.config/vim
 
 " Use XDG state directory for viminfo
 if !has('nvim')
-  set viminfofile=$HOME/.local/state/vim/viminfo
+    set viminfofile=$HOME/.local/state/vim/viminfo
 endif
 
 
@@ -104,15 +104,22 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 vnoremap <C-j> :m '>+1<CR>gv=gv
 
 " Save with sudo
-cnoremap w!! %!sudo tee > /dev/null %
+function! SudoWrite()
+    write !sudo tee > /dev/null %
+    edit!
+endfunction
+cnoreabbrev w!! call SudoWrite()
+
+" Reload .vimrc
+noremap <silent> <leader>V :source ~/.config/vim/vimrc<CR>:filetype detect<CR>:echo 'vimrc reloaded'<CR><CR>
 
 " Strip trailing whitespace
 function! StripWhitespace()
-	let save_cursor = getpos(".")
-	let old_query = getreg('/')
-	:%s/\s\+$//e
-	call setpos('.', save_cursor)
-	call setreg('/', old_query)
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    :%s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
 endfunction
 noremap <leader><space> :call StripWhitespace()<CR>
 

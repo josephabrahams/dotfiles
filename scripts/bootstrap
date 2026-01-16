@@ -4,6 +4,12 @@ set -euo pipefail
 echo "Creating standard directories..."
 mkdir -pv ~/Projects ~/tmp
 
+if [ ! -e ~/.config/zsh/.zshrc.local ]; then
+    echo "Creating .zshrc.local for zsh..."
+    mkdir -p ~/.config/zsh
+    touch ~/.config/zsh/.zshrc.local
+fi
+
 if [ ! -e ~/.config/git/config.local ]; then
     echo "Creating config.local for git..."
     mkdir -p ~/.config/git
