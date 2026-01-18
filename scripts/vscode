@@ -27,7 +27,7 @@ install_extensions() {
     echo "Installing $app_name extensions..."
     if [[ -x "$bin_path" ]]; then
         json5 "$EXT_FILE" | jq -r '.recommendations[]' | while read -r ext; do
-            "$bin_path" --force --install-extension "$ext" 2>&1 | grep -v "Installing extensions..."
+            "$bin_path" --install-extension "$ext" 2>&1 | sed -e "/Installing extensions.../d" -e "s/ Use '--force'.*//"
         done
     else
         echo "$app_name application not found. Skipping."
@@ -38,3 +38,7 @@ install_extensions "VS Code" "/Applications/Visual Studio Code.app/Contents/Reso
 install_extensions "Cursor" "/Applications/Cursor.app/Contents/Resources/app/bin/code"
 
 echo "Done."
+echo ""
+echo "NOTE: Prettier extension requires manually installing v11.0.2 in Cursor."
+echo "      Latest versions fail with 'cannot format [filetype]-files' error."
+echo "      Fix: Extensions > Prettier > Install Another Version > 11.0.2"

@@ -8,6 +8,8 @@
 
     // Language Support & Frameworks
     "batisteo.vscode-django",
+    "bradlc.vscode-tailwindcss",
+    "sumneko.lua",
     "vue.volar",
 
     // Formatters & Linters
@@ -18,10 +20,8 @@
     "redhat.vscode-xml",
 
     // Python Tools
-    "ms-python.black-formatter",
+    "charliermarsh.ruff",
     "ms-python.debugpy",
-    "ms-python.flake8",
-    "ms-python.isort",
     "ms-python.python",
 
     // Markup & Data Formats
@@ -29,24 +29,17 @@
     "tamasfe.even-better-toml",
     "tomoki1207.pdf",
 
-    // CSS & Styling
-    "bradlc.vscode-tailwindcss",
-
     // Infrastructure & DevOps
-    "hashicorp.terraform",
     "benspaulding.procfile",
     "github.vscode-github-actions",
 
     // File Types
     "jock.svg",
     "mikestead.dotenv",
-
-    // Editor Support
     "xadillax.viml",
 
-    // Utilities
+    // Theme & Utilities
     "golf1052.base16-generator",
-    "streetsidesoftware.code-spell-checker",
-    "sumneko.lua"
+    "streetsidesoftware.code-spell-checker"
   ]
 }

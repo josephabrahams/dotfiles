@@ -33,15 +33,11 @@ brew "foreman"
 brew "cmake"
 
 # Formatting & Linting
-brew "black"
 brew "djlint"
-brew "flake8"
-brew "isort"
-brew "prettier"
 brew "shfmt"
 
 # Editors
-cask "macvim"
+cask "macvim-app"
 
 # Modern CLI Toolkit
 brew "bat"
