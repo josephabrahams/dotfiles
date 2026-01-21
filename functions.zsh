@@ -11,6 +11,7 @@ j() {
         z "$@"
     fi
 }
+compdef _zoxide j
 
 # Create a new directory and enter it
 mcd() {
@@ -185,6 +186,7 @@ gh() {
         command gh "$@"
     fi
 }
+compdef _gh gh
 
 # Open CI page (GitHub Actions or CircleCI)
 ci() {

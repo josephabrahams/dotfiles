@@ -79,6 +79,18 @@ alias grb='git rebase'
 alias grbi='git rebase -i'
 alias grb2='git rebase -i HEAD~2'
 
+# Completions
+compdef _git glg=git-log gt=git-log
+compdef _git gd=git-diff gds=git-diff
+compdef _git gb=git-branch gbd=git-branch
+compdef _git gs=git-switch gsc=git-switch
+compdef _git ga=git-add gaa=git-add
+compdef _git gr=git-restore grs=git-restore
+compdef _git gc=git-commit gcm=git-commit gca=git-commit gcac=git-commit gcam=git-commit
+compdef _git gl=git-pull
+compdef _git gp=git-push gpf=git-push gpu=git-push
+compdef _git grb=git-rebase grbi=git-rebase grb2=git-rebase
+
 # ======================================================================
 # Development Tools
 # ======================================================================

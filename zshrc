@@ -64,6 +64,22 @@ if [[ ! -f $ZDOTDIR/plugins.zsh ]] || [[ $ZDOTDIR/plugins.txt -nt $ZDOTDIR/plugi
 fi
 
 # ======================================================================
+# Completions
+# ======================================================================
+
+fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select                    # Arrow key navigation
+zstyle ':completion:*' list-prompt ''                 # No pager prompt
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'   # Case-insensitive matches
+zstyle ':completion:*' list-colors 'di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*:make:*' tag-order targets       # Only show Makefile targets
+LISTMAX=0                                             # Never ask "show all N?"
+zmodload zsh/complist
+bindkey -M menuselect '^[[Z' reverse-menu-complete    # Shift+Tab to go back
+
+# ======================================================================
 # Load Config Files
 # ======================================================================
 
@@ -80,9 +96,6 @@ eval "$(starship init zsh)"
 
 # fzf key bindings and completion
 eval "$(fzf --zsh)"
-
-# Only show Makefile targets, not files
-zstyle ':completion:*:make:*' file-patterns ''
 
 # Ensure emacs mode
 bindkey -e
