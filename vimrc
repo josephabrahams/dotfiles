@@ -113,6 +113,9 @@ cnoreabbrev w!! call SudoWrite()
 " Reload .vimrc
 noremap <silent> <leader>V :source ~/.config/vim/vimrc<CR>:filetype detect<CR>:echo 'vimrc reloaded'<CR><CR>
 
+" Quick macro replay (also disables Ex mode)
+noremap Q @q
+
 " Strip trailing whitespace
 function! StripWhitespace()
     let save_cursor = getpos(".")

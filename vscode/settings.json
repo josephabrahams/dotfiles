@@ -123,7 +123,6 @@
     "ini": true,
     "jupyter": true,
     "latex": true,
-    "log": true,
     "markdown": true,
     "mdx": true,
     "org": true,
@@ -135,6 +134,12 @@
     "toml": true,
     "yaml": true
   },
+  "cSpell.ignorePaths": [
+    "**/.venv/**",
+    "**/node_modules/**",
+    "**/pnpm-lock.yaml",
+    "**/_redirects"
+  ],
   "cSpell.userWords": ["Abrahams"],
 
   // ===================================================================
