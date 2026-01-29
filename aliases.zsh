@@ -98,6 +98,7 @@ compdef _git grb=git-rebase grbi=git-rebase grb2=git-rebase
 alias fs='foreman start'
 alias fr='foreman run'
 alias fm='foreman run python manage.py'
+alias nvm='fnm'
 
 # ======================================================================
 # System & Shell
@@ -105,6 +106,7 @@ alias fm='foreman run python manage.py'
 
 alias sudo='sudo ' # Enable aliases to be sudo'ed
 alias reload="exec ${SHELL} -l"
+alias reload!="rm -rf ~/.config/zsh/completions && reload"
 alias path='echo -e ${PATH//:/\\n}'
 alias top='htop'
 alias week='date +%V'

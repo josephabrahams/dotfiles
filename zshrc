@@ -18,12 +18,10 @@ setopt HIST_FIND_NO_DUPS         # Don't show duplicates when searching
 setopt INC_APPEND_HISTORY        # Write to history immediately (don't wait for shell exit)
 
 # Node config
-export NVM_DIR="$HOME/.nvm"
-[ -s "$(brew --prefix nvm)/nvm.sh" ] && \. "$(brew --prefix nvm)/nvm.sh"
-[ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
 export NODE_REPL_HISTORY=~/.node_history;
 export NODE_REPL_HISTORY_SIZE=10000;
 export NODE_REPL_MODE="sloppy";
+eval "$(fnm env --use-on-cd)"
 
 # Python config
 export PIP_REQUIRE_VIRTUALENV=1
@@ -62,6 +60,7 @@ if [[ ! -f $ZDOTDIR/plugins.zsh ]] || [[ $ZDOTDIR/plugins.txt -nt $ZDOTDIR/plugi
     echo "Building Antidote bundle..."
     antidote bundle < $ZDOTDIR/plugins.txt >| $ZDOTDIR/plugins.zsh
 fi
+source $ZDOTDIR/plugins.zsh
 
 # ======================================================================
 # Completions
@@ -78,12 +77,24 @@ zstyle ':completion:*:make:*' tag-order targets       # Only show Makefile targe
 LISTMAX=0                                             # Never ask "show all N?"
 zmodload zsh/complist
 bindkey -M menuselect '^[[Z' reverse-menu-complete    # Shift+Tab to go back
+# Cached completions (regenerate with: reload!)
+COMP_DIR=~/.config/zsh/completions
+[[ -d $COMP_DIR ]] || mkdir -p $COMP_DIR
+[[ -f $COMP_DIR/_npm ]] && source $COMP_DIR/_npm || { npm completion > $COMP_DIR/_npm && source $COMP_DIR/_npm }
+[[ -f $COMP_DIR/_fly ]] && source $COMP_DIR/_fly || { fly completion zsh > $COMP_DIR/_fly 2>/dev/null && source $COMP_DIR/_fly }
+[[ -f $COMP_DIR/_uv ]]  && source $COMP_DIR/_uv  || { uv generate-shell-completion zsh > $COMP_DIR/_uv 2>/dev/null && source $COMP_DIR/_uv }
+# Docker completions (symlink to Homebrew site-functions if needed)
+if [[ ! -L $(brew --prefix)/share/zsh/site-functions/_docker ]] && [[ -d /Applications/Docker.app ]]; then
+    ln -sf /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion $(brew --prefix)/share/zsh/site-functions/_docker
+    ln -sf /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion $(brew --prefix)/share/zsh/site-functions/_docker-compose
+fi
 
 # ======================================================================
 # Load Config Files
 # ======================================================================
 
 for file in $ZDOTDIR/*.zsh; do
+    [[ $file == */plugins.zsh ]] && continue
     source "$file"
 done
 

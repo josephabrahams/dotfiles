@@ -6,7 +6,7 @@ brew "dotbot"
 brew "starship"
 
 # Programming Language Managers
-brew "nvm"
+brew "fnm"
 brew "pipenv"
 brew "uv"
 
