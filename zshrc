@@ -2,6 +2,9 @@
 # Environment Setup
 # ======================================================================
 
+# Custom scripts
+export PATH="$HOME/bin:$PATH"
+
 # Add Homebrew to path
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_NO_ENV_HINTS=1

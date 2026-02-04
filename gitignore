@@ -31,3 +31,6 @@ Temporary Items
 
 # Claude
 **/.claude/settings.local.json
+
+# Worktree feature notes
+FEATURE.md

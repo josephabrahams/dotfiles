@@ -90,6 +90,8 @@ compdef _git gc=git-commit gcm=git-commit gca=git-commit gcac=git-commit gcam=gi
 compdef _git gl=git-pull
 compdef _git gp=git-push gpf=git-push gpu=git-push
 compdef _git grb=git-rebase grbi=git-rebase grb2=git-rebase
+_wt() { compadd $(git branch --format='%(refname:short)' 2>/dev/null) }
+compdef _wt wt
 
 # ======================================================================
 # Development Tools

@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ======================================================================
+# Git Worktree Creator
+#
+# Usage: wt <branch-name>
+# Creates a worktree from current HEAD. Run from main repo.
+# ======================================================================
+
+if [[ $# -lt 1 ]]; then
+    echo "Usage: wt <branch-name>"
+    exit 1
+fi
+
+BRANCH_NAME="$1"
+
+# Must be in a git repo
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+    echo "❌ Error: Not inside a git repository"
+    exit 1
+fi
+
+# Must be in the main repo, not a worktree
+GIT_DIR="$(git rev-parse --git-dir)"
+if [[ "$GIT_DIR" != ".git" ]]; then
+    echo "❌ Error: Must run from the main repo, not a worktree"
+    exit 1
+fi
+
+REPO_PATH="$(git rev-parse --show-toplevel)"
+
+REPO_NAME="$(basename "$REPO_PATH")"
+FEATURE_NAME="$(basename "$BRANCH_NAME")"
+WORKTREE_DIR="$(dirname "$REPO_PATH")/${REPO_NAME}--${FEATURE_NAME}"
+
+echo "▶ Main repo:   ${REPO_PATH/#$HOME/~}"
+echo "▶ Branch:      $BRANCH_NAME"
+echo "▶ Worktree:    ${WORKTREE_DIR/#$HOME/~}"
+echo
+
+# Create branch if needed (based on current HEAD)
+if ! git -C "$REPO_PATH" show-ref --quiet "refs/heads/$BRANCH_NAME"; then
+    echo "➕ Creating branch $BRANCH_NAME"
+    git -C "$REPO_PATH" branch "$BRANCH_NAME"
+else
+    echo "✔ Branch already exists"
+fi
+
+# Prune stale worktrees (directory deleted but git still tracks it)
+git -C "$REPO_PATH" worktree prune
+
+# Check if branch is already used by another worktree
+EXISTING_WORKTREE=""
+while IFS= read -r line; do
+    if [[ "$line" == worktree\ * ]]; then
+        CURRENT_WT="${line#worktree }"
+    elif [[ "$line" == "branch refs/heads/$BRANCH_NAME" ]]; then
+        EXISTING_WORKTREE="$CURRENT_WT"
+        break
+    fi
+done < <(git -C "$REPO_PATH" worktree list --porcelain)
+
+if [[ -n "$EXISTING_WORKTREE" && "$EXISTING_WORKTREE" != "$WORKTREE_DIR" ]]; then
+    echo "❌ Branch '$BRANCH_NAME' already has a worktree at:"
+    echo "   ${EXISTING_WORKTREE/#$HOME/~}"
+    echo
+    echo "   To remove it: cd ${EXISTING_WORKTREE/#$HOME/~} && wt-rm"
+    exit 1
+fi
+
+# Create worktree
+if [[ -d "$WORKTREE_DIR" ]]; then
+    echo "✔ Worktree already exists"
+else
+    echo "➕ Creating worktree"
+    git -C "$REPO_PATH" worktree add "$WORKTREE_DIR" "$BRANCH_NAME"
+fi
+
+# Add FEATURE.md guardrail
+FEATURE_MD="$WORKTREE_DIR/FEATURE.md"
+if [[ ! -f "$FEATURE_MD" ]]; then
+    cat <<EOF >"$FEATURE_MD"
+Feature: ${FEATURE_NAME}
+
+Scope:
+- Describe feature intent here
+- Be explicit about boundaries
+- Note shared files if any
+EOF
+    echo "➕ Added FEATURE.md"
+fi
+
+echo
+echo "✅ Worktree ready: ${WORKTREE_DIR/#$HOME/~}"
+
+# Open editor if running inside one
+if [[ -n "${CURSOR_CLI:-}" ]]; then
+    echo "🚀 Opening new Cursor window"
+    cursor "$WORKTREE_DIR" >/dev/null 2>&1 &
+elif [[ "${TERM_PROGRAM:-}" == "vscode" ]]; then
+    echo "🚀 Opening new VS Code window"
+    code "$WORKTREE_DIR" >/dev/null 2>&1 &
+fi

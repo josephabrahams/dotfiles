@@ -12,8 +12,10 @@
   "explorer.autoRevealExclude": {
     "**/.venv": true
   },
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
+  // Confirm before deleting files
+  "explorer.confirmDelete": true,
+  // Confirm before dragging files between folders (easy to mess up with multiple worktrees)
+  "explorer.confirmDragAndDrop": true,
   "files.associations": {
     ".env": "dotenv",
     ".env.*": "dotenv",
@@ -32,6 +34,10 @@
   // ===================================================================
   // Window & Workbench settings
   // ===================================================================
+  // Worktree-friendly window behavior
+  "window.openFilesInNewWindow": "on",
+  "window.restoreWindows": "none",
+  "window.title": "${rootName}",
   "window.zoomLevel": 0.75,
   "workbench.colorTheme": "Base16 Default Dark",
   "workbench.colorCustomizations": {
@@ -129,7 +135,6 @@
     "plaintext": true,
     "properties": true,
     "restructuredtext": true,
-    "rst": true,
     "text": true,
     "toml": true,
     "yaml": true
@@ -160,8 +165,15 @@
   ],
 
   // ===================================================================
-  // Extension: Git
+  // Extension: Git (read-only - all actions done via CLI)
   // ===================================================================
+  "git.autoFetch": false,
+  "git.autostash": false,
+  "git.enableSmartCommit": false,
+  "git.postCommitCommand": "none",
+  "git.allowForcePush": false,
+  "git.allowNoVerifyCommit": false,
+  "git.branchProtection": ["main", "master"],
   "git.openRepositoryInParentFolders": "never",
 
   // ===================================================================
@@ -255,7 +267,7 @@
       "commands": ["editor.action.moveLinesUpAction"]
     },
     {
-      "before": ["C-j"],
+      "before": ["<C-j>"],
       "commands": ["editor.action.moveLinesDownAction"]
     }
   ]

@@ -94,7 +94,7 @@ targz() {
         "${tar_cmd[@]}" || return 1
     fi
 
-    size=$(wc -c < "${tmpFile}" | tr -d ' ')
+    size=$(wc -c <"${tmpFile}" | tr -d ' ')
 
     local cmd=""
     if ((size < 52428800)) && hash zopfli 2>/dev/null; then
@@ -117,7 +117,7 @@ targz() {
     fi
     [ -f "${tmpFile}" ] && rm "${tmpFile}"
 
-    zippedSize=$(wc -c < "${tmpFile}.gz" | tr -d ' ')
+    zippedSize=$(wc -c <"${tmpFile}.gz" | tr -d ' ')
 
     local ratio=$((100 - (zippedSize * 100 / size)))
     echo "${tmpFile}.gz created successfully ($((zippedSize / 1000)) kB, ${ratio}% reduction)"
@@ -138,10 +138,32 @@ diff() {
 
 # Open current directory in Cursor
 c() {
-    if [ $# -eq 0 ]; then
-        command cursor .
+    local editor reuse_flag=""
+
+    # Already inside an editor? Force reuse in that editor
+    if [[ -n "${CURSOR_CLI:-}" ]]; then
+        editor="cursor"
+        reuse_flag="-r"
+    elif [[ "$TERM_PROGRAM" == "vscode" ]]; then
+        editor="code"
+        reuse_flag="-r"
     else
-        command cursor "$@"
+        # Not inside any editor, pick based on availability
+        if command -v cursor >/dev/null 2>&1; then
+            editor="cursor"
+        elif command -v code >/dev/null 2>&1; then
+            editor="code"
+        else
+            echo "c: neither cursor nor vscode is installed" >&2
+            return 127
+        fi
+    fi
+
+    # Open files or project
+    if [ "$#" -eq 0 ]; then
+        command "$editor" .
+    else
+        command "$editor" $reuse_flag "$@"
     fi
 }
 
