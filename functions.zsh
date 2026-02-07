@@ -198,10 +198,17 @@ gh() {
             if ! _gh_check_error "$err"; then
                 return 1
             fi
-            # No PR, try repo view
-            if ! err=$(command gh repo view -wb "$branch" 2>&1); then
-                _gh_check_error "$err"
-                return $?
+            # No PR — open branch on GitHub if it exists on remote, otherwise open repo
+            if git ls-remote --heads origin "$branch" | grep -q .; then
+                if ! err=$(command gh repo view -wb "$branch" 2>&1); then
+                    _gh_check_error "$err"
+                    return $?
+                fi
+            else
+                if ! err=$(command gh repo view -w 2>&1); then
+                    _gh_check_error "$err"
+                    return $?
+                fi
             fi
         fi
     else
