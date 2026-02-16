@@ -32,6 +32,9 @@ brew "foreman"
 # Build Tools
 brew "cmake"
 
+# Media Tools
+brew "imagemagick"
+
 # Formatting & Linting
 brew "djlint"
 brew "shfmt"

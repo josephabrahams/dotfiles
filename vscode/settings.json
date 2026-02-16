@@ -28,6 +28,9 @@
   // Terminal settings
   // ===================================================================
   "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.env.osx": {
+    "GIT_ASKPASS": ""
+  },
   "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
   "terminal.integrated.showExitAlert": false,
 
@@ -167,14 +170,16 @@
   // ===================================================================
   // Extension: Git (read-only - all actions done via CLI)
   // ===================================================================
-  "git.autoFetch": false,
-  "git.autostash": false,
-  "git.enableSmartCommit": false,
-  "git.postCommitCommand": "none",
   "git.allowForcePush": false,
   "git.allowNoVerifyCommit": false,
+  "git.autoFetch": false,
+  "git.autostash": false,
   "git.branchProtection": ["main", "master"],
+  "git.enableSmartCommit": false,
   "git.openRepositoryInParentFolders": "never",
+  "git.postCommitCommand": "none",
+  "git.terminalAuthentication": false,
+  "github.gitAuthentication": false,
 
   // ===================================================================
   // Extension: Markdown Preview Enhanced

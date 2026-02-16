@@ -27,6 +27,7 @@ Install the following programs:
 - [ ] [iTerm2](https://iterm2.com/downloads.html)
 - [ ] [MacVim](https://macvim.org/)
 - [ ] [Postico](https://eggerapps.at/postico2/)
+- [ ] [Postman](https://www.postman.com/downloads/)
 
 ## Communication
 - [ ] [Loom](https://www.loom.com/download)
