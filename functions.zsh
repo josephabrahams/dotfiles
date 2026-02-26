@@ -43,7 +43,7 @@ ag() {
     local content names
 
     content="$(rg -S --hidden --glob '!.git/**' --heading -n --color=always "$pattern" "${paths[@]}")"
-    names="$(fd -Hs "$pattern" "${paths[@]}")"
+    names="$(fd -Hs -E .git "$pattern" "${paths[@]}")"
 
     [[ -n "$content" ]] && print -r -- "$content"
 
