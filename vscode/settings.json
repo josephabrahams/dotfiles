@@ -13,7 +13,7 @@
     "**/.venv": true
   },
   // Confirm before deleting files
-  "explorer.confirmDelete": true,
+  "explorer.confirmDelete": false,
   // Confirm before dragging files between folders (easy to mess up with multiple worktrees)
   "explorer.confirmDragAndDrop": true,
   "files.associations": {
@@ -188,6 +188,14 @@
   "markdown-preview-enhanced.liveUpdate": true,
   "markdown-preview-enhanced.previewRefreshOnThemeChange": true,
   "markdown-preview-enhanced.enableScriptExecution": true,
+
+  // ===================================================================
+  // Extension: Markdown PDF
+  // ===================================================================
+  "markdown-pdf.type": "pdf",
+  "markdown-pdf.emoji": true,
+  "markdown-pdf.highlight": true,
+  "markdown-pdf.highlightStyle": "github.css",
 
   // ===================================================================
   // Extension: Python
