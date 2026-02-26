@@ -43,6 +43,16 @@ defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy name" ~/Library/Preferences/com.apple.finder.plist
 
 # ======================================================================
+# Keyboard
+# ======================================================================
+
+# Enable dictation
+defaults write com.apple.HIToolbox AppleDictationAutoEnable -bool true
+
+# Set dictation shortcut to double-press right Command key
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 164 '{enabled = 1; value = {parameters = (1048592, 18446744073708503023); type = modifier;};}'
+
+# ======================================================================
 # Dock
 # ======================================================================
 

@@ -39,6 +39,9 @@ brew "imagemagick"
 brew "djlint"
 brew "shfmt"
 
+# AI Tools
+cask "claude-code"
+
 # Editors
 cask "macvim-app"
 
