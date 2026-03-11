@@ -161,7 +161,16 @@ c() {
 
     # Open files or project
     if [ "$#" -eq 0 ]; then
-        command "$editor" .
+        local -a workspaces=( *.code-workspace(N) )
+        if (( ${#workspaces} == 1 )); then
+            echo "c: opening workspace ${workspaces[1]}"
+            command "$editor" "${workspaces[1]}"
+        elif (( ${#workspaces} > 1 )); then
+            echo "c: multiple .code-workspace files found: ${workspaces[*]}" >&2
+            return 1
+        else
+            command "$editor" .
+        fi
     else
         command "$editor" $reuse_flag "$@"
     fi

@@ -182,10 +182,6 @@
     "when": "resourceExtname == .svg"
   },
   {
-    "key": "cmd+i",
-    "command": "composerMode.agent"
-  },
-  {
     "key": "cmd+shift+e",
     "command": "extension.markdown-pdf.pdf",
     "when": "editorLangId == markdown"
