@@ -5,6 +5,7 @@
 alias ..='cd ..'
 alias ...='cd ../..'
 alias b='cd -'
+alias j=z
 
 alias d='cd ~/Desktop'
 alias dl='cd ~/Downloads'

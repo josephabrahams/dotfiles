@@ -2,16 +2,6 @@
 # Navigation
 # ======================================================================
 
-# Jump to directory
-j() {
-    # I always type `j dots` accidentally
-    if [[ "$1" == "dots" ]]; then
-        dots
-    else
-        z "$@"
-    fi
-}
-compdef _zoxide j
 
 # Create a new directory and enter it
 mcd() {
