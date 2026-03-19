@@ -151,6 +151,10 @@ c() {
 
     # Open files or project
     if [ "$#" -eq 0 ]; then
+        if [[ -n "$reuse_flag" ]]; then
+            echo "c: already in a workspace — pass a file or path to open" >&2
+            return 1
+        fi
         local -a workspaces=( *.code-workspace(N) )
         if (( ${#workspaces} == 1 )); then
             echo "c: opening workspace ${workspaces[1]}"

@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ======================================================================
+# mkworkspace — generate a .code-workspace file from subdirectories
+#
+# Usage: mkworkspace [directory]
+#   directory  Target directory (default: current directory)
+# ======================================================================
+
+TARGET="${1:-.}"
+TARGET="$(cd "$TARGET" && pwd)"
+NAME="$(basename "$TARGET")"
+OUTFILE="$TARGET/${NAME}.code-workspace"
+
+if [[ -f "$OUTFILE" ]]; then
+    echo "mkworkspace: $OUTFILE already exists" >&2
+    exit 1
+fi
+
+# Collect top-level directories, excluding hidden dirs
+folders=()
+while IFS= read -r -d '' dir; do
+    folders+=("$(basename "$dir")")
+done < <(find "$TARGET" -mindepth 1 -maxdepth 1 -type d -not -name '.*' -print0 | sort -z)
+
+if [[ ${#folders[@]} -eq 0 ]]; then
+    echo "mkworkspace: no subdirectories found in $TARGET" >&2
+    exit 1
+fi
+
+# Build JSON
+{
+    printf '{\n  "folders": [\n'
+    for i in "${!folders[@]}"; do
+        name="${folders[$i]}"
+        comma=","
+        if [[ $i -eq $(( ${#folders[@]} - 1 )) ]]; then
+            comma=""
+        fi
+        printf '    { "name": "%s", "path": "%s" }%s\n' "$name" "$name" "$comma"
+    done
+    printf '  ]\n}\n'
+} > "$OUTFILE"
+
+echo "mkworkspace: created $OUTFILE (${#folders[@]} folders)"
