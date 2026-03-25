@@ -53,6 +53,7 @@ alias gds='git diff --staged'
 # Branching
 alias gb='git branch'
 alias gbd='git branch -D'
+alias gbr="git branch -r --list 'origin/*' --format='%(refname:short)' | sed -e '/^origin$/d' -e 's|origin/||'"
 alias gs='git switch'
 alias gsc='git switch -c'
 
@@ -83,7 +84,7 @@ alias grb2='git rebase -i HEAD~2'
 # Completions
 compdef _git glg=git-log gt=git-log
 compdef _git gd=git-diff gds=git-diff
-compdef _git gb=git-branch gbd=git-branch
+compdef _git gb=git-branch gbd=git-branch gbr=git-branch
 compdef _git gs=git-switch gsc=git-switch
 compdef _git ga=git-add gaa=git-add
 compdef _git gr=git-restore grs=git-restore
