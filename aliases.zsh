@@ -54,7 +54,7 @@ alias gds='git diff --staged'
 alias gb='git branch'
 alias gbd='git branch -D'
 alias gbr="git branch -r --list 'origin/*' --format='%(refname:short)' | sed -e '/^origin$/d' -e 's|origin/||'"
-alias gs='git switch'
+# gs is a function in functions.zsh (auto-switches when only one other branch)
 alias gsc='git switch -c'
 
 # Staging

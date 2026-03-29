@@ -220,6 +220,20 @@ gh() {
 }
 compdef _gh gh
 
+# Smart git switch (auto-switches when only one other branch exists)
+gs() {
+  if [ $# -eq 0 ]; then
+    local branches=($(git branch --format='%(refname:short)' | grep -v "^$(git branch --show-current)$"))
+    if [ ${#branches[@]} -eq 1 ]; then
+      git switch "${branches[1]}"
+    else
+      git switch
+    fi
+  else
+    git switch "$@"
+  fi
+}
+
 # Open CI page (GitHub Actions or CircleCI)
 ci() {
     local remote_url repo_path

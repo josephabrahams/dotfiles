@@ -69,7 +69,9 @@ source $ZDOTDIR/plugins.zsh
 # Completions
 # ======================================================================
 
-fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
+# Homebrew's _git is a bash-completion wrapper with zsh compat bugs;
+# move Homebrew's site-functions to the end so zsh's native _git wins.
+fpath=(${fpath:#$(brew --prefix)/share/zsh/site-functions} "$(brew --prefix)/share/zsh/site-functions")
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select                    # Arrow key navigation
 zstyle ':completion:*' list-prompt ''                 # No pager prompt
