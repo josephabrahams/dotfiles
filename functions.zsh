@@ -220,6 +220,17 @@ gh() {
 }
 compdef _gh gh
 
+# Delete all local branches except main (must be on main)
+gbda() {
+  [ "$(git branch --show-current)" = main ] || { echo "gbda: must be on main" >&2; return 1; }
+  local branches=("${(@f)$(git branch --format='%(refname:short)' | grep -v '^main$')}")
+  [ -z "${branches[1]}" ] && { echo "gbda: nothing to delete"; return 0; }
+  printf '  %s\n' "${branches[@]}"
+  read -q "?Delete ${#branches[@]} branch(es)? [y/N] " || { echo; return 1; }
+  echo
+  git branch -D "${branches[@]}"
+}
+
 # Smart git switch (auto-switches when only one other branch exists)
 gs() {
   if [ $# -eq 0 ]; then

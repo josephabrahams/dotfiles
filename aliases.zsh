@@ -129,6 +129,7 @@ alias jcurl='curl -H "Content-Type: application/json"'
 # ======================================================================
 
 alias copy="tr -d '\n' | pbcopy"
+alias pwc='pbpaste | wc -c'
 alias trim="sed 's/^[[:space:]]*//;s/[[:space:]]*$//'"
 alias json='jq . -C'
 

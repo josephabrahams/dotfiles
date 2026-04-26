@@ -7,6 +7,7 @@ brew "starship"
 
 # Programming Language Managers
 brew "fnm"
+brew "go"
 brew "pipenv"
 brew "uv"
 
@@ -33,6 +34,7 @@ brew "foreman"
 brew "cmake"
 
 # Media Tools
+brew "ffmpeg"
 brew "imagemagick"
 
 # Formatting & Linting
