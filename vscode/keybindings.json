@@ -185,5 +185,15 @@
     "key": "cmd+shift+e",
     "command": "extension.markdown-pdf.pdf",
     "when": "editorLangId == markdown"
+  },
+
+  // Move active editor into the group to its right (creates one if needed).
+  {
+    "key": "ctrl+cmd+right",
+    "command": "workbench.action.moveEditorToRightGroup"
+  },
+  {
+    "key": "ctrl+cmd+left",
+    "command": "workbench.action.moveEditorToLeftGroup"
   }
 ]
