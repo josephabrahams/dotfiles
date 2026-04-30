@@ -231,6 +231,37 @@ gbda() {
   git branch -D "${branches[@]}"
 }
 
+# Print the repo's main branch name (main, master, trunk, etc.)
+git_main_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+
+  local remote ref
+  for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default,stable,master}; do
+    if command git show-ref -q --verify $ref; then
+      echo ${ref:t}
+      return 0
+    fi
+  done
+
+  # Fallback: ask remote HEAD
+  for remote in origin upstream; do
+    ref=$(command git rev-parse --abbrev-ref $remote/HEAD 2>/dev/null)
+    if [[ $ref == $remote/* ]]; then
+      echo ${ref#"$remote/"}
+      return 0
+    fi
+  done
+
+  echo master
+  return 1
+}
+
+# List remote branches on origin (sans the 'origin/' prefix)
+gbr() {
+  git branch -r --list 'origin/*' --format='%(refname:short)' \
+    | sed -e '/^origin$/d' -e 's|origin/||'
+}
+
 # Smart git switch (auto-switches when only one other branch exists)
 gs() {
   if [ $# -eq 0 ]; then

@@ -42,6 +42,9 @@ export LESS="-R"  # Preserve ANSI color codes in less
 # GPG - required for commit signing and terminal passphrase prompts
 export GPG_TTY=$(tty)
 
+# Git - silence advice/hint messages
+export GIT_ADVICE=0
+
 # AWS - load config from ~/.aws/config
 export AWS_SDK_LOAD_CONFIG=1
 

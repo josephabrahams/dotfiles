@@ -53,8 +53,7 @@ alias gds='git diff --staged'
 # Branching
 alias gb='git branch'
 alias gbd='git branch -D'
-alias gbr="git branch -r --list 'origin/*' --format='%(refname:short)' | sed -e '/^origin$/d' -e 's|origin/||'"
-# gs is a function in functions.zsh (auto-switches when only one other branch)
+# gbr and gs are functions in functions.zsh
 alias gsc='git switch -c'
 
 # Staging
@@ -69,9 +68,13 @@ alias gcm='git commit -m'
 alias gca='git commit --amend --no-edit'
 alias gcac='git commit --amend'
 alias gcam='git commit --amend -m'
+alias gcf='git commit --fixup'
+alias gcs='git commit --squash'
 
 # Syncing
+alias gf='git fetch origin'
 alias gl='git pull'
+alias glom='git pull origin $(git_main_branch)'
 alias gp='git push'
 alias gpf='git push --force-with-lease --force-if-includes'
 alias gpu='git push -u origin $(git branch --show-current)'
@@ -79,19 +82,21 @@ alias gpu='git push -u origin $(git branch --show-current)'
 # Rewriting history
 alias grb='git rebase'
 alias grbi='git rebase -i'
-alias grb2='git rebase -i HEAD~2'
+alias grba='git rebase -i --autosquash origin/$(git_main_branch)'
+alias grbom='git rebase origin/$(git_main_branch)'
 
 # Completions
 compdef _git glg=git-log gt=git-log
 compdef _git gd=git-diff gds=git-diff
-compdef _git gb=git-branch gbd=git-branch gbr=git-branch
+compdef _git gb=git-branch gbd=git-branch
 compdef _git gs=git-switch gsc=git-switch
 compdef _git ga=git-add gaa=git-add
 compdef _git gr=git-restore grs=git-restore
-compdef _git gc=git-commit gcm=git-commit gca=git-commit gcac=git-commit gcam=git-commit
-compdef _git gl=git-pull
+compdef _git gc=git-commit gcm=git-commit gca=git-commit gcac=git-commit gcam=git-commit gcf=git-commit gcs=git-commit
+compdef _git gf=git-fetch
+compdef _git gl=git-pull glom=git-pull
 compdef _git gp=git-push gpf=git-push gpu=git-push
-compdef _git grb=git-rebase grbi=git-rebase grb2=git-rebase
+compdef _git grb=git-rebase grbi=git-rebase grba=git-rebase grbom=git-rebase
 _wt() { compadd $(git branch --format='%(refname:short)' 2>/dev/null) }
 compdef _wt wt
 

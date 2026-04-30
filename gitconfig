@@ -1,36 +1,52 @@
-[alias]
-    list = !git --no-pager log --reverse --decorate --pretty=oneline --abbrev-commit
-    root = rev-parse --show-toplevel
-    tree = log --graph --decorate --pretty=oneline --abbrev-commit
+[core]
+    editor = mvim -v
+    excludesfile = ~/.config/git/ignore
 
 [color]
     ui = auto
+
+[init]
+    defaultBranch = main
+
+[credential]
+    helper = osxkeychain
 
 [commit]
     gpgsign = true
     template = ~/.config/git/message
 
-[core]
-    editor = mvim -v
-    excludesfile = ~/.config/git/ignore
-
-[credential]
-    helper = osxkeychain
+[push]
+    default = simple
+    autoSetupRemote = true
 
 [fetch]
     prune = true
 
-[init]
-    defaultBranch = main
-
 [pull]
     rebase = true
+    ff = only
 
-[push]
-    default = simple
+[merge]
+    ff = only
+    conflictstyle = zdiff3
 
 [rebase]
     autoStash = true
+    updateRefs = true
+
+[rerere]
+    enabled = true
+
+[branch]
+    autoSetupMerge = always
+
+[branch "main"]
+    rebase = false
+
+[alias]
+    list = !git --no-pager log --reverse --decorate --pretty=oneline --abbrev-commit
+    root = rev-parse --show-toplevel
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit
 
 [include]
     path = ~/.config/git/config.local
