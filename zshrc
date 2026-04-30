@@ -39,6 +39,9 @@ export VISUAL="vim"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export LESS="-R"  # Preserve ANSI color codes in less
 
+# Export COLUMNS so children (make, scripts) can read terminal width
+export COLUMNS
+
 # GPG - required for commit signing and terminal passphrase prompts
 export GPG_TTY=$(tty)
 
