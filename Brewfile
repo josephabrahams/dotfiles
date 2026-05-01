@@ -21,6 +21,7 @@ brew "pinentry-mac"
 brew "awscli"
 brew "flyctl"
 brew "heroku/brew/heroku"
+cask "ngrok"
 
 # Databases / Caches
 brew "pgcli"
