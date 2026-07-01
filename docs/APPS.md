@@ -19,6 +19,7 @@ Install the following programs:
 - [ ] [Karabiner Elements](https://karabiner-elements.pqrs.org/)
 - [ ] [Logitech Options+](https://www.logitech.com/en-us/software/logi-options-plus.html)
 - [ ] [Viscosity](https://www.sparklabs.com/viscosity/download/)
+- [ ] [WireGuard](https://apps.apple.com/us/app/wireguard/id1451685025)
 
 ## Development Tools
 - [ ] [ChatGPT](https://chatgpt.com/download/)
