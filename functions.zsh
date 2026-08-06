@@ -307,12 +307,15 @@ ci() {
     fi
 }
 
+# Public resolver; bare `dig` still uses the system resolver for LAN names
+DIGS_RESOLVER="${DIGS_RESOLVER:-1.1.1.1}"
+
 # DNS lookup
 digs() {
     if [ $# -gt 0 ]; then
-        dig +short "$@"
+        dig "@$DIGS_RESOLVER" +short "$@"
     elif [ ! -t 0 ]; then
-        xargs -n1 dig +short
+        xargs -n1 dig "@$DIGS_RESOLVER" +short
     else
         echo "usage: digs <domain>..." >&2
         return 1
@@ -322,9 +325,12 @@ digs() {
 # Reverse DNS lookup
 ptr() {
     if [ $# -gt 0 ]; then
-        dig ptr +short "$@"
+        local ip
+        for ip in "$@"; do
+            dig "@$DIGS_RESOLVER" -x "$ip" +short
+        done
     elif [ ! -t 0 ]; then
-        xargs -n1 dig ptr +short
+        xargs -n1 -I{} dig "@$DIGS_RESOLVER" -x {} +short
     else
         echo "usage: ptr <ip>..." >&2
         return 1
