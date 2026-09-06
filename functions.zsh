@@ -239,6 +239,16 @@ gbda() {
   git branch -D "${branches[@]}"
 }
 
+# Amend the last commit, but refuse to rewrite it when nothing is staged
+gca() {
+  git rev-parse --git-dir &>/dev/null || { echo "gca: not a git repo" >&2; return 1; }
+  if git diff --cached --quiet; then
+    echo "gca: nothing staged, not amending" >&2
+    return 1
+  fi
+  git commit --amend --no-edit "$@"
+}
+
 # Print the repo's main branch name (main, master, trunk, etc.)
 git_main_branch() {
   command git rev-parse --git-dir &>/dev/null || return

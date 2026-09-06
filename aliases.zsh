@@ -65,7 +65,7 @@ alias grs='git restore --staged'
 # Committing
 alias gc='git commit'
 alias gcm='git commit -m'
-alias gca='git commit --amend --no-edit'
+# gca is a function in functions.zsh
 alias gcac='git commit --amend'
 alias gcam='git commit --amend -m'
 alias gcf='git commit --fixup'
