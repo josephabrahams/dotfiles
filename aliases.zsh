@@ -49,6 +49,8 @@ alias glg='git log'
 alias gt='git tree'
 alias gd='git diff'
 alias gds='git diff --staged'
+alias gdn='git diff --shortstat'
+alias gdsn='git diff --shortstat --staged'
 
 # Branching
 alias gb='git branch'
@@ -87,7 +89,7 @@ alias grbom='git rebase origin/$(git_main_branch)'
 
 # Completions
 compdef _git glg=git-log gt=git-log
-compdef _git gd=git-diff gds=git-diff
+compdef _git gd=git-diff gds=git-diff gdn=git-diff gdsn=git-diff
 compdef _git gb=git-branch gbd=git-branch
 compdef _git gs=git-switch gsc=git-switch
 compdef _git ga=git-add gaa=git-add
