@@ -280,18 +280,33 @@ gbr() {
     | sed -e '/^origin$/d' -e 's|origin/||'
 }
 
-# Smart git switch (auto-switches when only one other branch exists)
+# Smart git switch: bare `gs` toggles home. Off the main branch it goes to
+# main; on main it goes back to the last branch you were on.
 gs() {
-  if [ $# -eq 0 ]; then
-    local branches=($(git branch --format='%(refname:short)' | grep -v "^$(git branch --show-current)$"))
-    if [ ${#branches[@]} -eq 1 ]; then
-      git switch "${branches[1]}"
-    else
-      git switch
-    fi
-  else
+  if [ $# -gt 0 ]; then
     git switch "$@"
+    return
   fi
+
+  local current main
+  current=$(git branch --show-current)
+  main=$(git_main_branch) || main=""
+
+  if [[ -n $main && -n $current && $current != $main ]]; then
+    git switch "$main"
+    return
+  fi
+
+  # On main (or detached/unknown main): back to the previous branch. It may be
+  # gone (deleted after a merge) or never set (fresh clone), so resolve first.
+  local previous
+  previous=$(git rev-parse --abbrev-ref @{-1} 2>/dev/null)
+  if [[ -z $previous || $previous == "@{-1}" ]]; then
+    echo "gs: no previous branch" >&2
+    return 1
+  fi
+
+  git switch "$previous"
 }
 
 # Open CI page (GitHub Actions or CircleCI)
