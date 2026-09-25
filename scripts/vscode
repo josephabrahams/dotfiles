@@ -38,7 +38,3 @@ install_extensions "VS Code" "/Applications/Visual Studio Code.app/Contents/Reso
 install_extensions "Cursor" "/Applications/Cursor.app/Contents/Resources/app/bin/code"
 
 echo "Done."
-echo ""
-echo "NOTE: Prettier extension requires manually installing v11.0.2 in Cursor."
-echo "      Latest versions fail with 'cannot format [filetype]-files' error."
-echo "      Fix: Extensions > Prettier > Install Another Version > 11.0.2"
