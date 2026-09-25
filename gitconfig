@@ -11,6 +11,9 @@
 [credential]
     helper = osxkeychain
 
+[credential "https://git.heroku.com"]
+    helper = !heroku git:credentials
+
 [commit]
     gpgsign = true
     template = ~/.config/git/message
