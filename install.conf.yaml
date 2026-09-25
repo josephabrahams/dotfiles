@@ -24,6 +24,9 @@
     ~/.config/zsh/plugins.txt: plugins.txt
     ~/.config/starship.toml: starship.toml
 
+    # direnv (dev contexts, see docs/CONTEXTS.md)
+    ~/.config/direnv/lib/dev-context.sh: direnv/dev-context.sh
+
     # Git
     ~/.config/git/config: gitconfig
     ~/.config/git/ignore: gitignore

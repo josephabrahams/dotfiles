@@ -2,6 +2,7 @@ tap "heroku/brew"
 
 # Shell & Prompt
 brew "antidote"
+brew "direnv"
 brew "dotbot"
 brew "starship"
 

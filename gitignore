@@ -32,5 +32,8 @@ Temporary Items
 # Claude
 **/.claude/settings.local.json
 
+# direnv (dev contexts are local, never committed)
+.envrc
+
 # Worktree feature notes
 FEATURE.md

@@ -23,7 +23,8 @@ Install the following programs:
 
 ## Development Tools
 - [ ] [ChatGPT](https://chatgpt.com/download/)
-- [ ] [Cursor](https://cursor.com/download)
+- [ ] [Cursor](https://cursor.com/download), then run `Shell Command: Install 'cursor' command in PATH`
+- [ ] [VS Code](https://code.visualstudio.com/download), then run `Shell Command: Install 'code' command in PATH`
 - [ ] [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [ ] [iTerm2](https://iterm2.com/downloads.html)
 - [ ] [MacVim](https://macvim.org/)

@@ -94,11 +94,18 @@ fi
 echo
 echo "✅ Worktree ready: ${WORKTREE_DIR/#$HOME/~}"
 
-# Open editor if running inside one
-if [[ -n "${CURSOR_CLI:-}" ]]; then
-    echo "🚀 Opening new Cursor window"
-    cursor "$WORKTREE_DIR" >/dev/null 2>&1 &
-elif [[ "${TERM_PROGRAM:-}" == "vscode" ]]; then
-    echo "🚀 Opening new VS Code window"
-    code "$WORKTREE_DIR" >/dev/null 2>&1 &
+# Open editor if running inside one, in the current dev context's instance
+# (same rules as c in functions.zsh; see docs/CONTEXTS.md)
+if [[ "${TERM_PROGRAM:-}" == "vscode" && -z "${DEV_CONTEXT_ERROR:-}" ]]; then
+    EDITOR_CMD="${DEV_EDITOR:-code}"
+    DATA_DIR="${EDITOR_USER_DATA_DIR:-}"
+    if command -v "$EDITOR_CMD" >/dev/null 2>&1; then
+        echo "🚀 Opening new $EDITOR_CMD window"
+        export DEV_EDITOR_INSTANCE="$EDITOR_CMD:${DATA_DIR:-default}"
+        if [[ -n "$DATA_DIR" ]]; then
+            "$EDITOR_CMD" --user-data-dir "$DATA_DIR" "$WORKTREE_DIR" >/dev/null 2>&1 &
+        else
+            "$EDITOR_CMD" "$WORKTREE_DIR" >/dev/null 2>&1 &
+        fi
+    fi
 fi

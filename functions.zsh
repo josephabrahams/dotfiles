@@ -126,48 +126,96 @@ diff() {
 # Development
 # ======================================================================
 
-# Open current directory in Cursor
+# Open a project or files in the editor for the current dev context.
+# direnv sets DEV_EDITOR and EDITOR_USER_DATA_DIR in org folders (see
+# docs/CONTEXTS.md). Unset means personal: VS Code with its default data.
+# Each user-data-dir is its own editor instance, so passing it routes the
+# request to the right instance and that instance's environment.
 c() {
-    local editor reuse_flag=""
+    local editor="${DEV_EDITOR:-code}" data_dir="${EDITOR_USER_DATA_DIR:-}"
 
-    # Already inside an editor? Force reuse in that editor
-    if [[ -n "${CURSOR_CLI:-}" ]]; then
-        editor="cursor"
-        reuse_flag="-r"
-    elif [[ "$TERM_PROGRAM" == "vscode" ]]; then
-        editor="code"
-        reuse_flag="-r"
-    else
-        # Not inside any editor, pick based on availability
-        if command -v cursor >/dev/null 2>&1; then
-            editor="cursor"
-        elif command -v code >/dev/null 2>&1; then
-            editor="code"
+    if [[ -n $DEV_CONTEXT_ERROR ]]; then
+        echo "c: $DEV_CONTEXT_ERROR (fix the .envrc)" >&2
+        return 1
+    fi
+    if [[ $editor != (code|cursor) ]]; then
+        echo "c: unsupported DEV_EDITOR '$editor' (code or cursor)" >&2
+        return 1
+    fi
+    if ! command -v "$editor" >/dev/null 2>&1; then
+        echo "c: $editor is not installed or not in PATH" >&2
+        [[ $editor == code ]] && echo "c: in VS Code run: Shell Command: Install 'code' command in PATH" >&2
+        return 127
+    fi
+    # Refuse rather than let the editor or Claude create empty dirs
+    if [[ -n $data_dir && ! -d $data_dir ]] || [[ -n $CLAUDE_CONFIG_DIR && ! -d $CLAUDE_CONFIG_DIR ]]; then
+        echo "c: context '${WORK_CONTEXT:-?}' is not set up yet, run dev-context-init" >&2
+        return 1
+    fi
+
+    local -a args
+    [[ -n $data_dir ]] && args+=(--user-data-dir "$data_dir")
+
+    # Which editor instance is this terminal in? c stamps DEV_EDITOR_INSTANCE
+    # on every editor it launches; an editor started from the Dock is the
+    # default instance. Reuse the window only when it is the target instance.
+    local target="$editor:${data_dir:-default}" current=""
+    if [[ $TERM_PROGRAM == vscode ]]; then
+        if [[ -n $DEV_EDITOR_INSTANCE ]]; then
+            current=$DEV_EDITOR_INSTANCE
+        elif [[ -n $CURSOR_CLI ]]; then
+            current="cursor:default"
         else
-            echo "c: neither cursor nor vscode is installed" >&2
-            return 127
+            current="code:default"
         fi
     fi
 
-    # Open files or project
-    if [ "$#" -eq 0 ]; then
-        if [[ -n "$reuse_flag" ]]; then
+    if (( $# == 0 )); then
+        if [[ $current == $target ]]; then
             echo "c: already in a workspace, pass a file or path to open" >&2
             return 1
         fi
         local -a workspaces=( *.code-workspace(N) )
-        if (( ${#workspaces} == 1 )); then
-            echo "c: opening workspace ${workspaces[1]}"
-            command "$editor" "${workspaces[1]}"
-        elif (( ${#workspaces} > 1 )); then
+        if (( ${#workspaces} > 1 )); then
             echo "c: multiple .code-workspace files found: ${workspaces[*]}" >&2
             return 1
+        elif (( ${#workspaces} == 1 )); then
+            echo "c: opening workspace ${workspaces[1]}"
+            set -- "${workspaces[1]}"
         else
-            command "$editor" .
+            set -- .
         fi
-    else
-        command "$editor" $reuse_flag "$@"
+    elif [[ $current == $target ]]; then
+        args+=(-r)
     fi
+
+    DEV_EDITOR_INSTANCE=$target command "$editor" "${args[@]}" "$@"
+}
+
+# Show the active dev context and flag anything missing (diagnostic only)
+dev-context() {
+    local editor="${DEV_EDITOR:-code}" problems=0
+    printf '%-21s %s\n' \
+        WORK_CONTEXT "${WORK_CONTEXT:-(unset: personal)}" \
+        DEV_EDITOR "${DEV_EDITOR:-(unset: code)}" \
+        EDITOR_USER_DATA_DIR "${EDITOR_USER_DATA_DIR:-(unset: editor default)}" \
+        CLAUDE_CONFIG_DIR "${CLAUDE_CONFIG_DIR:-(unset: ~/.claude)}"
+    if [[ $TERM_PROGRAM == vscode ]]; then
+        printf '%-21s %s\n' "this editor" "${DEV_EDITOR_INSTANCE:-not launched by c (default instance)}"
+    fi
+
+    _dev_context_problem() { echo "problem: $*" >&2; problems=1; }
+    [[ -n $DEV_CONTEXT_ERROR ]] && _dev_context_problem "$DEV_CONTEXT_ERROR"
+    command -v "$editor" >/dev/null 2>&1 || _dev_context_problem "$editor is not in PATH"
+    if [[ -n $WORK_CONTEXT ]]; then
+        [[ -z $DEV_EDITOR || -z $EDITOR_USER_DATA_DIR ]] && _dev_context_problem "incomplete context, use dev_context in the .envrc"
+        [[ -n $EDITOR_USER_DATA_DIR && ! -d $EDITOR_USER_DATA_DIR ]] && _dev_context_problem "${EDITOR_USER_DATA_DIR/#$HOME/~} missing, run dev-context-init"
+        [[ -n $CLAUDE_CONFIG_DIR && ! -d $CLAUDE_CONFIG_DIR ]] && _dev_context_problem "${CLAUDE_CONFIG_DIR/#$HOME/~} missing, run dev-context-init"
+        [[ -z $CLAUDE_CONFIG_DIR ]] && echo "note: Claude uses personal ~/.claude in this context"
+    fi
+    [[ -n $ANTHROPIC_API_KEY ]] && _dev_context_problem "ANTHROPIC_API_KEY is set, Claude will bill the API"
+    unfunction _dev_context_problem
+    return $problems
 }
 
 # Export .env variables into current shell

@@ -119,6 +119,9 @@ eval "$(starship init zsh)"
 # fzf key bindings and completion
 eval "$(fzf --zsh)"
 
+# direnv: per-directory env, used for dev contexts (docs/CONTEXTS.md)
+(( $+commands[direnv] )) && eval "$(direnv hook zsh)"
+
 # Ensure emacs mode
 bindkey -e
 

@@ -47,6 +47,9 @@ scripts/macos
 scripts/vscode
 ```
 
+### Set up dev contexts (optional)
+Per-organisation editor and Claude Code logins, selected by folder. See [docs/CONTEXTS.md](docs/CONTEXTS.md).
+
 ### Install macOS apps
 Manually install macOS apps from the checklist in [docs/APPS.md](docs/APPS.md).
 

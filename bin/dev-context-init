@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ======================================================================
+# Dev Context Initialiser
+#
+# Usage: dev-context-init
+# Run inside a folder whose .envrc calls dev_context. Creates the isolated
+# editor user-data-dir and Claude config dir for that context. Idempotent.
+# ======================================================================
+
+DOTFILES_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+if [[ -n "${DEV_CONTEXT_ERROR:-}" ]]; then
+    echo "$DEV_CONTEXT_ERROR" >&2
+    exit 1
+fi
+if [[ -z "${WORK_CONTEXT:-}" || -z "${EDITOR_USER_DATA_DIR:-}" ]]; then
+    echo "dev-context-init: no dev context here" >&2
+    echo "cd into a folder whose .envrc calls dev_context, then run direnv allow" >&2
+    exit 1
+fi
+
+tilde() { echo "${1/#$HOME/\~}"; }
+
+link() {
+    local src="$1" dest="$2"
+    if [[ -L "$dest" && "$(readlink "$dest")" == "$src" ]]; then
+        echo "ok       $(tilde "$dest")"
+        return
+    fi
+    if [[ -e "$dest" || -L "$dest" ]]; then
+        mv "$dest" "$dest.bak.$(date +%s)"
+        echo "backup   $(tilde "$dest").bak.*"
+    fi
+    ln -s "$src" "$dest"
+    echo "linked   $(tilde "$dest")"
+}
+
+echo "Context: $WORK_CONTEXT ($DEV_EDITOR)"
+
+# Editor: isolated user data, shared settings. Extensions are shared through
+# the editor's default extensions dir, so nothing to install here.
+mkdir -p "$EDITOR_USER_DATA_DIR/User"
+for name in settings.json keybindings.json tasks.json snippets; do
+    link "$DOTFILES_DIR/vscode/$name" "$EDITOR_USER_DATA_DIR/User/$name"
+done
+
+# Claude: a copy of the baseline, not a symlink, because Claude rewrites
+# settings.json when you approve permissions.
+if [[ -n "${CLAUDE_CONFIG_DIR:-}" ]]; then
+    mkdir -p "$CLAUDE_CONFIG_DIR"
+    if [[ -e "$CLAUDE_CONFIG_DIR/settings.json" ]]; then
+        echo "ok       $(tilde "$CLAUDE_CONFIG_DIR")/settings.json (left as is)"
+    else
+        cp "$DOTFILES_DIR/claude/settings.json" "$CLAUDE_CONFIG_DIR/settings.json"
+        echo "created  $(tilde "$CLAUDE_CONFIG_DIR")/settings.json"
+    fi
+else
+    echo "skipped  Claude config (CLAUDE_CONFIG_DIR unset, uses ~/.claude)"
+fi
+
+echo "Done. Open it with: c"
