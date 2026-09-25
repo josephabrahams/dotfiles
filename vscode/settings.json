@@ -3,7 +3,6 @@
   // Editor settings
   // ===================================================================
   "editor.fontFamily": "'Hack Nerd Font', Menlo, Monaco, 'Courier New', monospace",
-  "editor.inlineSuggest.enabled": true,
   "editor.rulers": [80],
 
   // ===================================================================
@@ -51,11 +50,20 @@
     }
   },
   "workbench.editor.enablePreview": false,
+  "workbench.editor.focusRecentEditorAfterClose": true,
+  "workbench.editor.openEditorsInActiveGroup": false,
+  "workbench.editor.openSideBySideDirection": "right",
   "workbench.editorAssociations": {
     "*.mp4": "default",
     "*.svg": "default"
   },
   "workbench.startupEditor": "none",
+
+  // ===================================================================
+  // Accounts & built-in AI (Claude and Cursor provide AI instead)
+  // ===================================================================
+  "workbench.activity.showAccounts": false,
+  "chat.disableAIFeatures": true,
 
   // ===================================================================
   // Language-specific formatters
@@ -115,6 +123,7 @@
   // ===================================================================
   // Extension: Claude
   // ===================================================================
+  "claudeCode.hideOnboarding": true,
   "claudeCode.preferredLocation": "panel",
 
   // ===================================================================
@@ -181,12 +190,30 @@
   "github.gitAuthentication": false,
 
   // ===================================================================
+  // Extension: GitHub Actions
+  // ===================================================================
+  // Stop the YAML extension's schema checks clashing on workflow files
+  "yaml.disableSchemaDetection": [
+    "**/.github/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yml",
+    "**/.forgejo/workflows/*.yaml"
+  ],
+
+  // ===================================================================
+  // Extension: Makefile Tools
+  // ===================================================================
+  "makefile.configureOnOpen": false,
+
+  // ===================================================================
   // Extension: Markdown Preview Enhanced
   // ===================================================================
   "markdown-preview-enhanced.previewTheme": "github-dark.css",
   "markdown-preview-enhanced.liveUpdate": true,
   "markdown-preview-enhanced.previewRefreshOnThemeChange": true,
-  "markdown-preview-enhanced.enableScriptExecution": true,
+  "markdown-preview-enhanced.enableScriptExecution": false,
 
   // ===================================================================
   // Extension: Markdown PDF
