@@ -51,6 +51,7 @@ cask "macvim-app"
 
 # Modern CLI Toolkit
 brew "bat"
+brew "cloc"
 brew "eza"
 brew "fd"
 brew "fzf"

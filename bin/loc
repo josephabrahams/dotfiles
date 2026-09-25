@@ -1,0 +1,249 @@
+#!/usr/bin/env python3
+"""loc - reportable lines of code for a repo, or a folder of repos.
+
+Counts code and comments in every language cloc recognises. Docs, and data
+or config formats such as JSON and XML, are shown on their own lines: docs
+are in the total unless --no-docs, data only with --data. Images, plain
+text, and build metadata are never counted. Skips dependency, build, and VCS
+folders, and lock and minified files.
+
+Requires cloc (brew install cloc).
+"""
+
+import argparse
+import csv
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+
+# Dependency, build, and VCS folders. bin, obj, packages, and out are .NET
+# build output, but this also skips hand-written bin/ scripts.
+EXCLUDE_DIRS = [
+    "node_modules", "bower_components", "vendor", "packages", "bin", "obj",
+    "dist", "build", "out", "target", ".git", ".svn", ".hg", "CVS", ".vs",
+    ".idea", "DerivedData", "coverage", ".next", ".nuxt", ".turbo", ".cache",
+    "__pycache__", ".tox", ".venv", "venv", "Pods", "Carthage",
+    "jspm_packages", ".gradle", ".terraform", "TestResults", "artifacts",
+    ".yarn", ".pnpm-store",
+]
+
+# Lock, generated, and minified files
+NOT_MATCH_F = (
+    r"(\.g\.cs|\.designer\.cs|\.min\.(js|css)|package-lock\.json|yarn\.lock"
+    r"|pnpm-lock\.yaml|packages\.lock\.json|Podfile\.lock)$"
+)
+
+# Every language cloc finds counts as code, except the groups below.
+
+# Documentation: its own line, in the total unless --no-docs
+DOCS = {"Markdown", "reStructuredText", "AsciiDoc"}
+
+# Data and config: sometimes hand-written, often generated. Its own line, in
+# the total only with --data.
+DATA = {
+    "JSON", "JSON5", "XML", "YAML", "TOML", "INI", "Properties", "CSV", "TSV",
+    "XSD", "WSDL", "SQL Data",
+}
+
+# Never counted: images, plain text, diffs, build and IDE metadata, translations
+NOISE = {
+    "SVG", "Text", "diff", "MSBuild script", "Visual Studio Solution",
+    "C# Generated", "Maven", "Ant", "NuGet Config", "PO File",
+}
+
+
+def fail(message):
+    print(f"loc: {message}", file=sys.stderr)
+    sys.exit(1)
+
+
+def in_git_repo(path):
+    result = subprocess.run(
+        ["git", "-C", path, "rev-parse", "--is-inside-work-tree"],
+        capture_output=True,
+        text=True,
+    )
+    return result.returncode == 0 and result.stdout.strip() == "true"
+
+
+def find_repos(root):
+    """Every git repo under root, at any depth, including repos and submodules
+    nested inside other repos. Git never lists a nested repo's files as part
+    of the outer repo, so nothing is counted twice."""
+    repos = []
+    for dirpath, dirnames, filenames in os.walk(root):
+        if ".git" in dirnames or ".git" in filenames:
+            repos.append(dirpath)
+        dirnames[:] = [d for d in dirnames if not d.startswith(".") and d not in EXCLUDE_DIRS]
+    return sorted(repos)
+
+
+def tracked_files(repo):
+    """Absolute paths of the files git tracks in repo (or under it, for a subfolder)."""
+    result = subprocess.run(["git", "-C", repo, "ls-files", "-z"], capture_output=True)
+    if result.returncode != 0:
+        return []
+    paths = (os.path.join(repo, p) for p in result.stdout.decode().split("\0") if p)
+    # Skip deleted files and submodules, which ls-files still lists
+    return [os.path.abspath(p) for p in paths if os.path.isfile(p)]
+
+
+def choose_scope(target):
+    """Decide what to count: (description, list of files, or None to scan the folder).
+
+    Inside a git repo, count its tracked files. For a folder of repos, count
+    the tracked files of every repo in it. Either way that leaves out caches,
+    virtualenvs, build output, and scratch files by definition. With no repos
+    at all, scan the folder and skip hidden folders such as .mypy_cache.
+    """
+    repos = find_repos(target)
+    # A subfolder of a repo has no .git of its own
+    if in_git_repo(target) and os.path.abspath(target) not in map(os.path.abspath, repos):
+        repos.insert(0, target)
+    if not repos:
+        return "folder scan, hidden folders skipped", None
+    files = sorted({f for repo in repos for f in tracked_files(repo)})
+    label = "files tracked by git" if len(repos) == 1 else f"files tracked by git in {len(repos)} repos"
+    return label, files
+
+
+def cloc_args(target, list_file):
+    args = [
+        "cloc",
+        f"--exclude-dir={','.join(EXCLUDE_DIRS)}",
+        f"--not-match-f={NOT_MATCH_F}",
+        "--timeout=0",  # never skip a slow file, which would undercount
+    ]
+    if list_file:
+        return args + [f"--list-file={list_file}"]
+    return args + ["--fullpath", r"--not-match-d=(^|/)\.[^./]", target]
+
+
+def run_cloc(args, live):
+    """Run cloc. In a terminal, show its progress on stderr, minus the line
+    naming the temp report file. Otherwise run quietly."""
+    if not live:
+        result = subprocess.run(
+            args[:1] + ["--quiet"] + args[1:],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        return result.returncode, result.stderr
+
+    proc = subprocess.Popen(args, stdout=subprocess.PIPE)
+    out = sys.stderr.buffer
+    line = b""
+    while chunk := proc.stdout.read(1):
+        line += chunk
+        if chunk in (b"\r", b"\n"):
+            if not line.startswith(b"Wrote "):
+                out.write(line)
+                out.flush()
+            line = b""
+    out.write(line + b"\n")
+    out.flush()
+    return proc.wait(), ""
+
+
+def read_rows(target, list_file):
+    """Run cloc once and return (language, files, comment, code) per language.
+
+    The report goes to a temp file, because cloc only shows progress when its
+    report isn't on stdout.
+    """
+    with tempfile.NamedTemporaryFile(suffix=".csv") as report:
+        args = cloc_args(target, list_file)
+        args[1:1] = ["--csv", f"--report-file={report.name}"]
+        code, err = run_cloc(args, sys.stderr.isatty())
+        if code != 0:
+            fail(f"cloc failed: {err.strip() or code}")
+        with open(report.name, newline="") as f:
+            data = list(csv.DictReader(f))
+
+    rows = []
+    for row in data:
+        lang = (row.get("language") or "").strip()
+        if not lang or lang == "SUM":
+            continue
+        try:
+            rows.append((lang, int(row["files"]), int(row["comment"]), int(row["code"])))
+        except (KeyError, TypeError, ValueError):
+            continue
+    return rows
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="loc",
+        description="Reportable lines of code for a repo, or a folder of repos.",
+    )
+    parser.add_argument("path", nargs="?", default=".", help="repo or folder (default: .)")
+    parser.add_argument("--no-docs", action="store_true", help="leave docs out of the total")
+    parser.add_argument("--data", action="store_true", help="add data and config (JSON, XML, YAML) to the total")
+    parser.add_argument("--raw", action="store_true", help="also print the full cloc table")
+    args = parser.parse_args()
+
+    if not shutil.which("cloc"):
+        fail("cloc not found, install with: brew install cloc")
+    if not os.path.exists(args.path):
+        fail(f"path not found: {args.path}")
+
+    scope, files = choose_scope(args.path)
+    if files == []:
+        fail(f"no files tracked by git under {args.path}")
+    print(f"Scanning: {args.path} ({scope})\n", flush=True)
+
+    with tempfile.NamedTemporaryFile("w", suffix=".txt") as list_file:
+        name = None
+        if files is not None:
+            list_file.write("\n".join(files) + "\n")
+            list_file.flush()
+            name = list_file.name
+        rows = read_rows(args.path, name)
+
+        if args.raw:
+            print("=== Full cloc table (every language found, after excludes) ===", flush=True)
+            raw_args = cloc_args(args.path, name)
+            subprocess.run(raw_args[:1] + ["--quiet"] + raw_args[1:])
+            print()
+
+    def group(lang):
+        if lang in NOISE:
+            return "noise"
+        if lang in DOCS:
+            return "docs"
+        if lang in DATA:
+            return "data"
+        return "code"
+
+    def lines(g):
+        return sum(r[2] + r[3] for r in rows if group(r[0]) == g)
+
+    in_total = {"code"} | (set() if args.no_docs else {"docs"}) | ({"data"} if args.data else set())
+    shown = sorted((r for r in rows if group(r[0]) != "noise"), key=lambda r: r[2] + r[3], reverse=True)
+    noise = sorted(r[0] for r in rows if group(r[0]) == "noise")
+
+    print("=== Languages (code + comment) ===")
+    print(f"{'Language':<28} {'group':<6} {'files':>8} {'comment':>10} {'code':>12} {'total':>12}")
+    print("-" * 81)
+    for lang, f, cmt, cd in shown:
+        print(f"{lang:<28} {group(lang):<6} {f:>8,} {cmt:>10,} {cd:>12,} {cd + cmt:>12,}")
+    print("-" * 81)
+    print()
+    print("=== Reportable ===")
+    labels = {"code": "Code and comments", "docs": "Docs", "data": "Data and config"}
+    for g, label in labels.items():
+        note = "" if g in in_total else "  (not in total)"
+        print(f"  {label + ':':<19} {lines(g):>12,}{note}")
+    total = sum(lines(g) for g in in_total)
+    print(f"  {'Report this:':<19} {total:>12,}")
+    if noise:
+        print()
+        print(f"Never counted: {', '.join(noise)}")
+
+
+if __name__ == "__main__":
+    main()
