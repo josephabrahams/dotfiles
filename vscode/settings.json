@@ -309,5 +309,6 @@
       "before": ["<C-j>"],
       "commands": ["editor.action.moveLinesDownAction"]
     }
-  ]
+  ],
+  "python.defaultInterpreterPath": "/opt/homebrew/bin/python3"
 }

@@ -61,5 +61,10 @@
     ~/Library/Application Support/Cursor/User/tasks.json: vscode/tasks.json
     ~/Library/Application Support/Cursor/User/snippets: vscode/snippets
 
+    # Cursor agent policy (shared by every Cursor instance, see docs/AGENT-POLICY.md)
+    ~/.cursor/hooks.json: cursor/hooks.json
+    ~/.cursor/hooks/agent-deny: bin/agent-deny
+    ~/.cursor/sandbox.json: cursor/sandbox.json
+
     # bin
     ~/bin: bin

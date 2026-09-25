@@ -49,6 +49,7 @@ scripts/vscode
 
 ### Set up dev contexts (optional)
 Per-organisation editor and Claude Code logins, selected by folder. See [docs/CONTEXTS.md](docs/CONTEXTS.md).
+Coding agents are kept off privileged CLIs such as Heroku and AWS. See [docs/AGENT-POLICY.md](docs/AGENT-POLICY.md).
 
 ### Install macOS apps
 Manually install macOS apps from the checklist in [docs/APPS.md](docs/APPS.md).

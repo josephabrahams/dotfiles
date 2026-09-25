@@ -1,0 +1,26 @@
+{
+  "networkPolicy": {
+    "default": "deny",
+    "allow": [
+      "registry.npmjs.org",
+      "registry.yarnpkg.com",
+      "pypi.org",
+      "files.pythonhosted.org",
+      "proxy.golang.org",
+      "sum.golang.org"
+    ],
+    "deny": [
+      "github.com",
+      "api.heroku.com",
+      "git.heroku.com",
+      "api.fly.io",
+      "api.machines.dev",
+      "api.cloudflare.com",
+      "management.azure.com",
+      "login.microsoftonline.com",
+      "api.github.com",
+      "uploads.github.com",
+      "api.digitalocean.com"
+    ]
+  }
+}

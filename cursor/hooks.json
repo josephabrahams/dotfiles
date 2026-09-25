@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "./hooks/agent-deny",
+        "matcher": "\\b(heroku|fly|flyctl|wrangler|aws|az|gcloud|kubectl|terraform|tofu|doctl|gh)\\b|\\.env",
+        "timeout": 10,
+        "failClosed": true
+      }
+    ],
+    "beforeReadFile": [
+      {
+        "command": "./hooks/agent-deny",
+        "timeout": 10,
+        "failClosed": true
+      }
+    ]
+  }
+}

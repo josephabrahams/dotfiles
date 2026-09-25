@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+# ======================================================================
+# Agent hook: keep coding agents off privileged CLIs and secret env files
+#
+# Used as a Cursor beforeShellExecution and beforeReadFile hook, and a Claude
+# Code PreToolUse hook. Claude hides env files through its sandbox and Read
+# deny rules, so the env file checks here only run for Cursor.
+#
+# For commands, it reads the whole command, so it also catches sh -c,
+# absolute paths, env prefixes, and npx. See docs/AGENT-POLICY.md.
+#
+# Cursor: answers "deny" when a listed tool is invoked, otherwise "ask"
+# (hooks.json only runs it for commands that mention a listed tool).
+# Claude: prints a deny decision when a listed tool is invoked, otherwise
+# nothing, which leaves the normal permission flow in charge.
+# Neither ever answers "allow".
+# ======================================================================
+set -uo pipefail
+
+# Keep in sync with claude/settings.json and cursor/hooks.json
+DENY_TOOLS=" heroku fly flyctl wrangler aws az gcloud kubectl terraform tofu doctl "
+DENY_GH=" auth secret variable release workflow api "
+DENY_GH_PAIRS=" repo:delete repo:edit pr:merge "
+
+# Env files that may hold real keys. Keep in sync with claude/settings.json.
+secret_env() {
+    case ${1##*/} in
+        .envrc | .env | .env.local | .env.*.local | .env.production | .env.prod | .env.staging | .env.*secrets*) return 0 ;;
+    esac
+    return 1
+}
+
+input=$(cat)
+
+# Cursor beforeReadFile: the agent is about to read a file
+path=$(jq -r 'if has("file_path") and (has("command") | not) then .file_path else empty end' <<<"$input")
+if [[ -n $path ]]; then
+    if secret_env "$path"; then
+        jq -n '{permission: "deny", user_message: "Blocked by agent policy: env files may hold real keys."}'
+    else
+        jq -n '{permission: "allow"}'
+    fi
+    exit 0
+fi
+
+if [[ $(jq -r '.hook_event_name // empty' <<<"$input") == PreToolUse ]]; then
+    client=claude
+    cmd=$(jq -r '.tool_input.command // empty' <<<"$input")
+else
+    client=cursor
+    cmd=$(jq -r '.command // empty' <<<"$input")
+fi
+
+respond() {
+    if [[ $client == claude ]]; then
+        [[ $1 == deny ]] && jq -n --arg m "$2" '{hookSpecificOutput: {hookEventName: "PreToolUse", permissionDecision: "deny", permissionDecisionReason: $m}}'
+    else
+        jq -n --arg p "$1" --arg m "$2" '{permission: $p, user_message: $m, agent_message: $m}'
+    fi
+    exit 0
+}
+
+# Cursor has no sandbox read control, so refuse commands that name an env file
+if [[ $client == cursor ]]; then
+    set -f
+    # shellcheck disable=SC2206
+    all_words=($cmd)
+    set +f
+    for w in "${all_words[@]}"; do
+        w=${w//[\"\']/}
+        secret_env "$w" && respond deny "Blocked by agent policy: env files may hold real keys. Ask the user."
+    done
+fi
+
+# Fast path: nothing to check unless a listed tool is mentioned at all
+if ! grep -qE '(^|[^[:alnum:]_-])(heroku|fly|flyctl|wrangler|aws|az|gcloud|kubectl|terraform|tofu|doctl|gh)([^[:alnum:]_-]|$)' <<<"$cmd"; then
+    respond ask "This command mentions a privileged CLI, so it needs your approval."
+fi
+
+# Split into simple commands on separators and substitutions, then find the
+# program each one runs, skipping env assignments, wrappers, and sh -c.
+while IFS= read -r seg; do
+    set -f
+    # shellcheck disable=SC2206
+    words=($seg)
+    set +f
+    i=0
+    while ((i < ${#words[@]})); do
+        w=${words[i]//[\"\']/}
+        case $w in
+            *=* | sudo | env | command | exec | nohup | time | nice | xargs | npx | bunx | builtin | -*) ((i++)) ;;
+            sh | bash | zsh) ((i++)) ;;
+            npm | pnpm)
+                case ${words[i + 1]:-} in exec | dlx) ((i += 2)) ;; *) break ;; esac
+                ;;
+            *) break ;;
+        esac
+    done
+    tool=${words[i]:-}
+    tool=${tool//[\"\']/}
+    tool=${tool##*/}
+    [[ -z $tool ]] && continue
+
+    # A context can let specific tools through: AGENT_ALLOW="tofu" in its .envrc
+    [[ " ${AGENT_ALLOW:-} " == *" $tool "* ]] && continue
+
+    if [[ $DENY_TOOLS == *" $tool "* ]]; then
+        respond deny "Blocked by agent policy: $tool is not available to agents. Ask the user to run it."
+    fi
+    if [[ $tool == gh ]]; then
+        sub=${words[i + 1]:-}
+        sub=${sub//[\"\']/}
+        sub2=${words[i + 2]:-}
+        sub2=${sub2//[\"\']/}
+        if [[ $DENY_GH == *" $sub "* || $DENY_GH_PAIRS == *" $sub:$sub2 "* ]]; then
+            respond deny "Blocked by agent policy: gh $sub is not available to agents. Ask the user to run it."
+        fi
+    fi
+# Backticks are not split on: they show up far more often as markdown in
+# commit messages and heredocs than as command substitution.
+done < <(printf '%s\n' "$cmd" | sed -E 's/\|\||&&|\$\(|[;|&()]/\n/g')
+
+respond ask "This command mentions a privileged CLI, so it needs your approval."
