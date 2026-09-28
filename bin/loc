@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """loc - reportable lines of code for a repo, or a folder of repos.
 
-Counts code and comments in every language cloc recognises. Docs, and data
+Counts code and comments in every language cloc recognizes. Docs, and data
 or config formats such as JSON and XML, are shown on their own lines: docs
 are in the total unless --no-docs, data only with --data. Images, plain
 text, and build metadata are never counted. Skips dependency, build, and VCS

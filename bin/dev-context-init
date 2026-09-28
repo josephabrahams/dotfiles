@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # ======================================================================
-# Dev Context Initialiser
+# Dev Context Initializer
 #
 # Usage: dev-context-init
 # Run inside a folder whose .envrc calls dev_context. Creates the isolated
