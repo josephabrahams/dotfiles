@@ -19,6 +19,7 @@ setopt HIST_IGNORE_DUPS          # Don't save duplicate commands
 setopt HIST_IGNORE_SPACE         # Don't save commands starting with space
 setopt HIST_FIND_NO_DUPS         # Don't show duplicates when searching
 setopt INC_APPEND_HISTORY        # Write to history immediately (don't wait for shell exit)
+setopt INTERACTIVE_COMMENTS      # Allow # comments at the prompt
 
 # Node config
 export NODE_REPL_HISTORY=~/.node_history;
