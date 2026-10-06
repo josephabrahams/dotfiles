@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ======================================================================
+# Agent Skills Linker
+#
+# Usage: agent-skills-link [claude-config-dir ...]
+# Links each skill in ~/.agents/skills into <config>/skills/ for every
+# given Claude config dir, or ~/.claude and every ~/.claude-* by default.
+# Removes dangling links into ~/.agents/skills. Idempotent.
+# ======================================================================
+
+SKILLS_SRC="$HOME/.agents/skills"
+
+[[ -d "$SKILLS_SRC" ]] || exit 0
+
+tilde() { echo "${1/#$HOME/\~}"; }
+warn() { echo "skipped  $(tilde "$1") ($2)" >&2; }
+
+if [[ $# -gt 0 ]]; then
+    configs=("$@")
+else
+    configs=()
+    for d in "$HOME/.claude" "$HOME"/.claude-*; do
+        [[ -d "$d" ]] && configs+=("$d")
+    done
+fi
+
+# Skill folders: top-level dirs with a SKILL.md. Anything else in there,
+# such as local config, is not a skill.
+skills=()
+for d in "$SKILLS_SRC"/*/; do
+    name="$(basename "$d")"
+    [[ "$name" == "synced" ]] && continue
+    [[ -f "$d/SKILL.md" ]] && skills+=("$name")
+done
+
+for config in ${configs[@]+"${configs[@]}"}; do
+    dir="$config/skills"
+
+    # Claude writes synced/ and .trash/ in here, so never replace the dir.
+    if [[ -L "$dir" ]]; then
+        warn "$dir" "is a symlink, link skills individually instead"
+        continue
+    fi
+    if [[ ! -d "$dir" ]]; then
+        mkdir -p "$dir"
+        echo "created  $(tilde "$dir")"
+    fi
+
+    for name in ${skills[@]+"${skills[@]}"}; do
+        src="$SKILLS_SRC/$name"
+        dest="$dir/$name"
+        if [[ -L "$dest" && "$(readlink "$dest")" == "$src" ]]; then
+            echo "ok       $(tilde "$dest")"
+        elif [[ -e "$dest" && ! -L "$dest" ]]; then
+            warn "$dest" "not a symlink"
+        elif [[ -L "$dest" && "$(readlink "$dest")" != "$SKILLS_SRC/"* ]]; then
+            warn "$dest" "links outside $(tilde "$SKILLS_SRC")"
+        else
+            ln -sfn "$src" "$dest"
+            echo "linked   $(tilde "$dest")"
+        fi
+    done
+
+    # Dangling links left by a skill that was renamed or removed.
+    for dest in "$dir"/* "$dir"/.[!.]*; do
+        [[ -L "$dest" ]] || continue
+        case "$(basename "$dest")" in synced|.trash) continue ;; esac
+        target="$(readlink "$dest")"
+        if [[ "$target" == "$SKILLS_SRC/"* && ! -e "$dest" ]]; then
+            rm "$dest"
+            echo "removed  $(tilde "$dest")"
+        fi
+    done
+done
