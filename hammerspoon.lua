@@ -90,3 +90,52 @@ end
 hs.hotkey.bind(hyper, "space", function() spotify("playpause") end)
 hs.hotkey.bind(hyper, ";", function() spotify("previous track") end)
 hs.hotkey.bind(hyper, "'", function() spotify("next track") end)
+
+
+------------------------------------------------------------------------
+-- Quit editors when their last window closes
+------------------------------------------------------------------------
+
+-- `c` runs one editor process per dev context, all sharing a bundle ID, and
+-- AltTab mishandles a windowless one (Cmd+Q on it quits every instance). So
+-- quit each process once it has no windows left. hs.window.list asks the
+-- window server, which sees windows on every Space, unlike hs.window.
+local quitBundleIDs = { "com.microsoft.VSCode", "com.todesktop.230313mzl4w4u92" }
+local quitLog = hs.logger.new("lastwin", "info")
+local hadWindows, emptyChecks = {}, {}
+
+local function windowCounts()
+    local counts = {}
+    for _, w in ipairs(hs.window.list(true) or {}) do
+        local b = w.kCGWindowBounds or {}
+        -- Layer 0 is normal app windows; skip tiny offscreen helpers
+        if w.kCGWindowLayer == 0 and (b.Width or 0) >= 200 and (b.Height or 0) >= 150 then
+            local pid = w.kCGWindowOwnerPID
+            counts[pid] = (counts[pid] or 0) + 1
+        end
+    end
+    return counts
+end
+
+local function quitEmptyEditors()
+    local counts = windowCounts()
+    for _, id in ipairs(quitBundleIDs) do
+        for _, app in ipairs(hs.application.applicationsForBundleID(id)) do
+            local pid = app:pid()
+            if (counts[pid] or 0) > 0 then
+                hadWindows[pid], emptyChecks[pid] = true, 0
+            elseif hadWindows[pid] then
+                -- Wait for two empty checks in a row so a reload doesn't count
+                emptyChecks[pid] = (emptyChecks[pid] or 0) + 1
+                if emptyChecks[pid] >= 2 then
+                    quitLog.i(string.format("no windows left, quitting %s pid %d", app:name(), pid))
+                    hadWindows[pid], emptyChecks[pid] = nil, nil
+                    app:kill()
+                end
+            end
+        end
+    end
+end
+
+-- Global so the timer isn't garbage collected
+quitEditorsTimer = hs.timer.doEvery(0.5, quitEmptyEditors)
