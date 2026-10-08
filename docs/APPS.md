@@ -14,6 +14,7 @@ Install the following programs:
 
 ## System Utilities
 - [ ] [Alfred](https://www.alfredapp.com/)
+- [ ] [AltTab](https://alt-tab.app/download), then in Settings > Controls set Shortcut 1 to Cmd+Tab, clear Shortcut 2 (it claims Cmd+\`), and under "Shortcuts when active…" set "Select previous window" to \`
 - [ ] [Ejectify](https://app.lemonsqueezy.com/my-orders/)
 - [ ] [Hammerspoon](https://github.com/Hammerspoon/hammerspoon/releases)
 - [ ] [Karabiner Elements](https://karabiner-elements.pqrs.org/)
