@@ -12,6 +12,9 @@ export HOMEBREW_NO_ENV_HINTS=1
 # Add PostgreSQL 18 to path
 export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
 
+# uv tools
+export PATH="$HOME/.local/bin:$PATH"
+
 # Zsh config
 HISTSIZE=50000
 SAVEHIST=50000
